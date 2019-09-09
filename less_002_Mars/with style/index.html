@@ -6,6 +6,8 @@
         .main_title {
             color:#DE0202;
             background-color: darkkhaki;
+            position: fixed;
+            z-index: 2;
         }
         #green {
             color: green;
@@ -17,6 +19,9 @@
         #first-block {
             color: #DE0202;
             background-color: aquamarine;
+            position: relative;
+            top: 50px;
+            z-index: 1;
         }
         #second-block {
             background-color:mediumturquoise;
@@ -27,6 +32,13 @@
         .clear-float {
             clear: both;
         }
+        #third-block {
+            position: relative;
+            top: 10px;
+            left: 100px;
+            width: 600px;
+            float: left;
+        }
 
     </style>
 </head>
@@ -35,6 +47,7 @@
     <p>
         <h1 class="main_title"><ins><em>МАРС</em></ins> - четвертая планета от Солнца</h1>
     </p>
+    <hr>
     <div id="first-block">
         <div class="pict">
             <img src="img/500px-Mars_Earth_Comparison.png" width="500px">
@@ -51,7 +64,10 @@
     
     <div class="clear-float"></div>
     <hr>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/I5jgwSwtO4k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="iframe">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/I5jgwSwtO4k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <hr>
     <div id="second-block">
@@ -105,6 +121,7 @@
         </ul>
     </div>
     <hr>
+    <div id="third-block">
     <p>
         <h3>Физические характеристики</h3>
     </p>
@@ -130,10 +147,13 @@
     <p> Марс вращается вокруг своей оси, наклонённой относительно перпендикуляра к плоскости орбиты под углом 25,19°[2]. Наклон оси вращения Марса обеспечивает смену времён года. При этом эксцентриситет орбиты приводит к большим различиям в их продолжительности
         — так, северная весна и лето, вместе взятые, длятся 371 местные сутки, то есть заметно больше половины марсианского года. В то же время они приходятся на участок орбиты Марса, удалённый от Солнца. Поэтому на Марсе северное лето долгое и прохладное,
         а южное — короткое и относительно тёплое.</p>
+    </div>
+    <div class="clear-float"></div>
     <hr>
     <p>
         <a id="green" href="https://ru.wikipedia.org/wiki/Марс">Информация взята с википедии</a>
     </p>
+
 </body>
 
 </html>
