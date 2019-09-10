@@ -1,4 +1,4 @@
-<html>
+<html lang="RU">
 
 <head>
     <title>Technology - BBC News</title>
@@ -28,35 +28,71 @@
         }
         
         #but_1st_Sign-in:hover {
-            border-top: 3px;
+            border-bottom-width: 3px;
+            border-bottom-color: #1188BB;
         }
         
         #but_1st_none {
             width: 40px;
         }
+        #but_1st_none:hover {
+            border-bottom-width: 3px;
+            border-bottom-color: black;
+        }
+        #but_1st_news {
+            width: 40px;
+        }
+        #but_1st_news:hover {
+            border-bottom-width: 3px;
+            border-bottom-color: #992211;
+        }
         
         #but_1st_sport {
             width: 50px;
+        }
+        #but_1st_sport:hover {
+            border-bottom-width: 3px;
+            border-bottom-color: #FFEE11;
         }
         
         #but_1st_weather {
             width: 60px;
         }
+        #but_1st_weather:hover {
+            border-bottom-width: 3px;
+            border-bottom-color: #88CCEE;
+        }
+        #but_1st_iplayer {
+            width: 60px;
+        }
+        #but_1st_iplayer:hover {
+            border-bottom-width: 3px;
+            border-bottom-color: #ED3D7D;
+        }
         
         #but_1st_TV {
             width: 25px;
+        }
+        #but_1st_TV:hover {
+            border-bottom-width: 3px;
+            border-bottom-color: black;
         }
         
         #but_1st_radio {
             width: 50px;
         }
-        
-        #but_1st_cbbc {
-            width: 50px;
+        #but_1st_radio:hover {
+            border-bottom-width: 3px;
+            border-bottom-color: black;
         }
+        
         
         #but_1st_more {
             width: 130px;
+        }
+        #but_1st_more:hover {
+            border-bottom-width: 3px;
+            border-bottom-color: black;
         }
         
         .but_search {
@@ -96,6 +132,17 @@
             left: 800px;
             top: -50px;
         }
+        .darck-red-line {
+            background-color: #A91717;
+            height: 30px;
+             
+        }
+        .darck-line-button {
+            background-color: #A91717;
+            color: white;
+            border: 0;
+            padding: 7px;
+        }
     </style>
 </head>
 
@@ -109,21 +156,25 @@
     <div id="but_1st_none" class="but_1st_line">
         <p></p>
     </div>
+    <div id="but_1st_news" class="but_1st_line">
+        <p>News</p>
+    </div>
     <div id="but_1st_sport" class="but_1st_line">
         <p>Sport</p>
     </div>
     <div id="but_1st_weather" class="but_1st_line">
-        <p>Wether</p>
-    </div>
-    <div id="but_1st_TV" class="but_1st_line">
+            <p>Wether</p>
+        </div>
+        <div id="but_1st_iplayer" class="but_1st_line">
+                <p>iPlayer</p>
+            </div>
+            <div id="but_1st_TV" class="but_1st_line">
         <p>TV</p>
     </div>
     <div id="but_1st_radio" class="but_1st_line">
         <p>Radio</p>
     </div>
-    <div id="but_1st_cbbc" class="but_1st_line">
-        <p>CBBC</p>
-    </div>
+    
     <div id="but_1st_more" class="but_1st_line">
         <p>More</p>
     </div>
@@ -142,6 +193,19 @@
             <button class="but-find-local-news">Find local news</button>
         </div>
 
+    </div>
+    <div class="darck-red-line">
+            <button class="darck-line-button">Home</button>
+            <button class="darck-line-button">UK</button>
+            <button class="darck-line-button">World</button>
+            <button class="darck-line-button">Business</button>
+            <button class="darck-line-button">Politics</button>
+            <button class="darck-line-button">Tech</button>
+            <button class="darck-line-button">Science</button>
+            <button class="darck-line-button">Education</button>
+            <button class="darck-line-button">Entertainment & Arts</button>
+            <button class="darck-line-button">Video & Audio</button>
+            <button class="darck-line-button">More</button>
     </div>
 </body>
 
