@@ -8,6 +8,7 @@
             margin: 0;
             font-family: Helvetica, Arial, sans-serif;
         }
+
         #top-bar {
             width: 1100px;
             height: 40px;
@@ -20,15 +21,18 @@
             padding: 10px;
             float: left;
         }
+
         .top-bar-section {
             float: left;
             border-left: 1px #cccccc solid;
             height: 100%;
         }
+
         #signin-img {
             width: 30px;
             margin: 8px 10px;
             float: left;
+            padding-right: 10px;
         }
 
         .but_1st_line {
@@ -36,26 +40,36 @@
             float: left;
             text-align: center;
             height: 30px;
-            padding: 5px;
         }
 
         #but_1st_Sign-in {
             font-weight: bold;
             font-size: 90%;
             position: relative;
-            top: 12px;
+            top: 10px;
+            float: left;
+            padding-right: 50px;
         }
 
-        /*#but_1st_Sign-in:hover {
+        #bell {
+            height: 20px;
+            margin: 11px 3px;
+        }
+
+        #bell-div {
+
+            float: left;
+        }
+
+        #signin-div:hover {
             box-shadow: 0px -3px 0 #1188BB inset;
-        }*/
-
-        #but_1st_none {
-            width: 40px;
         }
 
-        #but_1st_none:hover {
+        #bell-div:hover {
             box-shadow: 0px -3px 0 black inset;
+        }
+        .top-bar-menu {
+            
         }
 
         #but_1st_news {
@@ -199,10 +213,12 @@
         #first-link {
             font-size: 200%;
         }
+
         .text-news {
             float: left;
             width: 240px;
         }
+
         .img-news {
             float: left;
             width: 320px;
@@ -215,40 +231,43 @@
         <img id="logo" src="img/bbc-blocks-dark.png" width="84px" height="24px">
         <div id="signin-div" class="top-bar-section">
             <img id="signin-img" src="img/signin.png">
-            <span id="but_1st_Sign-in" >Sign In</span>
-            <img src="img/border-line.png">
+            <span id="but_1st_Sign-in">Sign In</span>
         </div>
-        
-        <div id="but_1st_none" class="but_1st_line">
-            <p></p>
+        <div id="bell-div">
+            <img id="border-line-img" src="img/border-line.png">
+            <img id="bell" src="img/bell.png">
         </div>
-        <div id="but_1st_news" class="but_1st_line">
-            <p>News</p>
-        </div>
-        <div id="but_1st_sport" class="but_1st_line">
-            <p>Sport</p>
-        </div>
-        <div id="but_1st_weather" class="but_1st_line">
-            <p>Wether</p>
-        </div>
-        <div id="but_1st_iplayer" class="but_1st_line">
-            <p>iPlayer</p>
-        </div>
-        <div id="but_1st_TV" class="but_1st_line">
-            <p>TV</p>
-        </div>
-        <div id="but_1st_radio" class="but_1st_line">
-            <p>Radio</p>
-        </div>
-    
-        <div id="but_1st_more" class="but_1st_line">
-            <p>More</p>
-        </div>
-        <div id="search" class="but_search">
-            <input type="text" placeholder="Search">
-        </div>
-        <div id="img-search" class="but_search">
-            <img src="img/orb-search-dark.png">
+        <div class="top-bar-menu">
+            <div id="but_1st_none" class="but_1st_line">
+                <p></p>
+            </div>
+            <div id="but_1st_news" class="but_1st_line">
+                <p>News</p>
+            </div>
+            <div id="but_1st_sport" class="but_1st_line">
+                <p>Sport</p>
+            </div>
+            <div id="but_1st_weather" class="but_1st_line">
+                <p>Wether</p>
+            </div>
+            <div id="but_1st_iplayer" class="but_1st_line">
+                <p>iPlayer</p>
+            </div>
+            <div id="but_1st_TV" class="but_1st_line">
+                <p>TV</p>
+            </div>
+            <div id="but_1st_radio" class="but_1st_line">
+                <p>Radio</p>
+            </div>
+            <div id="but_1st_more" class="but_1st_line">
+                <p>More</p>
+            </div>
+            <div id="search" class="but_search">
+                <input type="text" placeholder="Search">
+            </div>
+            <div id="img-search" class="but_search">
+                <img src="img/orb-search-dark.png">
+            </div>
         </div>
     </div>
     <div class="clear-float"></div>
@@ -291,7 +310,7 @@
                 <a href="#tech">Technology</a>
             </p>
             <p><a href="#">Surveillance firm hit in hack attack</a></p>
-            <p><a href="#">eBay flaw has existed for months</a></p>    
+            <p><a href="#">eBay flaw has existed for months</a></p>
         </div>
         <div>
             <p><img class="img-news" src="img/asda.gif"></p>
