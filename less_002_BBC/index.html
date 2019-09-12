@@ -34,13 +34,13 @@
             float: left;
             padding-right: 10px;
         }
-
+        /*
         .but_1st_line {
             border: 1px gray solid;
             float: left;
             text-align: center;
             height: 30px;
-        }
+        }*/
 
         #but_1st_Sign-in {
             font-weight: bold;
@@ -57,7 +57,6 @@
         }
 
         #bell-div {
-
             float: left;
         }
 
@@ -68,61 +67,35 @@
         #bell-div:hover {
             box-shadow: 0px -3px 0 black inset;
         }
-        .top-bar-menu {
-            
-        }
 
-        #but_1st_news {
-            width: 40px;
+        .top-bar-menu {
+            font-weight: bold;
+            font-size: 90%;
+            /*padding: 18px 15px 0px 15px;*/
         }
 
         #but_1st_news:hover {
             box-shadow: 0px -3px 0 #992211 inset;
         }
 
-        #but_1st_sport {
-            width: 50px;
-        }
-
         #but_1st_sport:hover {
             box-shadow: 0px -3px 0 #FFEE11 inset;
-        }
-
-        #but_1st_weather {
-            width: 60px;
         }
 
         #but_1st_weather:hover {
             box-shadow: 0px -3px 0 #88CCEE inset;
         }
 
-        #but_1st_iplayer {
-            width: 60px;
-        }
-
         #but_1st_iplayer:hover {
             box-shadow: 0px -3px 0 #ED3D7D inset;
-        }
-
-        #but_1st_TV {
-            width: 25px;
         }
 
         #but_1st_TV:hover {
             box-shadow: 0px -3px 0 black inset;
         }
 
-        #but_1st_radio {
-            width: 50px;
-        }
-
         #but_1st_radio:hover {
             box-shadow: 0px -3px 0 black inset;
-        }
-
-
-        #but_1st_more {
-            width: 130px;
         }
 
         #but_1st_more:hover {
@@ -236,36 +209,33 @@
         <div id="bell-div">
             <img id="border-line-img" src="img/border-line.png">
             <img id="bell" src="img/bell.png">
-        </div>
-        <div class="top-bar-menu">
-            <div id="but_1st_none" class="but_1st_line">
-                <p></p>
             </div>
-            <div id="but_1st_news" class="but_1st_line">
-                <p>News</p>
-            </div>
-            <div id="but_1st_sport" class="but_1st_line">
-                <p>Sport</p>
-            </div>
-            <div id="but_1st_weather" class="but_1st_line">
-                <p>Wether</p>
-            </div>
-            <div id="but_1st_iplayer" class="but_1st_line">
-                <p>iPlayer</p>
-            </div>
-            <div id="but_1st_TV" class="but_1st_line">
-                <p>TV</p>
-            </div>
-            <div id="but_1st_radio" class="but_1st_line">
-                <p>Radio</p>
-            </div>
-            <div id="but_1st_more" class="but_1st_line">
-                <p>More</p>
-            </div>
-            <div id="search" class="but_search">
-                <input type="text" placeholder="Search">
-            </div>
-            <div id="img-search" class="but_search">
+            <div class="top-bar-menu">
+                <div id="but_1st_news" class="top-bar-section">
+                    News
+                </div>
+                <div id="but_1st_sport" class="top-bar-section">
+                    Sport
+                </div>
+                <div id="but_1st_weather" class="top-bar-section">
+                    Wether
+                </div>
+                <div id="but_1st_iplayer" class="top-bar-section">
+                    iPlayer
+                </div>
+                <div id="but_1st_TV" class="top-bar-section">
+                    TV
+                </div>
+                <div id="but_1st_radio" class="top-bar-section">
+                    Radio
+                </div>
+                <div id="but_1st_more" class="top-bar-section">
+                    More
+                    <img src="img/small-triangle.png">
+                </div>
+                <div id="search" class="but_search">
+                    <input type="text" placeholder="Search">
+                </div>          <div id="img-search" class="but_search">
                 <img src="img/orb-search-dark.png">
             </div>
         </div>
