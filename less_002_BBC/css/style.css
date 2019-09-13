@@ -12,7 +12,7 @@ body {
 
 #logo {
     width: 84px;
-    height: 24px;
+    height: 20px;
     padding: 10px;
     float: left;
 }
@@ -39,19 +39,22 @@ body {
     padding-right: 50px;
 }
 
+#border-line-img {
+    position: relative;
+    top: 1px;
+    height: 36px;
+    margin: 0;
+}
+
 #bell {
     height: 20px;
-    margin: 11px 13px 11px 5px;
+    margin: 0;
+    padding: 5px 15px 10px 5px;
 }
 
 #bell-div {
     float: left;
-}
-
-#border-line-img {
-    position: relative;
-    top: -3px;
-    height: 100%;
+    margin: 0;
 }
 
 #signin-div:hover {
@@ -117,6 +120,7 @@ body {
 }
 
 .red-line {
+    border-top: 1px #cccccc solid; 
     background-color: #BB1919;
     margin: 0;
     height: 60px;
@@ -136,7 +140,7 @@ body {
     height: 40px;
     position: relative;
     left: 800px;
-    top: -50px; 
+    top: -50px;
 }
 .but-find-local-news:hover {
     text-decoration-line: underline;
