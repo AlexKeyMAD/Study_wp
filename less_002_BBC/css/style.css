@@ -66,7 +66,7 @@ body {
     font-weight: bold;
     font-size: 90%;
     height: 10px;
-    padding: 15px 20px;
+    padding: 15px 15px;
 }
 
 #but_1st_news:hover {
@@ -97,19 +97,19 @@ body {
     box-shadow: 0px -3px 0 black inset;
 }
 
-.but_search {
+#serch-box {
+    background-color: #A9A9A9;
+    border: none;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 7px;
+    margin: 5px 0px 5px 5px;
     float: left;
-    background-color: grey;
 }
 
-#img-search {
-    padding: 12px 5px 12px 15px;
-}
-
-#search {
-    padding: 11px 5px 10px 5px;
-    border: 3px;
-    border-left-color: white;
+#serch-img {
+    height: 30px;
+    padding: 5px 0px;
 }
 
 .clear-float {
