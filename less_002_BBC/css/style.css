@@ -136,17 +136,29 @@ body {
     height: 40px;
     position: relative;
     left: 800px;
-    top: -50px;
+    top: -50px; 
+}
+.but-find-local-news:hover {
+    text-decoration-line: underline;
+}
+
+.icon-dot {
     background-image:url("../img/Dot-on-map.png");
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
+    padding-left : 20px;
+    padding-top : 5px;
+}
+
+#darck-red-line-list {
+    background-color: #A91717;
+    margin: 0;
 }
 
 .darck-red-line {
     background-color: #A91717;
-    height: 30px;
     width: 1100px;
+    height: 30px;
     margin: 0 auto;
-
 }
 
 .darck-line-button {
