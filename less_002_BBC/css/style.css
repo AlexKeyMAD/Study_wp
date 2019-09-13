@@ -1,0 +1,196 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#top-bar {
+    width: 1100px;
+    height: 40px;
+    margin: 0 auto;
+}
+
+#logo {
+    width: 84px;
+    height: 24px;
+    padding: 10px;
+    float: left;
+}
+
+.top-bar-section {
+    float: left;
+    border-left: 1px #cccccc solid;
+    height: 100%;
+}
+
+#signin-img {
+    width: 30px;
+    margin: 8px 10px;
+    float: left;
+    padding-right: 10px;
+}
+
+/*
+        .but_1st_line {
+            border: 1px gray solid;
+            float: left;
+            text-align: center;
+            height: 30px;
+        }*/
+
+#but_1st_Sign-in {
+    font-weight: bold;
+    font-size: 90%;
+    position: relative;
+    top: 10px;
+    float: left;
+    padding-right: 50px;
+}
+
+#bell {
+    height: 20px;
+    margin: 11px 3px;
+}
+
+#bell-div {
+    float: left;
+}
+
+#signin-div:hover {
+    box-shadow: 0px -3px 0 #1188BB inset;
+}
+
+#bell-div:hover {
+    box-shadow: 0px -3px 0 black inset;
+}
+
+.top-bar-menu {
+    font-weight: bold;
+    font-size: 90%;
+    height: 40px;
+    /*float: left;
+            padding: 18px 15px 0px 15px;*/
+}
+
+#but_1st_news:hover {
+    box-shadow: 0px -3px 0 #992211 inset;
+}
+
+#but_1st_sport:hover {
+    box-shadow: 0px -3px 0 #FFEE11 inset;
+}
+
+#but_1st_weather:hover {
+    box-shadow: 0px -3px 0 #88CCEE inset;
+}
+
+#but_1st_iplayer:hover {
+    box-shadow: 0px -3px 0 #ED3D7D inset;
+}
+
+#but_1st_TV:hover {
+    box-shadow: 0px -3px 0 black inset;
+}
+
+#but_1st_radio:hover {
+    box-shadow: 0px -3px 0 black inset;
+}
+
+#but_1st_more:hover {
+    box-shadow: 0px -3px 0 black inset;
+}
+
+.but_search {
+    float: left;
+    background-color: grey;
+}
+
+#img-search {
+    padding: 12px 5px 12px 15px;
+}
+
+#search {
+    padding: 11px 5px 10px 5px;
+    border: 3px;
+    border-left-color: white;
+}
+
+.clear-float {
+    clear: both;
+}
+
+.red-line {
+    background-color: #BB1919;
+    margin: 0;
+    height: 60px;
+}
+
+#red-line-news {
+    width: 160px;
+    height: 60px;
+}
+
+.but-find-local-news {
+    background-color: #BB1919;
+    color: white;
+    border: 1px gainsboro solid;
+    width: 160px;
+    height: 40px;
+    position: relative;
+    left: 800px;
+    top: -50px;
+}
+
+.darck-red-line {
+    background-color: #A91717;
+    height: 30px;
+
+}
+
+.darck-line-button {
+    background-color: #A91717;
+    color: white;
+    border: 0;
+    padding: 5px;
+}
+
+.darck-line-button:nth-child(-n+10) {
+    border-right: 1px solid whitesmoke;
+}
+
+.darck-line-button:hover {
+    box-shadow: 0px 5px 0 white;
+}
+
+#tech {
+    border-bottom: 2px #A91717 solid;
+    width: 120px;
+    margin-left: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: blue;
+}
+
+.first-news {
+    margin-left: 10px;
+}
+
+#first-link {
+    font-size: 200%;
+}
+
+.text-news {
+    float: left;
+    width: 240px;
+}
+
+.img-news {
+    float: left;
+    width: 320px;
+}
