@@ -211,7 +211,7 @@ a:hover {
 
 .first-news {
     margin-left: 10px;
-    width: 760px;
+    width: 781px;
 }
 
 #first-link {
@@ -248,5 +248,10 @@ a:hover {
 #time-tech2 {
     width: 100px;
     float: left;
-    color: #A91717;
+    color: #A91717 !important;
+}
+
+#timer-hr {
+    border-top: 2px solid #A91717;
+    width: 50px;
 }
