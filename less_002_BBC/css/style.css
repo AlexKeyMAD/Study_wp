@@ -291,20 +291,35 @@ body {
 
 .div-clock {
     font-size: 12px;
+    float: left;
+    width: 170px;
 }
 
 .div-video-list {
     padding: 0px 0px 15px 0px;
     float: left;
-    width: 100px;
+    width: 350px;
 }
 
-.link-block-video-list {
-    width: 50px;
-    color: #A91717;
-    font-size: 12px;
+.div-link-block-video-list {
+    float: left;
+    margin: 0 auto;
+    position: relative;
+    top: 5px;
 }
 
 .div-img-video-list {
     float: left;
+}
+
+.div-link-video-list {
+    float: left;
+    width: 180px;
+}
+
+.link-block-video-list {
+    /*width: 200px;*/
+    color: #A91717;
+    font-size: 12px;
+    text-decoration: none;
 }
