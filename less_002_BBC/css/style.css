@@ -227,13 +227,13 @@ body {
 
 .text-news {
     float: left;
-    width: 300px;
+    width: 250px;
     color: #5a5a5a;
 }
 
 .img-news {
     float: left;
-    width: 460px;
+    width: 450px;
 }
 
 #time-tech {
@@ -254,13 +254,13 @@ body {
 
 #left-box {
     float: left;
-    width: 780px;
+    width: 730px;
 }
 
 #video-list {
     float: left;
     border-left: 1px solid #cccccc;
-    height: 500px;
+    height: 450px;
     padding-left: 10px;
 }
 
@@ -278,12 +278,33 @@ body {
 }
 
 .link-video-list {
-    width: 100px;
+    width: 350px;
     text-decoration: none;
     color: black;
     font: bold;
+    float: left;
 }
 
 .link-video-list:hover {
     color: #1167a8;
+}
+
+.div-clock {
+    font-size: 12px;
+}
+
+.div-video-list {
+    padding: 0px 0px 15px 0px;
+    float: left;
+    width: 100px;
+}
+
+.link-block-video-list {
+    width: 50px;
+    color: #A91717;
+    font-size: 12px;
+}
+
+.div-img-video-list {
+    float: left;
 }
