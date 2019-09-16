@@ -260,7 +260,7 @@ body {
 #video-list {
     float: left;
     border-left: 1px solid #cccccc;
-    height: 450px;
+    height: 600px;
     padding-left: 10px;
 }
 
@@ -289,23 +289,10 @@ body {
     color: #1167a8;
 }
 
-.div-clock {
-    font-size: 12px;
-    float: left;
-    width: 170px;
-}
-
 .div-video-list {
     padding: 0px 0px 15px 0px;
     float: left;
     width: 350px;
-}
-
-.div-link-block-video-list {
-    float: left;
-    margin: 0 auto;
-    position: relative;
-    top: 5px;
 }
 
 .div-img-video-list {
@@ -314,7 +301,21 @@ body {
 
 .div-link-video-list {
     float: left;
-    width: 180px;
+    width: 240px;
+}
+
+.div-clock {
+    font-size: 12px;
+    float: left;
+    width: 120px;
+}
+
+.div-link-block-video-list {
+    float: left;
+    margin: 0 auto;
+    position: relative;
+    top: 5px;
+    width: 120px;
 }
 
 .link-block-video-list {
