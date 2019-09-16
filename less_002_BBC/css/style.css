@@ -200,12 +200,12 @@ body {
     margin-left: 10px;
 }
 
-a {
+.text-news a {
     text-decoration: none;
     color: #5a5a5a;
 }
 
-a:hover {
+.text-news a:hover {
     color: #1167a8;
 }
 
@@ -214,16 +214,11 @@ a:hover {
     margin: 0 auto;
 }
 
-
-/*.first-news {
-    margin-left: 10px;
-    width: 781px;
-}
-
 #first-link {
     font-size: 30px;
     text-decoration: none;
     color: black;
+    margin: 0 auto;
 }
 
 #first-link:hover {
@@ -232,14 +227,15 @@ a:hover {
 
 .text-news {
     float: left;
-    width: 760px;
+    width: 300px;
     color: #5a5a5a;
 }
 
 .img-news {
     float: left;
-    width: 500px;
+    width: 460px;
 }
+
 #time-tech {
     width: 150px;
     float: left;
@@ -256,9 +252,38 @@ a:hover {
     width: 50px;
 }
 
-#news-one {
+#left-box {
     float: left;
-    width: 1000px;
+    width: 780px;
 }
 
-#video-list {}*/
+#video-list {
+    float: left;
+    border-left: 1px solid #cccccc;
+    height: 500px;
+    padding-left: 10px;
+}
+
+#name-video-list {
+    font-size: 25px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-bottom: 37px;
+}
+
+.img-video-list {
+    width: 100px;
+    float: left;
+    padding-right: 2px;
+}
+
+.link-video-list {
+    width: 100px;
+    text-decoration: none;
+    color: black;
+    font: bold;
+}
+
+.link-video-list:hover {
+    color: #1167a8;
+}
