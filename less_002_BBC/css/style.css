@@ -209,7 +209,13 @@ a:hover {
     color: #1167a8;
 }
 
-.first-news {
+#page-container {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+
+/*.first-news {
     margin-left: 10px;
     width: 781px;
 }
@@ -226,7 +232,7 @@ a:hover {
 
 .text-news {
     float: left;
-    width: 260px;
+    width: 760px;
     color: #5a5a5a;
 }
 
@@ -234,12 +240,6 @@ a:hover {
     float: left;
     width: 500px;
 }
-
-#page-container {
-    width: 1100px;
-    margin: 0 auto;
-}
-
 #time-tech {
     width: 150px;
     float: left;
@@ -255,3 +255,10 @@ a:hover {
     border-top: 2px solid #A91717;
     width: 50px;
 }
+
+#news-one {
+    float: left;
+    width: 1000px;
+}
+
+#video-list {}*/
