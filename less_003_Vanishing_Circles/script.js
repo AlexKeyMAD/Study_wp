@@ -14,6 +14,8 @@ for (let index = 0; index < list_div.length; index++) {
     list_div[index].style.height = '100px';
     list_div[index].style.border = '2px solid';
     list_div[index].style.borderRadius = '50%';
+    list_div[index].style.float = 'left';
+    list_div[index].style.margin = '0px 10px';
     list_div[index].id = 'i' + index;
 
     list_div[index].onclick = function() {
