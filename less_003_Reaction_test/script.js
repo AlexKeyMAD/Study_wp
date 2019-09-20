@@ -1,0 +1,1 @@
+let reactionTime = document.getElementById('reaction-time');
