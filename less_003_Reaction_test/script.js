@@ -22,7 +22,9 @@ function getRandomColor() {
 
 function newRandomGeometricShape() {
 
-    let widthHeight = String(getRandomNumber(20, 200));
+    let widthHeight = String(getRandomNumber(20, 100));
+
+    _width = document.body.clientWidth;
 
     newElement = document.createElement('div');
     newElement.id = 'figure';
@@ -32,7 +34,7 @@ function newRandomGeometricShape() {
     newElement.style.height = widthHeight;
     newElement.style.border = '2px solid';
     newElement.style.position = 'relative';
-    newElement.style.left = String(getRandomNumber(0, 800));
+    newElement.style.left = String(getRandomNumber(0, _width - (Math.floor(_width / 100 * 10))));
     newElement.style.top = String(getRandomNumber(0, 400));
 
     newElement.onclick = function() {
