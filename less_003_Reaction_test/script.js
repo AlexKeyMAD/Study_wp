@@ -1,7 +1,11 @@
-let reactionTime = document.getElementById('reaction-time');
+let reactionTime = document.getElementById('reaction-time'),
+    divRandom = document.getElementById('box');
 let startTime = new Date,
     currentTime = new Date;
 let arrayFigure = ['0', '50'];
+let statSteps = 0,
+    statsMin = 10,
+    statsMax = 0;
 
 function getRandomNumber(min, max) {
     genericNum = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -18,7 +22,6 @@ function getRandomColor() {
 
 function newRandomGeometricShape() {
 
-    let divRandom = document.getElementById('box');
     let widthHeight = String(getRandomNumber(20, 200));
 
     newElement = document.createElement('div');
@@ -33,8 +36,13 @@ function newRandomGeometricShape() {
     newElement.style.top = String(getRandomNumber(0, 400));
 
     newElement.onclick = function() {
+        statSteps += 1;
+
         currentTime = (new Date).getTime();
-        reactionTime.innerHTML = '' + ((currentTime - startTime) / 1000) + 'мс';
+        result = (currentTime - startTime) / 1000;
+        statsMin = Math.min(result, statsMin);
+        statsMax = Math.max(result, statsMax);
+        reactionTime.innerHTML = '' + result + 'мс';
         deleteDivFigure();
         newRandomGeometricShape();
     }
@@ -51,13 +59,38 @@ function deleteDivFigure() {
     }
 }
 
-document.getElementById('start').onclick = function() {
-    if (document.getElementById('figure') != null) {
-        deleteDivFigure();
+function deleteDivStatistic() {
+    div = document.getElementById('state-box');
+    if (div != null) {
+        div.remove();
     }
+}
+
+document.getElementById('start').onclick = function() {
+    deleteDivStatistic();
+    deleteDivFigure();
     newRandomGeometricShape();
 }
 
 document.getElementById('finish').onclick = function() {
     deleteDivFigure();
+    newDiv = document.createElement('div');
+    newDiv.id = 'state-box';
+    newH2 = document.createElement('h2');
+    newH2.id = 'result';
+    newH2.innerHTML = 'Статистика игры:';
+    newDiv.append(newH2);
+    newP = document.createElement('p');
+    newP.id = 'result-steps';
+    newP.innerHTML = 'Количество попыток: ' + statSteps;
+    newDiv.append(newP);
+    newP = document.createElement('p');
+    newP.id = 'result-min';
+    newP.innerHTML = 'Минимальный результат: ' + statsMin;
+    newDiv.append(newP);
+    newP = document.createElement('p');
+    newP.id = 'result-мax';
+    newP.innerHTML = 'Максимальный результат: ' + statsMax;
+    newDiv.append(newP);
+    divRandom.append(newDiv);
 }
