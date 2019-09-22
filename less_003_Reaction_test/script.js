@@ -22,7 +22,7 @@ function getRandomColor() {
 
 function newRandomGeometricShape() {
 
-    let widthHeight = String(getRandomNumber(20, 100));
+    let widthHeight = String(getRandomNumber(30, 100));
 
     _width = document.body.clientWidth;
 
@@ -46,7 +46,7 @@ function newRandomGeometricShape() {
         statsMax = Math.max(result, statsMax);
         reactionTime.innerHTML = '' + result + 'мс';
         deleteDivFigure();
-        newRandomGeometricShape();
+        setTimeout(newRandomGeometricShape, getRandomNumber(0, 1000));
     }
 
     divRandom.append(newElement);
