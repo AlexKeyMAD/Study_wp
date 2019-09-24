@@ -1,0 +1,27 @@
+#box {
+    border: 2px solid black;
+    width: 99%;
+    height: 65%;
+    margin: .5%;
+}
+
+#result-steps {
+    color: purple;
+    font-size: 20px;
+}
+
+#result-min {
+    color: green;
+    font-size: 20px;
+}
+
+#result-мax {
+    color: red;
+    font-size: 20px;
+}
+
+button {
+    border-radius: 35%;
+    width: 100px;
+    height: 30px;
+}
