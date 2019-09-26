@@ -1,0 +1,25 @@
+#parent-div {
+    height: 200px;
+    width: 500px;
+    margin: 0 auto;
+    background-color: bisque;
+}
+
+#draggable {
+    font-size: 15px;
+}
+
+.sq {
+    border: 2px grey solid;
+    height: 100px;
+    width: 100px;
+    margin: 10px;
+}
+
+#red-sq {
+    background-color: red;
+}
+
+#green-sq {
+    background-color: green;
+}
