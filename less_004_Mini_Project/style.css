@@ -41,3 +41,14 @@ label {
     border-radius: 10px;
     padding: 0px 10px;
 }
+
+#parent-div {
+    height: 200px;
+    width: 500px;
+    margin: 0 auto;
+    background-color: bisque;
+}
+
+#draggable {
+    font-size: 15px;
+}

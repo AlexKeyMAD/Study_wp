@@ -40,3 +40,7 @@ $('#submit-button').click(function() {
         alert('Всё ОК');
     }
 });
+$("#draggable").draggable();
+//$("#draggable").draggable({ axis: "x" });
+$("#draggable").draggable({ containment: "#parent-div", scroll: false });
+$("#draggable").resizable();
