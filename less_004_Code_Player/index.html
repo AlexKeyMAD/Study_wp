@@ -7,6 +7,8 @@
     <title>Проигрыватель web-кода</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
 
 <body>
@@ -16,10 +18,14 @@
             <p>Проигрыватель web-кода</p>
         </div>
         <div id="buttons" class="header">
-            <button id="b-html">HTML</button>
-            <button id="b-css">CSS</button>
-            <button id="b-js">JavaScript</button>
-            <button id="b-result">Результат</button>
+            <label for="b-html">HTML</label>
+            <input type="checkbox" id="b-html" name="b-html" class="butt"></input>
+            <label for="b-css">CSS</label>
+            <input type="checkbox" id="b-css" name="b-css" class="butt"></input>
+            <label for="b-js">JavaScript</label>
+            <input type="checkbox" id="b-js" name="b-js" class="butt"></input>
+            <label for="b-result">Результат</label>
+            <input type="checkbox" id="b-result" name="b-result" class="butt"></input>
         </div>
 
     </div>

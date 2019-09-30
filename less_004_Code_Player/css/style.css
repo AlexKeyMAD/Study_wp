@@ -27,5 +27,13 @@ body {
 .workspace {
     float: left;
     border: 2px solid darkgray;
-    height: 100%;
+    height: 95%;
+}
+
+.ui-checkboxradio-label.ui-corner-all.ui-button.ui-widget.ui-checkboxradio-checked.ui-state-active {
+    border: 3px solid #777777 !important;
+}
+
+.checkbox-noicon.ui-checkboxradio.ui-helper-hidden-accessible {
+    border: 3px solid #777777 !important;
 }
