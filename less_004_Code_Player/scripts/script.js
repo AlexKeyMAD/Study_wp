@@ -31,3 +31,7 @@ $('.butt').on('change', function() {
     }
     styleWorkspace();
 });
+
+$('textarea').keypress(function(sym) {
+    $('#result').val($('#text-html').val());
+});

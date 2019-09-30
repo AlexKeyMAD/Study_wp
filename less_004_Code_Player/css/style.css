@@ -58,3 +58,7 @@ textarea {
     width: 99%;
     height: 92%;
 }
+
+#result {
+    border: 2px solid #dfdbe2;
+}
