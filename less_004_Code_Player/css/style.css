@@ -4,8 +4,8 @@ body {
 
 #p-title {
     margin: 0 auto;
-    background-color: darkgray;
-    height: 40px;
+    background-color: #a19f9f;
+    height: 43px;
 }
 
 .header {
@@ -15,9 +15,10 @@ body {
 #name {
     width: 300px;
     padding: 0px 10px;
-    font-size: 20px;
+    font-size: 25px;
+    font-weight: bold;
     position: relative;
-    top: -10px;
+    top: -17px;
 }
 
 .clear-float {
@@ -26,8 +27,9 @@ body {
 
 .workspace {
     float: left;
-    border: 2px solid darkgray;
-    height: 95%;
+    border: 2px solid #777777;
+    height: 99%;
+    margin: 0px 0px 5px 2px;
 }
 
 .ui-checkboxradio-label.ui-corner-all.ui-button.ui-widget.ui-checkboxradio-checked.ui-state-active {
@@ -36,4 +38,13 @@ body {
 
 .checkbox-noicon.ui-checkboxradio.ui-helper-hidden-accessible {
     border: 3px solid #777777 !important;
+}
+
+.box-title {
+    padding: 0px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #68448d;
+    position: relative;
+    top: -10px;
 }
