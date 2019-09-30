@@ -28,7 +28,7 @@ body {
 .workspace {
     float: left;
     border: 2px solid #777777;
-    height: 99%;
+    height: 90%;
     margin: 0px 0px 5px 2px;
 }
 
@@ -47,4 +47,14 @@ body {
     color: #68448d;
     position: relative;
     top: -10px;
+}
+
+#code-box {
+    margin: 0px 0 px;
+}
+
+textarea {
+    margin: 0px 2px;
+    width: 99%;
+    height: 92%;
 }
