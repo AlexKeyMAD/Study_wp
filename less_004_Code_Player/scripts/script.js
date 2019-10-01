@@ -5,16 +5,18 @@ $('#b-result').prop('checked', true);
 function styleWorkspace() {
     widthPer = 100 / visibleAreas - 1;
     $('.workspace').css('width', String(widthPer) + '%');
+    let arr = $('.butt');
+    let i = 0;
 
-    for (let item of $('.butt')) {
-        if (item.checked) {
+    while (i != arr.length) {
+        if (arr[i].checked) {
             strVis = 'block';
         } else {
             strVis = 'none';
         }
-        $('#' + item.name.replace('b-', 'div-')).css('display', strVis);
+        $('#' + arr[i].name.replace('b-', 'div-')).css('display', strVis);
+        i += 1;
     }
-
 }
 
 styleWorkspace();
@@ -32,6 +34,7 @@ $('.butt').on('change', function() {
     styleWorkspace();
 });
 
-$('textarea').keypress(function(sym) {
-    $('#result').val($('#text-html').val());
+$('textarea').on('change keyup paste', function() {
+    let textHTML = $('#text-html').val();
+    $('#result').contents().find('html').html(textHTML);
 });
