@@ -35,7 +35,15 @@ $('.butt').on('change', function() {
 });
 
 $('textarea').on('change keyup paste', function() {
+    reloadResult();
+});
+
+function reloadResult() {
     let textHTML = $('#text-html').val();
     textHTML = "<html><head><style type = 'text/css'>" + $('#text-css').val() + "</style></head><body>" + textHTML + "</body></html>";
     $('#result').contents().find('html').html(textHTML);
-});
+
+    document.getElementById('result').contentWindow.eval($('#text-js').val());
+}
+
+reloadResult();
