@@ -2,7 +2,11 @@ body {
     position: relative;
 }
 
-#img-home {
-    width: 100%;
-    height: 400px;
+.jumbotron {
+    background-image: url(../img/home-background.jpg);
+    color: aliceblue;
+}
+
+#text-abaut {
+    margin: 0 auto;
 }
