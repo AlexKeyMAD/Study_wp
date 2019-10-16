@@ -2,11 +2,19 @@ body {
     position: relative;
 }
 
-.jumbotron {
+#home {
     background-image: url(../img/home-background.jpg);
     color: aliceblue;
 }
 
 #text-abaut {
     margin: 0 auto;
+}
+
+.img-card-title {
+    float: left;
+}
+
+#download {
+    background-color: aquamarine;
 }
