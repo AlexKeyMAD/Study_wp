@@ -1,11 +1,11 @@
 body {
     position: relative;
-    /*padding-top: 50px;*/
 }
 
 #home {
     background-image: url(../img/home-background.jpg);
     color: aliceblue;
+    text-align: center;
 }
 
 #text-abaut {
@@ -19,4 +19,13 @@ body {
 
 #download {
     background-color: aquamarine;
+    text-align: center;
+}
+
+#about {
+    padding: 50px 10px;
+}
+
+.form-inline {
+    margin: auto;
 }
