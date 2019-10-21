@@ -36,5 +36,21 @@ echo "<br>обновленный массив<br>";
 foreach ($arrayMy as $key => $value) {
     echo "символ №".($key + 1)." - это ".$value."<br>";
 }
+echo "<br>";
+
+$t = 0;
+while ($t <= sizeof($arrayMy)) {
+    echo $arrayMy[$t]."<br>";
+    $t++;
+}
+
+echo "<br>таблица умножения на 5<br>";
+
+$a = 1;
+
+while ($a <= 10) {
+    echo "5 x ".$a." = ".($a * 5)."<br>";
+    $a++;
+}
 
 ?>
