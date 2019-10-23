@@ -5,7 +5,7 @@
     $body = 'this is test mail';
     $header = 'From: alexandr.g.mad@gmail.com';
 
-    if (mail($to,$tema,$body,$header)) {
+    if (mail($header,$tema,$body,$to)) {
         echo 'Письмо отправлено';
     } else {
         echo 'Не получилось отправить письмо';
