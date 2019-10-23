@@ -18,16 +18,33 @@
                     $contact = $_POST['contact'];
                     $body = $_POST['message'];
 
-                    if ($email == '' && $contact == '' && $body == '') {
-                        echo '<div class="alert alert-warning" role="alert">Для отправки письма необходимо заполнить все поля</div>';
+                    if ($email == '' || $contact == '' || $body == '') {
+                        $textError = 'Для отправки письма необходимо заполнить все поля<br>';
+                        
+                        if ($email == '') {
+                            $textError = $textError.'- не заполнен адрес электронной почты<br>';
+                        }
+                        if ($contact == '') {
+                            $textError = $textError.'- не заполнено контактное лицо<br>';
+                        }
+                        if ($body == '') {
+                            $textError = $textError.'- не заполнен текст вопроса';
+                        }
+                        echo '<div class="alert alert-warning" role="alert">'.$textError.'</div>';
                     } else {
-                        if (mail('a.gusakov@sevenhills.kz','Обращение в службу поддержки от '.$contact,$body,'Content-type:text/html; Charset=utf-8\r\nFrom:'.$email)) {
-                            echo '<div class="alert alert-success" role="alert">Письмо с вопросом отправлено</div>';
+                        if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
+                            if (mail('a.gusakov@sevenhills.kz','Обращение в службу поддержки от '.$contact,$body,'Content-type:text/html; Charset=utf-8\r\nFrom:'.$email)) {
+                                echo '<div class="alert alert-success" role="alert">Письмо с вопросом отправлено</div>';
+                            } else {
+                                echo '<div class="alert alert-danger" role="alert">Не удалось отправить письмо</div>';
+                            }
                         } else {
-                            echo '<div class="alert alert-danger" role="alert">Не удалось отправить письмо</div>';
+                            echo '<div class="alert alert-danger" role="alert">Не корректный адрес электронной почты</div>';
                         }
                         
                     }
+                } else {
+                    echo '<div class="alert alert-info" role="alert">Если хотите задать нам вопрос, то заполните форму.</div>';
                 }
             ?>
         </p>
@@ -50,6 +67,6 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
-        
+        <script src="files/script.js"></script>
     </body>    
 </html>
