@@ -6,23 +6,44 @@
         <link rel="stylesheet" href="/files/style.css">
     </head>
     <body>
-    <p>
-        <h2>Контакты</h2>
-    </p>
-    <form id='myForm'>
+    
+    <form id='myForm' method='post'>
+        <p>
+            <h2>Контакты</h2>
+        </p>
+        <p>
+            <?php
+                if ($_POST) {
+                    $email = $_POST['email'];
+                    $contact = $_POST['contact'];
+                    $body = $_POST['message'];
+
+                    if ($email == '' && $contact == '' && $body == '') {
+                        echo '<div class="alert alert-warning" role="alert">Для отправки письма необходимо заполнить все поля</div>';
+                    } else {
+                        if (mail('a.gusakov@sevenhills.kz','Обращение в службу поддержки от '.$contact,$body,'Content-type:text/html; Charset=utf-8\r\nFrom:'.$email)) {
+                            echo '<div class="alert alert-success" role="alert">Письмо с вопросом отправлено</div>';
+                        } else {
+                            echo '<div class="alert alert-danger" role="alert">Не удалось отправить письмо</div>';
+                        }
+                        
+                    }
+                }
+            ?>
+        </p>
         <div class="form-group">
             <label for="exampleInputEmail1">Адрес электронной почты</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите email">
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите email" name='email'>
         </div>
         <div class="form-group">
             <label for="exampleInputText">Контакт</label>
-            <input type="text" class="form-control" id="exampleInputText" placeholder="Введите контактное лицо">
+            <input type="text" class="form-control" id="exampleInputText" placeholder="Введите контактное лицо" name='contact'>
         </div>
         <div class="form-group">
             <label for="exampleInputBody">Что бы вы хотели у нас спросить?</label>
-            <textarea class="form-control" rows="3" id='exampleInputBody'></textarea>
+            <textarea class="form-control" rows="3" id='exampleInputBody' name='message'></textarea>
         </div>
-        <button type="submit" class="btn btn-default">Отправить</button>
+        <button type="submit" class="btn btn-default">Задать вопрос</button>
     </form>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -32,6 +53,3 @@
         
     </body>    
 </html>
-
-<?php
-?>
