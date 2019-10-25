@@ -24,3 +24,6 @@
         <!--<script src="files/script.js"></script>-->
     </body>    
 </html>
+
+<?php
+?>
