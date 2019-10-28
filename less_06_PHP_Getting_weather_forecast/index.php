@@ -17,11 +17,11 @@
                 <button type="submit" class="btn btn-primary mb-2">Отправить</button>
             </form>
             <?php
-                if ($_POST) {
+                if (array_key_exists('city',$_POST)) {
                     $city = $_POST['city'];
                     if ($city != '') {
                         //https://www.weather-forecast.com/locations/<<city>>/forecasts/latest
-                        $content = file_get_contents( "https://www.weather-forecast.com/locations/".$city."/forecasts/latest" );
+                        $content = file_get_contents( "https://www.weather-forecast.com/locations/".(str_replace(' ','',$city))."/forecasts/latest" );
                         $arr0 = explode('<div class="description__text"><div class="show-for-small-only"><div class="description__weather-icon"><div class="weather-wrapper">',$content);
                         $arr1 = explode('<section class="row expanded">',$arr0[1]);
                         $arr2 = explode('Providing a local 3 hourly',$arr1[0]);
