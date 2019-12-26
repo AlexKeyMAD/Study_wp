@@ -1,0 +1,27 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="text1">
+    <input type="text" name="" id="text2">
+    <button id='but1'>Сравнить</button>
+    <script>
+        let Text1 = document.getElementById('text1').innerText,
+            Text2 = document.getElementById('text2').innerText,
+            But1 = document.getElementById('but1');
+
+        But1.onclick = function() {
+            if (Text1 == Text2) {
+                alert('Тексты равны');
+            } else {
+                alert('Тексты не равны');
+            }
+        }
+    </script>
+</body>
+
+</html>
