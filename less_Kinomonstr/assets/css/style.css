@@ -3,6 +3,17 @@
     padding: 0px;
 }
 
+body {
+    font-size: 1.2em;
+    background-color: #fff;
+    color: #555;
+}
+
+p {
+    padding: 0 0 20px 0;
+    line-height: 1.5em;
+}
+
 input[type='text'],
 input[type='password'],
 input[type='search'] {
@@ -35,6 +46,16 @@ a:hover {
     outline: none;
     text-decoration: underline;
     color: #aeb002;
+}
+
+ul {
+    margin: 2px 0 22px 17px;
+}
+
+ul li {
+    margin: 0 0 6px 0;
+    padding: 0 0 4px 5px;
+    line-height: 1.3em;
 }
 
 .header {
@@ -150,4 +171,17 @@ ul.menu li a:hover {
     font-size: 0.7em;
     margin-top: 3%;
     margin-left: 3%;
+}
+
+.sidebar ul {
+    margin: 0;
+}
+
+.sidebar li {
+    list-style-type: none;
+    margin: 0 0 0 0;
+}
+
+.sidebar .rating_sidebar {
+    float: right;
 }
