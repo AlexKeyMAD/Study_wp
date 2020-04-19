@@ -1,31 +1,16 @@
 window.addEventListener('DOMContentLoaded', function() {
-    /*
-        let btnPy = document.getElementById('btn-python'),
-            btnJS = document.getElementById('btn-js'),
-            btn1c = document.getElementById('btn-1c'),
-            ulPy = document.getElementById('ul-python'),
-            ulJS = document.getElementById('ul-js'),
-            ul1c = document.getElementById('ul-1c');
+    let arr_a = document.getElementsByTagName('a'),
+        arr_pages = [];
 
-        function hideElementsMenu() {
-            ulPy.style.display = 'none';
-            ulJS.style.display = 'none';
-            ul1c.style.display = 'none';
-        }
-
-        btnPy.onclick = function() {
-            hideElementsMenu();
-            ulPy.style.display = 'block';
-        }
-        btnJS.onclick = function() {
-            hideElementsMenu();
-            ulJS.style.display = 'block';
-        }
-        btn1c.onclick = function() {
-            hideElementsMenu();
-            ul1c.style.display = 'block';
+    for (let index = 0; index < arr_a.length; index++) {
+        let arr_atr = arr_a[index].getAttributeNames();
+        if (arr_atr.indexOf('id') != -1) {
+            /*let id = arr_a[index].id,
+                elem = document.getElementById('content');*/
+            arr_pages.push(arr_a[index]);
+            console.log(arr_pages);
+            /*elem.src = 'files/content/' + id + '.html';*/
         }
 
-        hideElementsMenu();
-    */
+    }
 }, false);

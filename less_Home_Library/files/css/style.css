@@ -18,53 +18,22 @@
     width: 880px;
 }
 
-nav {
-    margin: 100px 0;
-    background-color: #b57ee9;
-}
-
-
-/* убираем отступы и поля, а также list-style для "ul", 
- * и добавляем "position:relative" */
-
-nav ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    position: relative;
-}
-
-
-/* применяем inline-block позиционирование к элементам навигации */
-
-nav ul li {
-    margin: 0px -7px 0 0;
-    display: inline-block;
-    background-color: #b57ee9;
-}
-
-
-/* стилизуем ссылки */
-
-nav a {
-    display: block;
-    padding: 0 10px;
-    color: #FFF;
-    font-size: 20px;
-    line-height: 60px;
-    text-decoration: none;
-}
-
-
-/* изменяем цвет фона при наведении курсора */
-
-nav a:hover {
-    background-color: #000000;
-}
-
 .logo-text {
     width: 880px;
     padding-bottom: 10px;
     margin: 0 auto;
     text-align: center;
+}
+
+#div-content {
+    margin: 0 auto;
+    width: 900px;
+    height: 700px;
+    margin-top: 5px;
+}
+
+#content {
+    border: 1px solid #b57ee9;
+    width: 100%;
+    height: 100%;
 }
