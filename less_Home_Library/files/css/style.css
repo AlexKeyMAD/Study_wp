@@ -5,6 +5,7 @@
 
 #header {
     background-color: #b57ee9;
+    color: #f14444;
     height: 130px;
     font-size: 2.0em;
     margin-left: 0px;
@@ -12,22 +13,79 @@
     min-width: 900px;
 }
 
-#header ul {
+.menu {
     margin: 0 auto;
     width: 880px;
 }
 
-#header li {
-    border: 1px solid #df2727;
-    display: inline;
-    padding: 1px 5px;
+ul {
+    list-style: none;
+    display: block;
 }
 
-a,
-a:hover {
-    outline: none;
+ul:after {
+    display: block;
+    float: none;
+    content: ' ';
+    clear: both;
+}
+
+ul.menu>li {
+    float: left;
+    position: relative;
+}
+
+ul.menu>li>a {
+    display: block;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+    background-color: #b57ee9;
+}
+
+ul.menu>li>a:hover {
+    background-color: #b57ee9;
+}
+
+ul.submenu {
+    position: absolute;
+    width: 240px;
+    top: 37px;
+    left: 0px;
+    /* Делаю субменю скрытыми. */
+    display: none;
+    /* Цвет — белый. */
+    background-color: white;
+}
+
+ul.submenu>li {
+    /* Блочное расположение элементов*/
+    display: block;
+}
+
+ul.submenu>li>a {
+    /* Делаю элементы блочными. */
+    display: block;
+    /* Убираю форматирование*/
+    text-decoration: none;
+    /* Задаю отступ. */
+    padding: 10px;
+    /* Задаю цвет. */
+    color: #ffffff;
+    /* Еще цвет. */
+    background-color: #da570f;
+}
+
+ul.submenu>li>a:hover {
+    /* Цвет бэкграунда при наведении. */
+    background-color: #eb9316;
+    /* Задаю подчеркивание*/
     text-decoration: underline;
-    color: #df2727;
+}
+
+ul.menuu>li:hover>ul.submenu {
+    /* Делаю элементы блочными. */
+    display: block;
 }
 
 .logo-text {
