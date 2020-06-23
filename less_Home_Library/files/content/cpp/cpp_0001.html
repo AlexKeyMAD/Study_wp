@@ -132,6 +132,58 @@
                         </table>
                     </div>
                 </div>
+                <div class="slide">
+                    <label for="slide-null_pointer_3">
+                        <h4>Is the abbreviated pointer comparison "if(p)" to test for non-null pointers valid? What if the internal representation for null pointers is nonzero? / Допустимо ли сокращенное сравнение указателей "if (p)" для проверки ненулевых указателей? Что если внутреннее представление для нулевых указателей отлично от нуля?</h4>
+                    </label>
+                    <input type="checkbox" id="slide-null_pointer_3" />
+                    <div class="slide-text">
+                        <table border="1">
+                            <tr>
+                                <th>English</th>
+                                <th>Русский</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>When C requires the Boolean value of an expression, a false value is inferred when the expression compares equal to zero, and a true value otherwise. That is, whenever one writes</p>
+                                    <p>if(expr)</p>
+                                    <p>where "expr" is any expression at all, the compiler essentially acts as if it had been written as</p>
+                                    <p>if((expr) != 0)</p>
+                                    <p>Substituting the trivial pointer expression "p" for "expr", we have</p>
+                                    <p>if(p) is equivalent to if(p != 0)</p>
+                                    <p>and this is a comparison context, so the compiler can tell that the (implicit) 0 is actually a null pointer constant, and use the correct null pointer value. There is no trickery involved here; compilers do work this
+                                        way, and generate identical code for both constructs. The internal representation of a null pointer does not matter.</p>
+                                </td>
+                                <td>
+                                    <p>Когда C требует логического значения выражения, ложное значение выводится, когда выражение сравнивается равным нулю, и истинное значение в противном случае. То есть всякий раз, когда кто-то пишет</p>
+                                    <p>if(expr)</p>
+                                    <p>где "expr" - любое выражение вообще, компилятор по существу действует так, как если бы он был записан как</p>
+                                    <p>if((expr) != 0)</p>
+                                    <p>Подставляя тривиальное выражение-указатель «p» вместо «expr», получим</p>
+                                    <p>if(p) эквивалентно if(p != 0)</p>
+                                    <p>и это контекст сравнения, поэтому компилятор может сказать, что (неявный) 0 на самом деле является константой нулевого указателя, и использовать правильное значение нулевого указателя. Здесь нет хитрости; компиляторы
+                                        работают таким образом и генерируют идентичный код для обеих конструкций. Внутреннее представление нулевого указателя не имеет значения.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>The boolean negation operator, !, can be described as follows:</p>
+                                    <p>!expr is essentially equivalent to (expr)?0:1</p>
+                                    <p>or to ((expr) == 0)</p>
+                                    <p>which leads to the conclusion that</p>
+                                    <p>if(!p) is equivalent to if(p == 0)</p>
+                                </td>
+                                <td>
+                                    <p>Оператор логического отрицания (!) может быть описан следующим образом:</p>
+                                    <p>!expr по существу эквивалентно (expr)?0:1</p>
+                                    <p>или ((expr) == 0)</p>
+                                    <p>Что приводит к выводу, что</p>
+                                    <p>if(!p) эквивалентно if(p == 0)</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
