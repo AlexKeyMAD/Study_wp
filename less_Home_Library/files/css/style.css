@@ -13,9 +13,55 @@
     min-width: 900px;
 }
 
-.menu {
+#navbar ul {
+    display: none;
+    background-color: #b57ee9;
+    position: absolute;
+    top: 100%;
+}
+
+#navbar li:hover ul {
+    display: block;
+}
+
+#navbar,
+#navbar ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#navbar {
+    height: 45px;
     margin: 0 auto;
     width: 880px;
+}
+
+#navbar li {
+    float: left;
+    position: relative;
+    height: 100%;
+}
+
+#navbar li a {
+    display: block;
+    padding: 6px;
+    width: 150px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+}
+
+#navbar ul li {
+    float: none;
+}
+
+#navbar li:hover {
+    background-color: #8412a7;
+}
+
+#navbar ul li:hover {
+    background-color: #666;
 }
 
 .logo-text {
