@@ -9,33 +9,33 @@
     <div class="book-content">
         <div class="slide">
             <label for="slide-null_pointer">
-                Null Pointers / Нулевые указатели
+                <h3>Null Pointers / Нулевые указатели</h3> 
             </label>
             <input type="checkbox" id="slide-null_pointer" />
             <div class="slide-text">
                 <div class="slide">
                     <label for="slide-null_pointer_1">
-                        1. What is this infamous null pointer, anyway? / Что это за печально известный нулевой указатель?
+                        <h4>1. What is this infamous null pointer, anyway? / Что это за печально известный нулевой указатель?</h4>
                     </label>
                     <input type="checkbox" id="slide-null_pointer_1" />
                     <div class="slide-text">
-                        <table>
+                        <table border="1">
                             <tr>
                                 <th>English</th>
                                 <th>Русский</th>
                             </tr>
                             <tr>
                                 <td>
-                                    <p>The language definition states that for each pointer type, there is a special value--the ``null pointer''--which is distinguishable from all other pointer values and which is ``guaranteed to compare unequal to a pointer
-                                        to any object or function.'' That is, a null pointer points definitively nowhere; it is not the address of any object or function. The address-of operator & will never yield a null pointer, nor will a successful
-                                        call to malloc.[footnote] (malloc does return a null pointer when it fails, and this is a typical use of null pointers: as a ``special'' pointer value with some other meaning, usually ``not allocated'' or ``not
-                                        pointing anywhere yet.'')</p>
+                                    <p>The language definition states that for each pointer type, there is a special value--the "null pointer"--which is distinguishable from all other pointer values and which is "guaranteed to compare unequal to a pointer
+                                        to any object or function". That is, a null pointer points definitively nowhere; it is not the address of any object or function. The address-of operator & will never yield a null pointer, nor will a successful
+                                        call to malloc.[footnote] (malloc does return a null pointer when it fails, and this is a typical use of null pointers: as a "special" pointer value with some other meaning, usually "not allocated" or "not pointing
+                                        anywhere yet".)</p>
                                 </td>
                                 <td>
-                                    <p>В определении языка говорится, что для каждого типа указателя существует специальное значение - `` нулевой указатель '' - которое можно отличить от всех других значений указателя и которое `` гарантированно сравнивает
-                                        неравное с указателем на любой объект или функцию. '' То есть, нулевой указатель нигде не указывает; это не адрес какого-либо объекта или функции. Оператор address-of & никогда не выдаст нулевой указатель, как и
-                                        успешный вызов malloc. [Footnote] (malloc действительно возвращает нулевой указатель в случае сбоя, и это типичное использование нулевых указателей: в качестве `` специального '' значение указателя с некоторым другим
-                                        значением, обычно `` не выделено '' или `` еще нигде не указывает. '')</p>
+                                    <p>В определении языка говорится, что для каждого типа указателя существует специальное значение - "нулевой указатель" - которое можно отличить от всех других значений указателя и которое "гарантированно сравнивает неравное
+                                        с указателем на любой объект или функцию". То есть, нулевой указатель нигде не указывает; это не адрес какого-либо объекта или функции. Оператор address-of & никогда не выдаст нулевой указатель, как и успешный вызов
+                                        malloc. [Footnote] (malloc действительно возвращает нулевой указатель в случае сбоя, и это типичное использование нулевых указателей: в качестве "специального" значение указателя с некоторым другим значением, обычно
+                                        "не выделено" или "еще нигде не указывает".)</p>
                                 </td>
                             </tr>
                             <tr>
@@ -60,6 +60,78 @@
                         </table>
                     </div>
                 </div>
+                <div class="slide">
+                    <label for="slide-null_pointer_2">
+                        <h4>2. How do I get a null pointer in my programs? / Как получить нулевой указатель в моих программах?</h4>
+                    </label>
+                    <input type="checkbox" id="slide-null_pointer_2" />
+                    <div class="slide-text">
+                        <table border="1">
+                            <tr>
+                                <th>English</th>
+                                <th>Русский</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>According to the language definition, an "integral constant expression with the value 0" in a pointer context is converted into a null pointer at compile time. That is, in an initialization, assignment, or comparison
+                                        when one side is a variable or expression of pointer type, the compiler can tell that a constant 0 on the other side requests a null pointer, and generate the correctly-typed null pointer value. Therefore, the following
+                                        fragments are perfectly legal:
+                                    </p>
+                                    <p>char *p = 0;</p>
+                                    <p>if(p != 0)</p>
+                                    <p>(See also question 3.)</p>
+                                </td>
+                                <td>
+                                    <p>Согласно определению языка, "целочисленное константное выражение со значением 0" в контексте указателя преобразуется в нулевой указатель во время компиляции. То есть при инициализации, присваивании или сравнении, когда
+                                        одна сторона является переменной или выражением типа указателя, компилятор может сказать, что константа 0 на другой стороне запрашивает нулевой указатель, и сгенерировать правильное значение нулевого указателя.
+                                        Поэтому следующие фрагменты абсолютно законны:</p>
+                                    <p>char *p = 0;</p>
+                                    <p>if(p != 0)</p>
+                                    <p>(См. вопрос 3.)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>However, an argument being passed to a function is not necessarily recognizable as a pointer context, and the compiler may not be able to tell that an unadorned 0 ``means'' a null pointer. To generate a null pointer
+                                        in a function call context, an explicit cast may be required, to force the 0 to be recognized as a pointer. For example, the Unix system call execl takes a variable-length, null-pointer-terminated list of character
+                                        pointer arguments, and is correctly called like this:</p>
+                                    <p>execl("/bin/sh", "sh", "-c", "date", (char *)0);</p>
+                                </td>
+                                <td>
+                                    <p>Однако аргумент, передаваемый в функцию, не обязательно распознается как контекст указателя, и компилятор может быть не в состоянии сказать, что неукрашенный 0 "означает" нулевой указатель. Чтобы сгенерировать нулевой
+                                        указатель в контексте вызова функции, может потребоваться явное приведение, чтобы заставить 0 быть распознанным как указатель. Например, системный вызов Unix execl принимает список аргументов указателей символов
+                                        переменной длины, заканчивающийся нулевым указателем, и корректно вызывается так:</p>
+                                    <p>execl("/bin/sh", "sh", "-c", "date", (char *)0);</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>If the (char *) cast on the last argument were omitted, the compiler would not know to pass a null pointer, and would pass an integer 0 instead. (Note that many Unix manuals get this example wrong; see also question
+                                        11.)
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>Если бы (char *) приведение к последнему аргументу было опущено, компилятор не знал бы, чтобы передать нулевой указатель, и вместо этого передал бы целое число 0. (Обратите внимание, что во многих руководствах по Unix
+                                        этот пример неверен; см. Также вопрос 11.)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>When function prototypes are in scope, argument passing becomes an ``assignment context,'' and most casts may safely be omitted, since the prototype tells the compiler that a pointer is required, and of which type,
+                                        enabling it to correctly convert an unadorned 0. Function prototypes cannot provide the types for variable arguments in variable-length argument lists however, so explicit casts are still required for those arguments.
+                                        It is probably safest to properly cast all null pointer constants in function calls, to guard against varargs functions or those without prototypes.</p>
+                                </td>
+                                <td>
+                                    <p>Когда прототипы функций находятся в области видимости, передача аргументов становится `` контекстом присваивания '', и большинство приведений может быть безопасно опущено, так как прототип сообщает компилятору, что
+                                        указатель необходим и какого типа, что позволяет ему правильно преобразовывать неукрашенные 0. Прототипы функций не могут предоставлять типы для переменных аргументов в списках аргументов переменной длины, поэтому
+                                        для этих аргументов все еще требуется явное приведение. Вероятно, наиболее безопасным является правильное приведение всех констант нулевого указателя в вызовах функций для защиты от функций varargs или функций без
+                                        прототипов.
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -67,3 +139,43 @@
     <script src="../../js/books.js"></script>
 
 </body>
+<!--
+    <div class="slide">
+                    <label for="slide-null_pointer_xxx">
+                        <h4> </h4>
+                    </label>
+                    <input type="checkbox" id="slide-null_pointer_xxx" />
+                    <div class="slide-text">
+                        <table border="1">
+                            <tr>
+                                <th>English</th>
+                                <th>Русский</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+-->
