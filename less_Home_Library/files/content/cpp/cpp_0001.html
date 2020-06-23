@@ -12,10 +12,12 @@
                 <h3>Null Pointers / Нулевые указатели</h3> 
             </label>
             <input type="checkbox" id="slide-null_pointer" />
+            <hr>
             <div class="slide-text">
                 <div class="slide">
                     <label for="slide-null_pointer_1">
-                        <h4>1. What is this infamous null pointer, anyway? / Что это за печально известный нулевой указатель?</h4>
+                        <h4>1. What is this infamous null pointer, anyway?</h4>
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Что это за печально известный нулевой указатель?</h4>
                     </label>
                     <input type="checkbox" id="slide-null_pointer_1" />
                     <div class="slide-text">
@@ -60,9 +62,11 @@
                         </table>
                     </div>
                 </div>
+                <hr>
                 <div class="slide">
                     <label for="slide-null_pointer_2">
-                        <h4>2. How do I get a null pointer in my programs? / Как получить нулевой указатель в моих программах?</h4>
+                        <h4>2. How do I get a null pointer in my programs?</h4>
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Как получить нулевой указатель в моих программах?</h4>
                     </label>
                     <input type="checkbox" id="slide-null_pointer_2" />
                     <div class="slide-text">
@@ -132,9 +136,11 @@
                         </table>
                     </div>
                 </div>
+                <hr>
                 <div class="slide">
                     <label for="slide-null_pointer_3">
-                        <h4>Is the abbreviated pointer comparison "if(p)" to test for non-null pointers valid? What if the internal representation for null pointers is nonzero? / Допустимо ли сокращенное сравнение указателей "if (p)" для проверки ненулевых указателей? Что если внутреннее представление для нулевых указателей отлично от нуля?</h4>
+                        <h4>3. Is the abbreviated pointer comparison "if(p)" to test for non-null pointers valid? What if the internal representation for null pointers is nonzero?</h4>
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Допустимо ли сокращенное сравнение указателей "if (p)" для проверки ненулевых указателей? Что если внутреннее представление для нулевых указателей отлично от нуля?</h4>
                     </label>
                     <input type="checkbox" id="slide-null_pointer_3" />
                     <div class="slide-text">
@@ -184,6 +190,53 @@
                         </table>
                     </div>
                 </div>
+                <hr>
+                <div class="slide">
+                    <label for="slide-null_pointer_4">
+                        <h4>4. What is NULL and how is it defined?</h4>
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Что такое NULL и как оно определяется?</h4>
+                    </label>
+                    <input type="checkbox" id="slide-null_pointer_4" />
+                    <div class="slide-text">
+                        <table border="1">
+                            <tr>
+                                <th>English</th>
+                                <th>Русский</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>As a matter of style, many programmers prefer not to have unadorned 0's scattered through their programs, some representing numbers and some representing pointers. Therefore, the preprocessor macro NULL is defined (by
+                                        several headers, including &lt;stdio.h&gt; and &lt;stddef.h&gt;) as a null pointer constant, typically 0 or ((void *)0) (see also question 5.6). A programmer who wishes to make explicit the distinction between 0
+                                        the integer and 0 the null pointer constant can then use NULL whenever a null pointer is required.</p>
+                                </td>
+                                <td>
+                                    <p>В качестве стиля многие программисты предпочитают не разбрасывать по своим программам неукрашенные нули, некоторые из которых представляют числа, а некоторые представляют указатели. Поэтому макрос препроцессора NULL
+                                        определяется (несколькими заголовками, включая &lt;stdio.h&gt; и &lt;stddef.h&gt;) как константа нулевого указателя, обычно 0 или ((void *) 0) (см. Также вопрос 5.6). Программист, желающий сделать явное различие
+                                        между 0 целым числом и 0 константой нулевого указателя, может затем использовать NULL всякий раз, когда требуется нулевой указатель.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Using NULL is a stylistic convention only; the preprocessor turns NULL back into 0 which is then recognized by the compiler, in pointer contexts, as before. In particular, a cast may still be necessary before NULL (as
+                                        before 0) in a function call argument. The table under question 2 above applies for NULL as well as 0 (an unadorned NULL is equivalent to an unadorned 0).</p>
+                                </td>
+                                <td>
+                                    <p>Использование NULL является только стилистическим соглашением; препроцессор превращает NULL обратно в 0, который затем распознается компилятором в контексте указателя, как и раньше. В частности, приведение может быть
+                                        необходимо до NULL (как и до 0) в аргументе вызова функции. Таблица под вопросом 2 выше применяется как к NULL, так и к 0 (неукрашенный NULL эквивалентен неукрашенному 0).</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>NULL should be used only as a pointer constant; see question 9</p>
+                                </td>
+                                <td>
+                                    <p>NULL должен использоваться только как указатель константы; см вопрос 9</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <hr>
             </div>
         </div>
     </div>
@@ -195,6 +248,7 @@
     <div class="slide">
                     <label for="slide-null_pointer_xxx">
                         <h4> </h4>
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;</h4>
                     </label>
                     <input type="checkbox" id="slide-null_pointer_xxx" />
                     <div class="slide-text">
@@ -230,4 +284,5 @@
                         </table>
                     </div>
                 </div>
+                <hr>
 -->
