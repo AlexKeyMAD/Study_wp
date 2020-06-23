@@ -9,11 +9,57 @@
     <div class="book-content">
         <div class="slide">
             <label for="slide-null_pointer">
-                Null Pointers / Null-указатели (Нулевые указатели)
+                Null Pointers / Нулевые указатели
             </label>
             <input type="checkbox" id="slide-null_pointer" />
             <div class="slide-text">
-                <p>shgfuosgfuydk</p>
+                <div class="slide">
+                    <label for="slide-null_pointer_1">
+                        1. What is this infamous null pointer, anyway? / Что это за печально известный нулевой указатель?
+                    </label>
+                    <input type="checkbox" id="slide-null_pointer_1" />
+                    <div class="slide-text">
+                        <table>
+                            <tr>
+                                <th>English</th>
+                                <th>Русский</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>The language definition states that for each pointer type, there is a special value--the ``null pointer''--which is distinguishable from all other pointer values and which is ``guaranteed to compare unequal to a pointer
+                                        to any object or function.'' That is, a null pointer points definitively nowhere; it is not the address of any object or function. The address-of operator & will never yield a null pointer, nor will a successful
+                                        call to malloc.[footnote] (malloc does return a null pointer when it fails, and this is a typical use of null pointers: as a ``special'' pointer value with some other meaning, usually ``not allocated'' or ``not
+                                        pointing anywhere yet.'')</p>
+                                </td>
+                                <td>
+                                    <p>В определении языка говорится, что для каждого типа указателя существует специальное значение - `` нулевой указатель '' - которое можно отличить от всех других значений указателя и которое `` гарантированно сравнивает
+                                        неравное с указателем на любой объект или функцию. '' То есть, нулевой указатель нигде не указывает; это не адрес какого-либо объекта или функции. Оператор address-of & никогда не выдаст нулевой указатель, как и
+                                        успешный вызов malloc. [Footnote] (malloc действительно возвращает нулевой указатель в случае сбоя, и это типичное использование нулевых указателей: в качестве `` специального '' значение указателя с некоторым другим
+                                        значением, обычно `` не выделено '' или `` еще нигде не указывает. '')</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>A null pointer is conceptually different from an uninitialized pointer. A null pointer is known not to point to any object or function; an uninitialized pointer might point anywhere.</p>
+                                </td>
+                                <td>
+                                    <p>Нулевой указатель концептуально отличается от неинициализированного указателя. Известно, что нулевой указатель не указывает на какой-либо объект или функцию; неинициализированный указатель может указывать куда угодно.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>As mentioned above, there is a null pointer for each pointer type, and the internal values of null pointers for different types may be different. Although programmers need not know the internal values, the compiler
+                                        must always be informed which type of null pointer is required, so that it can make the distinction if necessary.</p>
+                                </td>
+                                <td>
+                                    <p>Как упомянуто выше, для каждого типа указателя существует нулевой указатель, и внутренние значения нулевых указателей для разных типов могут быть разными. Хотя программистам не нужно знать внутренние значения, компилятор
+                                        всегда должен быть информирован о том, какой тип нулевого указателя требуется, чтобы он мог провести различие при необходимости.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
