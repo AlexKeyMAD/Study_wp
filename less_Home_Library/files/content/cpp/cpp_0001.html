@@ -237,6 +237,117 @@
                     </div>
                 </div>
                 <hr>
+                <div class="slide">
+                    <label for="slide-null_pointer_5">
+                        <h4>5. How should NULL be defined on a machine which uses a nonzero bit pattern as the internal representation of a null pointer?</h4>
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Как определить NULL на машине, которая использует ненулевой битовый шаблон как внутреннее представление нулевого указателя?</h4>
+                    </label>
+                    <input type="checkbox" id="slide-null_pointer_5" />
+                    <div class="slide-text">
+                        <table border="1">
+                            <tr>
+                                <th>English</th>
+                                <th>Русский</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>The same as on any other machine: as 0 (or some version of 0; see question 4).</p>
+                                </td>
+                                <td>
+                                    <p>То же, что и на любом другом компьютере: 0 (или некоторая версия 0; см. Вопрос 4).</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Whenever a programmer requests a null pointer, either by writing "0" or "NULL", it is the compiler's responsibility to generate whatever bit pattern the machine uses for that null pointer. (Again, the compiler can tell
+                                        that an unadorned 0 requests a null pointer when the 0 is in a pointer context; see question 2.) Therefore, #defining NULL as 0 on a machine for which internal null pointers are nonzero is as valid as on any other:
+                                        the compiler must always be able to generate the machine's correct null pointers in response to unadorned 0's seen in pointer contexts. A constant 0 is a null pointer constant; NULL is just a convenient name for
+                                        it (see also question 13).</p>
+                                    <p>(Section 4.1.5 of the C Standard states that NULL "expands to an implementation-defined null pointer constant," which means that the implementation gets to choose which form of 0 to use and whether to use a void * cast;
+                                        see questions 6 and 7. "Implementation-defined" here does not mean that NULL might be #defined to match some implementation-specific nonzero internal null pointer value.)</p>
+                                    <p>See also questions 2, 10 and 17</p>
+                                </td>
+                                <td>
+                                    <p>Всякий раз, когда программист запрашивает нулевой указатель, записывая «0» или «NULL», компилятор несет ответственность за генерацию любого битового шаблона, который машина использует для этого нулевого указателя. (Опять
+                                        же, компилятор может сказать, что незакрашенный 0 запрашивает нулевой указатель, когда 0 находится в контексте указателя; см. Вопрос 2.) Следовательно, # определение NULL как 0 на машине, для которой внутренние
+                                        нулевые указатели отличны от нуля, так же верно, как на любом другом: компилятор должен всегда иметь возможность генерировать правильные нулевые указатели машины в ответ на неукрашенные 0, видимые в контекстах указателей.
+                                        Константа 0 является константой нулевого указателя; NULL - просто удобное название для него (см. Также вопрос 13).</p>
+                                    <p>(Раздел 4.1.5 Стандарта C гласит, что NULL «расширяется до определенной в реализации константы нулевого указателя», что означает, что реализация может выбирать, какую форму 0 использовать и использовать ли приведение
+                                        типа void *; см. Вопросы 6). и 7. «Определено реализацией» в данном случае не означает, что NULL может быть #defined, чтобы соответствовать некоторому значению, зависящему от реализации, от ненулевого значения внутреннего
+                                        нулевого указателя.)</p>
+                                    <p>Смотрите также вопросы 2, 10 и 17</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <hr>
+                <div class="slide">
+                    <label for="slide-null_pointer_6">
+                        <h4>6. If NULL were defined as follows:<span><br></span>
+                            #define NULL ((char *)0)<span><br></span>
+                        wouldn't that make function calls which pass an uncast NULL work?</h4>
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Если NULL были определены следующим образом:<span><br></span>
+                            #define NULL ((char *)0)<span><br></span>
+                            не заставит ли это работать вызовы функций, которые передают uncast NULL?</h4>
+                    </label>
+                    <input type="checkbox" id="slide-null_pointer_6" />
+                    <div class="slide-text">
+                        <table border="1">
+                            <tr>
+                                <th>English</th>
+                                <th>Русский</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Not in the most general case. The complication is that there are machines which use different internal representations for pointers to different types of data. The suggested definition would make uncast NULL arguments
+                                        to functions expecting pointers to characters work correctly, but pointer arguments of other types could still (in the absence of prototypes) require explicit casts. Furthermore, legal constructions such as</p>
+                                    <p>FILE *fp = NULL;</p>
+                                    <p>could fail.</p>
+                                </td>
+                                <td>
+                                    <p>Не в самом общем случае. Сложность состоит в том, что существуют машины, которые используют разные внутренние представления для указателей на разные типы данных. Предложенное определение будет приводить к тому, что
+                                        нерассчитанные NULL-аргументы для функций, ожидающих, что указатели на символы будут работать правильно, но аргументы-указатели других типов все же могут (при отсутствии прототипов) требовать явного приведения.
+                                        Кроме того, правовые конструкции, такие как</p>
+                                    <p>FILE *fp = NULL;</p>
+                                    <p>может потерпеть неудачу.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Nevertheless, ANSI C allows the alternate definition</p>
+                                    <p>#define NULL ((void *)0)</p>
+                                    <p>for NULL. Besides potentially helping incorrect programs to work (but only on machines with homogeneous pointers, thus questionably valid assistance), this definition may catch programs which use NULL incorrectly (e.g.
+                                        when the ASCII NUL character was really intended; see question 9). See also question 7.</p>
+                                </td>
+                                <td>
+                                    <p>Тем не менее, в ANSI C позволяет альтернативное определение</p>
+                                    <p>#define NULL ((void *)0)</p>
+                                    <p>для NULL. Помимо потенциальной помощи в работе некорректных программ (но только на машинах с однородными указателями, что, следовательно, сомнительно допустимая помощь), это определение может отлавливать программы,
+                                        которые используют NULL неправильно (например, когда символ ASCII NUL действительно был задуман; см. Вопрос 9). Смотрите также вопрос 7.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>At any rate, ANSI function prototypes ensure that most (though not quite all; see question 2) pointer arguments are converted correctly when passed as function arguments, so the question is largely moot.</p>
+                                </td>
+                                <td>
+                                    <p>В любом случае, прототипы функций ANSI гарантируют, что большинство (хотя и не все; см. Вопрос 2) аргументы указателя будут правильно преобразованы при передаче в качестве аргументов функции, поэтому вопрос в значительной
+                                        степени спорный.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Programmers who are accustomed to modern, "flat" memory architectures may find the idea of "different kinds of pointers" very difficult to accept. See question 17 for some examples.</p>
+                                </td>
+                                <td>
+                                    <p>Программистам, которые привыкли к современной «плоской» архитектуре памяти, может быть очень трудно принять идею «различных указателей». Смотрите вопрос 17 для некоторых примеров.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <hr>
             </div>
         </div>
     </div>
