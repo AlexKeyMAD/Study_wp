@@ -1,0 +1,13 @@
+.book-title {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.slide .slide-text,
+.slide [type="checkbox"] {
+    display: none;
+}
+
+.slide [type="checkbox"]:checked~.slide-text {
+    display: block;
+}
