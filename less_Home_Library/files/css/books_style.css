@@ -11,3 +11,12 @@
 .slide [type="checkbox"]:checked~.slide-text {
     display: block;
 }
+
+.table-en-ru {
+    width: 48%;
+}
+
+table td {
+    vertical-align: top;
+    text-align: left;
+}

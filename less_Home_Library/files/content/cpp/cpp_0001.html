@@ -12,388 +12,684 @@
                 <h3>Null Pointers / Нулевые указатели</h3> 
             </label>
             <input type="checkbox" id="slide-null_pointer" />
-            <hr>
             <div class="slide-text">
-                <div class="slide">
-                    <label for="slide-null_pointer_1">
-                        <h4>1. What is this infamous null pointer, anyway?</h4>
-                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Что это за печально известный нулевой указатель?</h4>
-                    </label>
-                    <input type="checkbox" id="slide-null_pointer_1" />
-                    <div class="slide-text">
-                        <table border="1">
-                            <tr>
-                                <th>English</th>
-                                <th>Русский</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>The language definition states that for each pointer type, there is a special value--the "null pointer"--which is distinguishable from all other pointer values and which is "guaranteed to compare unequal to a pointer
-                                        to any object or function". That is, a null pointer points definitively nowhere; it is not the address of any object or function. The address-of operator & will never yield a null pointer, nor will a successful
-                                        call to malloc.[footnote] (malloc does return a null pointer when it fails, and this is a typical use of null pointers: as a "special" pointer value with some other meaning, usually "not allocated" or "not pointing
-                                        anywhere yet".)</p>
-                                </td>
-                                <td>
-                                    <p>В определении языка говорится, что для каждого типа указателя существует специальное значение - "нулевой указатель" - которое можно отличить от всех других значений указателя и которое "гарантированно сравнивает неравное
-                                        с указателем на любой объект или функцию". То есть, нулевой указатель нигде не указывает; это не адрес какого-либо объекта или функции. Оператор address-of & никогда не выдаст нулевой указатель, как и успешный вызов
-                                        malloc. [Footnote] (malloc действительно возвращает нулевой указатель в случае сбоя, и это типичное использование нулевых указателей: в качестве "специального" значение указателя с некоторым другим значением, обычно
-                                        "не выделено" или "еще нигде не указывает".)</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>A null pointer is conceptually different from an uninitialized pointer. A null pointer is known not to point to any object or function; an uninitialized pointer might point anywhere.</p>
-                                </td>
-                                <td>
-                                    <p>Нулевой указатель концептуально отличается от неинициализированного указателя. Известно, что нулевой указатель не указывает на какой-либо объект или функцию; неинициализированный указатель может указывать куда угодно.
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>As mentioned above, there is a null pointer for each pointer type, and the internal values of null pointers for different types may be different. Although programmers need not know the internal values, the compiler
-                                        must always be informed which type of null pointer is required, so that it can make the distinction if necessary.</p>
-                                </td>
-                                <td>
-                                    <p>Как упомянуто выше, для каждого типа указателя существует нулевой указатель, и внутренние значения нулевых указателей для разных типов могут быть разными. Хотя программистам не нужно знать внутренние значения, компилятор
-                                        всегда должен быть информирован о том, какой тип нулевого указателя требуется, чтобы он мог провести различие при необходимости.</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <hr>
-                <div class="slide">
-                    <label for="slide-null_pointer_2">
-                        <h4>2. How do I get a null pointer in my programs?</h4>
-                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Как получить нулевой указатель в моих программах?</h4>
-                    </label>
-                    <input type="checkbox" id="slide-null_pointer_2" />
-                    <div class="slide-text">
-                        <table border="1">
-                            <tr>
-                                <th>English</th>
-                                <th>Русский</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>According to the language definition, an "integral constant expression with the value 0" in a pointer context is converted into a null pointer at compile time. That is, in an initialization, assignment, or comparison
-                                        when one side is a variable or expression of pointer type, the compiler can tell that a constant 0 on the other side requests a null pointer, and generate the correctly-typed null pointer value. Therefore, the following
-                                        fragments are perfectly legal:
-                                    </p>
-                                    <p>char *p = 0;</p>
-                                    <p>if(p != 0)</p>
-                                    <p>(See also question 3.)</p>
-                                </td>
-                                <td>
-                                    <p>Согласно определению языка, "целочисленное константное выражение со значением 0" в контексте указателя преобразуется в нулевой указатель во время компиляции. То есть при инициализации, присваивании или сравнении, когда
-                                        одна сторона является переменной или выражением типа указателя, компилятор может сказать, что константа 0 на другой стороне запрашивает нулевой указатель, и сгенерировать правильное значение нулевого указателя.
-                                        Поэтому следующие фрагменты абсолютно законны:</p>
-                                    <p>char *p = 0;</p>
-                                    <p>if(p != 0)</p>
-                                    <p>(См. вопрос 3.)</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>However, an argument being passed to a function is not necessarily recognizable as a pointer context, and the compiler may not be able to tell that an unadorned 0 ``means'' a null pointer. To generate a null pointer
-                                        in a function call context, an explicit cast may be required, to force the 0 to be recognized as a pointer. For example, the Unix system call execl takes a variable-length, null-pointer-terminated list of character
-                                        pointer arguments, and is correctly called like this:</p>
-                                    <p>execl("/bin/sh", "sh", "-c", "date", (char *)0);</p>
-                                </td>
-                                <td>
-                                    <p>Однако аргумент, передаваемый в функцию, не обязательно распознается как контекст указателя, и компилятор может быть не в состоянии сказать, что неукрашенный 0 "означает" нулевой указатель. Чтобы сгенерировать нулевой
-                                        указатель в контексте вызова функции, может потребоваться явное приведение, чтобы заставить 0 быть распознанным как указатель. Например, системный вызов Unix execl принимает список аргументов указателей символов
-                                        переменной длины, заканчивающийся нулевым указателем, и корректно вызывается так:</p>
-                                    <p>execl("/bin/sh", "sh", "-c", "date", (char *)0);</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>If the (char *) cast on the last argument were omitted, the compiler would not know to pass a null pointer, and would pass an integer 0 instead. (Note that many Unix manuals get this example wrong; see also question
-                                        11.)
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>Если бы (char *) приведение к последнему аргументу было опущено, компилятор не знал бы, чтобы передать нулевой указатель, и вместо этого передал бы целое число 0. (Обратите внимание, что во многих руководствах по Unix
-                                        этот пример неверен; см. Также вопрос 11.)</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>When function prototypes are in scope, argument passing becomes an ``assignment context,'' and most casts may safely be omitted, since the prototype tells the compiler that a pointer is required, and of which type,
-                                        enabling it to correctly convert an unadorned 0. Function prototypes cannot provide the types for variable arguments in variable-length argument lists however, so explicit casts are still required for those arguments.
-                                        It is probably safest to properly cast all null pointer constants in function calls, to guard against varargs functions or those without prototypes.</p>
-                                </td>
-                                <td>
-                                    <p>Когда прототипы функций находятся в области видимости, передача аргументов становится `` контекстом присваивания '', и большинство приведений может быть безопасно опущено, так как прототип сообщает компилятору, что
-                                        указатель необходим и какого типа, что позволяет ему правильно преобразовывать неукрашенные 0. Прототипы функций не могут предоставлять типы для переменных аргументов в списках аргументов переменной длины, поэтому
-                                        для этих аргументов все еще требуется явное приведение. Вероятно, наиболее безопасным является правильное приведение всех констант нулевого указателя в вызовах функций для защиты от функций varargs или функций без
-                                        прототипов.
-                                    </p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <hr>
-                <div class="slide">
-                    <label for="slide-null_pointer_3">
-                        <h4>3. Is the abbreviated pointer comparison "if(p)" to test for non-null pointers valid? What if the internal representation for null pointers is nonzero?</h4>
-                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Допустимо ли сокращенное сравнение указателей "if (p)" для проверки ненулевых указателей? Что если внутреннее представление для нулевых указателей отлично от нуля?</h4>
-                    </label>
-                    <input type="checkbox" id="slide-null_pointer_3" />
-                    <div class="slide-text">
-                        <table border="1">
-                            <tr>
-                                <th>English</th>
-                                <th>Русский</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>When C requires the Boolean value of an expression, a false value is inferred when the expression compares equal to zero, and a true value otherwise. That is, whenever one writes</p>
-                                    <p>if(expr)</p>
-                                    <p>where "expr" is any expression at all, the compiler essentially acts as if it had been written as</p>
-                                    <p>if((expr) != 0)</p>
-                                    <p>Substituting the trivial pointer expression "p" for "expr", we have</p>
-                                    <p>if(p) is equivalent to if(p != 0)</p>
-                                    <p>and this is a comparison context, so the compiler can tell that the (implicit) 0 is actually a null pointer constant, and use the correct null pointer value. There is no trickery involved here; compilers do work this
-                                        way, and generate identical code for both constructs. The internal representation of a null pointer does not matter.</p>
-                                </td>
-                                <td>
-                                    <p>Когда C требует логического значения выражения, ложное значение выводится, когда выражение сравнивается равным нулю, и истинное значение в противном случае. То есть всякий раз, когда кто-то пишет</p>
-                                    <p>if(expr)</p>
-                                    <p>где "expr" - любое выражение вообще, компилятор по существу действует так, как если бы он был записан как</p>
-                                    <p>if((expr) != 0)</p>
-                                    <p>Подставляя тривиальное выражение-указатель «p» вместо «expr», получим</p>
-                                    <p>if(p) эквивалентно if(p != 0)</p>
-                                    <p>и это контекст сравнения, поэтому компилятор может сказать, что (неявный) 0 на самом деле является константой нулевого указателя, и использовать правильное значение нулевого указателя. Здесь нет хитрости; компиляторы
-                                        работают таким образом и генерируют идентичный код для обеих конструкций. Внутреннее представление нулевого указателя не имеет значения.</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>The boolean negation operator, !, can be described as follows:</p>
-                                    <p>!expr is essentially equivalent to (expr)?0:1</p>
-                                    <p>or to ((expr) == 0)</p>
-                                    <p>which leads to the conclusion that</p>
-                                    <p>if(!p) is equivalent to if(p == 0)</p>
-                                </td>
-                                <td>
-                                    <p>Оператор логического отрицания (!) может быть описан следующим образом:</p>
-                                    <p>!expr по существу эквивалентно (expr)?0:1</p>
-                                    <p>или ((expr) == 0)</p>
-                                    <p>Что приводит к выводу, что</p>
-                                    <p>if(!p) эквивалентно if(p == 0)</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <hr>
-                <div class="slide">
-                    <label for="slide-null_pointer_4">
-                        <h4>4. What is NULL and how is it defined?</h4>
-                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Что такое NULL и как оно определяется?</h4>
-                    </label>
-                    <input type="checkbox" id="slide-null_pointer_4" />
-                    <div class="slide-text">
-                        <table border="1">
-                            <tr>
-                                <th>English</th>
-                                <th>Русский</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>As a matter of style, many programmers prefer not to have unadorned 0's scattered through their programs, some representing numbers and some representing pointers. Therefore, the preprocessor macro NULL is defined (by
-                                        several headers, including &lt;stdio.h&gt; and &lt;stddef.h&gt;) as a null pointer constant, typically 0 or ((void *)0) (see also question 5.6). A programmer who wishes to make explicit the distinction between 0
-                                        the integer and 0 the null pointer constant can then use NULL whenever a null pointer is required.</p>
-                                </td>
-                                <td>
-                                    <p>В качестве стиля многие программисты предпочитают не разбрасывать по своим программам неукрашенные нули, некоторые из которых представляют числа, а некоторые представляют указатели. Поэтому макрос препроцессора NULL
-                                        определяется (несколькими заголовками, включая &lt;stdio.h&gt; и &lt;stddef.h&gt;) как константа нулевого указателя, обычно 0 или ((void *) 0) (см. Также вопрос 5.6). Программист, желающий сделать явное различие
-                                        между 0 целым числом и 0 константой нулевого указателя, может затем использовать NULL всякий раз, когда требуется нулевой указатель.</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>Using NULL is a stylistic convention only; the preprocessor turns NULL back into 0 which is then recognized by the compiler, in pointer contexts, as before. In particular, a cast may still be necessary before NULL (as
-                                        before 0) in a function call argument. The table under question 2 above applies for NULL as well as 0 (an unadorned NULL is equivalent to an unadorned 0).</p>
-                                </td>
-                                <td>
-                                    <p>Использование NULL является только стилистическим соглашением; препроцессор превращает NULL обратно в 0, который затем распознается компилятором в контексте указателя, как и раньше. В частности, приведение может быть
-                                        необходимо до NULL (как и до 0) в аргументе вызова функции. Таблица под вопросом 2 выше применяется как к NULL, так и к 0 (неукрашенный NULL эквивалентен неукрашенному 0).</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>NULL should be used only as a pointer constant; see question 9</p>
-                                </td>
-                                <td>
-                                    <p>NULL должен использоваться только как указатель константы; см вопрос 9</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <hr>
-                <div class="slide">
-                    <label for="slide-null_pointer_5">
-                        <h4>5. How should NULL be defined on a machine which uses a nonzero bit pattern as the internal representation of a null pointer?</h4>
-                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Как определить NULL на машине, которая использует ненулевой битовый шаблон как внутреннее представление нулевого указателя?</h4>
-                    </label>
-                    <input type="checkbox" id="slide-null_pointer_5" />
-                    <div class="slide-text">
-                        <table border="1">
-                            <tr>
-                                <th>English</th>
-                                <th>Русский</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>The same as on any other machine: as 0 (or some version of 0; see question 4).</p>
-                                </td>
-                                <td>
-                                    <p>То же, что и на любом другом компьютере: 0 (или некоторая версия 0; см. Вопрос 4).</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>Whenever a programmer requests a null pointer, either by writing "0" or "NULL", it is the compiler's responsibility to generate whatever bit pattern the machine uses for that null pointer. (Again, the compiler can tell
-                                        that an unadorned 0 requests a null pointer when the 0 is in a pointer context; see question 2.) Therefore, #defining NULL as 0 on a machine for which internal null pointers are nonzero is as valid as on any other:
-                                        the compiler must always be able to generate the machine's correct null pointers in response to unadorned 0's seen in pointer contexts. A constant 0 is a null pointer constant; NULL is just a convenient name for
-                                        it (see also question 13).</p>
-                                    <p>(Section 4.1.5 of the C Standard states that NULL "expands to an implementation-defined null pointer constant," which means that the implementation gets to choose which form of 0 to use and whether to use a void * cast;
-                                        see questions 6 and 7. "Implementation-defined" here does not mean that NULL might be #defined to match some implementation-specific nonzero internal null pointer value.)</p>
-                                    <p>See also questions 2, 10 and 17</p>
-                                </td>
-                                <td>
-                                    <p>Всякий раз, когда программист запрашивает нулевой указатель, записывая «0» или «NULL», компилятор несет ответственность за генерацию любого битового шаблона, который машина использует для этого нулевого указателя. (Опять
-                                        же, компилятор может сказать, что незакрашенный 0 запрашивает нулевой указатель, когда 0 находится в контексте указателя; см. Вопрос 2.) Следовательно, # определение NULL как 0 на машине, для которой внутренние
-                                        нулевые указатели отличны от нуля, так же верно, как на любом другом: компилятор должен всегда иметь возможность генерировать правильные нулевые указатели машины в ответ на неукрашенные 0, видимые в контекстах указателей.
-                                        Константа 0 является константой нулевого указателя; NULL - просто удобное название для него (см. Также вопрос 13).</p>
-                                    <p>(Раздел 4.1.5 Стандарта C гласит, что NULL «расширяется до определенной в реализации константы нулевого указателя», что означает, что реализация может выбирать, какую форму 0 использовать и использовать ли приведение
-                                        типа void *; см. Вопросы 6). и 7. «Определено реализацией» в данном случае не означает, что NULL может быть #defined, чтобы соответствовать некоторому значению, зависящему от реализации, от ненулевого значения внутреннего
-                                        нулевого указателя.)</p>
-                                    <p>Смотрите также вопросы 2, 10 и 17</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <hr>
-                <div class="slide">
-                    <label for="slide-null_pointer_6">
-                        <h4>6. If NULL were defined as follows:<span><br></span>
-                            #define NULL ((char *)0)<span><br></span>
-                        wouldn't that make function calls which pass an uncast NULL work?</h4>
-                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;Если NULL были определены следующим образом:<span><br></span>
-                            #define NULL ((char *)0)<span><br></span>
-                            не заставит ли это работать вызовы функций, которые передают uncast NULL?</h4>
-                    </label>
-                    <input type="checkbox" id="slide-null_pointer_6" />
-                    <div class="slide-text">
-                        <table border="1">
-                            <tr>
-                                <th>English</th>
-                                <th>Русский</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>Not in the most general case. The complication is that there are machines which use different internal representations for pointers to different types of data. The suggested definition would make uncast NULL arguments
-                                        to functions expecting pointers to characters work correctly, but pointer arguments of other types could still (in the absence of prototypes) require explicit casts. Furthermore, legal constructions such as</p>
-                                    <p>FILE *fp = NULL;</p>
-                                    <p>could fail.</p>
-                                </td>
-                                <td>
-                                    <p>Не в самом общем случае. Сложность состоит в том, что существуют машины, которые используют разные внутренние представления для указателей на разные типы данных. Предложенное определение будет приводить к тому, что
-                                        нерассчитанные NULL-аргументы для функций, ожидающих, что указатели на символы будут работать правильно, но аргументы-указатели других типов все же могут (при отсутствии прототипов) требовать явного приведения.
-                                        Кроме того, правовые конструкции, такие как</p>
-                                    <p>FILE *fp = NULL;</p>
-                                    <p>может потерпеть неудачу.</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>Nevertheless, ANSI C allows the alternate definition</p>
-                                    <p>#define NULL ((void *)0)</p>
-                                    <p>for NULL. Besides potentially helping incorrect programs to work (but only on machines with homogeneous pointers, thus questionably valid assistance), this definition may catch programs which use NULL incorrectly (e.g.
-                                        when the ASCII NUL character was really intended; see question 9). See also question 7.</p>
-                                </td>
-                                <td>
-                                    <p>Тем не менее, в ANSI C позволяет альтернативное определение</p>
-                                    <p>#define NULL ((void *)0)</p>
-                                    <p>для NULL. Помимо потенциальной помощи в работе некорректных программ (но только на машинах с однородными указателями, что, следовательно, сомнительно допустимая помощь), это определение может отлавливать программы,
-                                        которые используют NULL неправильно (например, когда символ ASCII NUL действительно был задуман; см. Вопрос 9). Смотрите также вопрос 7.</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>At any rate, ANSI function prototypes ensure that most (though not quite all; see question 2) pointer arguments are converted correctly when passed as function arguments, so the question is largely moot.</p>
-                                </td>
-                                <td>
-                                    <p>В любом случае, прототипы функций ANSI гарантируют, что большинство (хотя и не все; см. Вопрос 2) аргументы указателя будут правильно преобразованы при передаче в качестве аргументов функции, поэтому вопрос в значительной
-                                        степени спорный.</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>Programmers who are accustomed to modern, "flat" memory architectures may find the idea of "different kinds of pointers" very difficult to accept. See question 17 for some examples.</p>
-                                </td>
-                                <td>
-                                    <p>Программистам, которые привыкли к современной «плоской» архитектуре памяти, может быть очень трудно принять идею «различных указателей». Смотрите вопрос 17 для некоторых примеров.</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <hr>
+                <table border="1">
+                    <tr>
+                        <th id="table-num">#</th>
+                        <th class="table-en-ru">English</th>
+                        <th class="table-en-ru">Русский</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>1</h4>
+                        </td>
+                        <td>
+                            <h4>What is this infamous null pointer, anyway?</h4>
+                        </td>
+                        <td>
+                            <h4>Что это за печально известный нулевой указатель?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>The language definition states that for each pointer type, there is a special value--the "null pointer"--which is distinguishable from all other pointer values and which is "guaranteed to compare unequal to a pointer to any
+                                object or function". That is, a null pointer points definitively nowhere; it is not the address of any object or function. The address-of operator & will never yield a null pointer, nor will a successful call to malloc.
+                                (malloc does return a null pointer when it fails, and this is a typical use of null pointers: as a "special" pointer value with some other meaning, usually "not allocated" or "not pointing anywhere yet".)
+                            </p>
+                            <p>A null pointer is conceptually different from an uninitialized pointer. A null pointer is known not to point to any object or function; an uninitialized pointer might point anywhere.</p>
+                            <p>As mentioned above, there is a null pointer for each pointer type, and the internal values of null pointers for different types may be different. Although programmers need not know the internal values, the compiler must always
+                                be informed which type of null pointer is required, so that it can make the distinction if necessary.</p>
+                        </td>
+                        <td>
+                            <p>В определении языка говорится, что для каждого типа указателя существует специальное значение - "нулевой указатель" - которое можно отличить от всех других значений указателя и которое "гарантированно сравнивает неравное с
+                                указателем на любой объект или функцию". То есть, нулевой указатель нигде не указывает; это не адрес какого-либо объекта или функции. Оператор address-of & никогда не выдаст нулевой указатель, как и успешный вызов malloc.
+                                (malloc действительно возвращает нулевой указатель в случае сбоя, и это типичное использование нулевых указателей: в качестве "специального" значение указателя с некоторым другим значением, обычно "не выделено" или "еще
+                                нигде не указывает".)</p>
+                            <p>Нулевой указатель концептуально отличается от неинициализированного указателя. Известно, что нулевой указатель не указывает на какой-либо объект или функцию; неинициализированный указатель может указывать куда угодно.</p>
+                            <p>Как упомянуто выше, для каждого типа указателя существует нулевой указатель, и внутренние значения нулевых указателей для разных типов могут быть разными. Хотя программистам не нужно знать внутренние значения, компилятор всегда
+                                должен быть информирован о том, какой тип нулевого указателя требуется, чтобы он мог провести различие при необходимости.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>2</h4>
+                        </td>
+                        <td>
+                            <h4>How do I get a null pointer in my programs?</h4>
+                        </td>
+                        <td>
+                            <h4>Как получить нулевой указатель в моих программах?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>According to the language definition, an "integral constant expression with the value 0" in a pointer context is converted into a null pointer at compile time. That is, in an initialization, assignment, or comparison when one
+                                side is a variable or expression of pointer type, the compiler can tell that a constant 0 on the other side requests a null pointer, and generate the correctly-typed null pointer value. Therefore, the following fragments
+                                are perfectly legal:
+                            </p>
+                            <p>char *p = 0;</p>
+                            <p>if(p != 0)</p>
+                            <p>(See also question 3.)</p>
+                            <p>However, an argument being passed to a function is not necessarily recognizable as a pointer context, and the compiler may not be able to tell that an unadorned 0 ``means'' a null pointer. To generate a null pointer in a function
+                                call context, an explicit cast may be required, to force the 0 to be recognized as a pointer. For example, the Unix system call execl takes a variable-length, null-pointer-terminated list of character pointer arguments,
+                                and is correctly called like this:</p>
+                            <p>execl("/bin/sh", "sh", "-c", "date", (char *)0);</p>
+                            <p>If the (char *) cast on the last argument were omitted, the compiler would not know to pass a null pointer, and would pass an integer 0 instead. (Note that many Unix manuals get this example wrong; see also question 11.)
+                            </p>
+                            <p>When function prototypes are in scope, argument passing becomes an ``assignment context,'' and most casts may safely be omitted, since the prototype tells the compiler that a pointer is required, and of which type, enabling
+                                it to correctly convert an unadorned 0. Function prototypes cannot provide the types for variable arguments in variable-length argument lists however, so explicit casts are still required for those arguments. It is probably
+                                safest to properly cast all null pointer constants in function calls, to guard against varargs functions or those without prototypes.</p>
+                        </td>
+                        <td>
+                            <p>Согласно определению языка, "целочисленное константное выражение со значением 0" в контексте указателя преобразуется в нулевой указатель во время компиляции. То есть при инициализации, присваивании или сравнении, когда одна
+                                сторона является переменной или выражением типа указателя, компилятор может сказать, что константа 0 на другой стороне запрашивает нулевой указатель, и сгенерировать правильное значение нулевого указателя. Поэтому следующие
+                                фрагменты абсолютно законны:</p>
+                            <p>char *p = 0;</p>
+                            <p>if(p != 0)</p>
+                            <p>(См. вопрос 3.)</p>
+                            <p>Однако аргумент, передаваемый в функцию, не обязательно распознается как контекст указателя, и компилятор может быть не в состоянии сказать, что неукрашенный 0 "означает" нулевой указатель. Чтобы сгенерировать нулевой указатель
+                                в контексте вызова функции, может потребоваться явное приведение, чтобы заставить 0 быть распознанным как указатель. Например, системный вызов Unix execl принимает список аргументов указателей символов переменной длины,
+                                заканчивающийся нулевым указателем, и корректно вызывается так:</p>
+                            <p>execl("/bin/sh", "sh", "-c", "date", (char *)0);</p>
+                            <p>Если бы (char *) приведение к последнему аргументу было опущено, компилятор не знал бы, чтобы передать нулевой указатель, и вместо этого передал бы целое число 0. (Обратите внимание, что во многих руководствах по Unix этот
+                                пример неверен; см. Также вопрос 11.)</p>
+                            <p>Когда прототипы функций находятся в области видимости, передача аргументов становится `` контекстом присваивания '', и большинство приведений может быть безопасно опущено, так как прототип сообщает компилятору, что указатель
+                                необходим и какого типа, что позволяет ему правильно преобразовывать неукрашенные 0. Прототипы функций не могут предоставлять типы для переменных аргументов в списках аргументов переменной длины, поэтому для этих аргументов
+                                все еще требуется явное приведение. Вероятно, наиболее безопасным является правильное приведение всех констант нулевого указателя в вызовах функций для защиты от функций varargs или функций без прототипов.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>3</h4>
+                        </td>
+                        <td>
+                            <h4>Is the abbreviated pointer comparison "if(p)" to test for non-null pointers valid? What if the internal representation for null pointers is nonzero?</h4>
+                        </td>
+                        <td>
+                            <h4>Допустимо ли сокращенное сравнение указателей "if (p)" для проверки ненулевых указателей? Что если внутреннее представление для нулевых указателей отлично от нуля?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>When C requires the Boolean value of an expression, a false value is inferred when the expression compares equal to zero, and a true value otherwise. That is, whenever one writes</p>
+                            <p>if(expr)</p>
+                            <p>where "expr" is any expression at all, the compiler essentially acts as if it had been written as</p>
+                            <p>if((expr) != 0)</p>
+                            <p>Substituting the trivial pointer expression "p" for "expr", we have</p>
+                            <p>if(p) is equivalent to if(p != 0)</p>
+                            <p>and this is a comparison context, so the compiler can tell that the (implicit) 0 is actually a null pointer constant, and use the correct null pointer value. There is no trickery involved here; compilers do work this way, and
+                                generate identical code for both constructs. The internal representation of a null pointer does not matter.</p>
+                            <p>The boolean negation operator, !, can be described as follows:</p>
+                            <p>!expr is essentially equivalent to (expr)?0:1</p>
+                            <p>or to ((expr) == 0)</p>
+                            <p>which leads to the conclusion that</p>
+                            <p>if(!p) is equivalent to if(p == 0)</p>
+                        </td>
+                        <td>
+                            <p>Когда C требует логического значения выражения, ложное значение выводится, когда выражение сравнивается равным нулю, и истинное значение в противном случае. То есть всякий раз, когда кто-то пишет</p>
+                            <p>if(expr)</p>
+                            <p>где "expr" - любое выражение вообще, компилятор по существу действует так, как если бы он был записан как</p>
+                            <p>if((expr) != 0)</p>
+                            <p>Подставляя тривиальное выражение-указатель «p» вместо «expr», получим</p>
+                            <p>if(p) эквивалентно if(p != 0)</p>
+                            <p>и это контекст сравнения, поэтому компилятор может сказать, что (неявный) 0 на самом деле является константой нулевого указателя, и использовать правильное значение нулевого указателя. Здесь нет хитрости; компиляторы работают
+                                таким образом и генерируют идентичный код для обеих конструкций. Внутреннее представление нулевого указателя не имеет значения.</p>
+                            <p>Оператор логического отрицания (!) может быть описан следующим образом:</p>
+                            <p>!expr по существу эквивалентно (expr)?0:1</p>
+                            <p>или ((expr) == 0)</p>
+                            <p>Что приводит к выводу, что</p>
+                            <p>if(!p) эквивалентно if(p == 0)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>4</h4>
+                        </td>
+                        <td>
+                            <h4>What is NULL and how is it defined?</h4>
+                        </td>
+                        <td>
+                            <h4>Что такое NULL и как оно определяется?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>As a matter of style, many programmers prefer not to have unadorned 0's scattered through their programs, some representing numbers and some representing pointers. Therefore, the preprocessor macro NULL is defined (by several
+                                headers, including &lt;stdio.h&gt; and &lt;stddef.h&gt;) as a null pointer constant, typically 0 or ((void *)0) (see also question 5.6). A programmer who wishes to make explicit the distinction between 0 the integer and
+                                0 the null pointer constant can then use NULL whenever a null pointer is required.</p>
+                            <p>Using NULL is a stylistic convention only; the preprocessor turns NULL back into 0 which is then recognized by the compiler, in pointer contexts, as before. In particular, a cast may still be necessary before NULL (as before
+                                0) in a function call argument. The table under question 2 above applies for NULL as well as 0 (an unadorned NULL is equivalent to an unadorned 0).</p>
+                            <p>NULL should be used only as a pointer constant; see question 9</p>
+                        </td>
+                        <td>
+                            <p>В качестве стиля многие программисты предпочитают не разбрасывать по своим программам неукрашенные нули, некоторые из которых представляют числа, а некоторые представляют указатели. Поэтому макрос препроцессора NULL определяется
+                                (несколькими заголовками, включая &lt;stdio.h&gt; и &lt;stddef.h&gt;) как константа нулевого указателя, обычно 0 или ((void *) 0) (см. Также вопрос 5.6). Программист, желающий сделать явное различие между 0 целым числом
+                                и 0 константой нулевого указателя, может затем использовать NULL всякий раз, когда требуется нулевой указатель.</p>
+                            <p>Использование NULL является только стилистическим соглашением; препроцессор превращает NULL обратно в 0, который затем распознается компилятором в контексте указателя, как и раньше. В частности, приведение может быть необходимо
+                                до NULL (как и до 0) в аргументе вызова функции. Таблица под вопросом 2 выше применяется как к NULL, так и к 0 (неукрашенный NULL эквивалентен неукрашенному 0).</p>
+                            <p>NULL должен использоваться только как указатель константы; см вопрос 9</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>5</h4>
+                        </td>
+                        <td>
+                            <h4>How should NULL be defined on a machine which uses a nonzero bit pattern as the internal representation of a null pointer?</h4>
+                        </td>
+                        <td>
+                            <h4>Как определить NULL на машине, которая использует ненулевой битовый шаблон как внутреннее представление нулевого указателя?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>The same as on any other machine: as 0 (or some version of 0; see question 4).</p>
+                            <p>Whenever a programmer requests a null pointer, either by writing "0" or "NULL", it is the compiler's responsibility to generate whatever bit pattern the machine uses for that null pointer. (Again, the compiler can tell that
+                                an unadorned 0 requests a null pointer when the 0 is in a pointer context; see question 2.) Therefore, #defining NULL as 0 on a machine for which internal null pointers are nonzero is as valid as on any other: the compiler
+                                must always be able to generate the machine's correct null pointers in response to unadorned 0's seen in pointer contexts. A constant 0 is a null pointer constant; NULL is just a convenient name for it (see also question
+                                13).
+                            </p>
+                            <p>(Section 4.1.5 of the C Standard states that NULL "expands to an implementation-defined null pointer constant," which means that the implementation gets to choose which form of 0 to use and whether to use a void * cast; see
+                                questions 6 and 7. "Implementation-defined" here does not mean that NULL might be #defined to match some implementation-specific nonzero internal null pointer value.)</p>
+                            <p>See also questions 2, 10 and 17</p>
+                        </td>
+                        <td>
+                            <p>То же, что и на любом другом компьютере: 0 (или некоторая версия 0; см. Вопрос 4).</p>
+                            <p>Всякий раз, когда программист запрашивает нулевой указатель, записывая «0» или «NULL», компилятор несет ответственность за генерацию любого битового шаблона, который машина использует для этого нулевого указателя. (Опять же,
+                                компилятор может сказать, что незакрашенный 0 запрашивает нулевой указатель, когда 0 находится в контексте указателя; см. Вопрос 2.) Следовательно, # определение NULL как 0 на машине, для которой внутренние нулевые указатели
+                                отличны от нуля, так же верно, как на любом другом: компилятор должен всегда иметь возможность генерировать правильные нулевые указатели машины в ответ на неукрашенные 0, видимые в контекстах указателей. Константа 0 является
+                                константой нулевого указателя; NULL - просто удобное название для него (см. Также вопрос 13).</p>
+                            <p>(Раздел 4.1.5 Стандарта C гласит, что NULL «расширяется до определенной в реализации константы нулевого указателя», что означает, что реализация может выбирать, какую форму 0 использовать и использовать ли приведение типа void
+                                *; см. Вопросы 6). и 7. «Определено реализацией» в данном случае не означает, что NULL может быть #defined, чтобы соответствовать некоторому значению, зависящему от реализации, от ненулевого значения внутреннего нулевого
+                                указателя.)
+                            </p>
+                            <p>Смотрите также вопросы 2, 10 и 17</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>6</h4>
+                        </td>
+                        <td>
+                            <h4>If NULL were defined as follows:<span><br></span> #define NULL ((char *)0)<span><br></span> wouldn't that make function calls which pass an uncast NULL work?</h4>
+                        </td>
+                        <td>
+                            <h4>Если NULL были определены следующим образом:<span><br></span> #define NULL ((char *)0)<span><br></span> не заставит ли это работать вызовы функций, которые передают uncast NULL?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>Not in the most general case. The complication is that there are machines which use different internal representations for pointers to different types of data. The suggested definition would make uncast NULL arguments to functions
+                                expecting pointers to characters work correctly, but pointer arguments of other types could still (in the absence of prototypes) require explicit casts. Furthermore, legal constructions such as</p>
+                            <p>FILE *fp = NULL;</p>
+                            <p>could fail.</p>
+                            <p>Nevertheless, ANSI C allows the alternate definition</p>
+                            <p>#define NULL ((void *)0)</p>
+                            <p>for NULL. Besides potentially helping incorrect programs to work (but only on machines with homogeneous pointers, thus questionably valid assistance), this definition may catch programs which use NULL incorrectly (e.g. when
+                                the ASCII NUL character was really intended; see question 9). See also question 7.</p>
+                            <p>At any rate, ANSI function prototypes ensure that most (though not quite all; see question 2) pointer arguments are converted correctly when passed as function arguments, so the question is largely moot.</p>
+                            <p>Programmers who are accustomed to modern, "flat" memory architectures may find the idea of "different kinds of pointers" very difficult to accept. See question 17 for some examples.</p>
+                        </td>
+                        <td>
+                            <p>Не в самом общем случае. Сложность состоит в том, что существуют машины, которые используют разные внутренние представления для указателей на разные типы данных. Предложенное определение будет приводить к тому, что нерассчитанные
+                                NULL-аргументы для функций, ожидающих, что указатели на символы будут работать правильно, но аргументы-указатели других типов все же могут (при отсутствии прототипов) требовать явного приведения. Кроме того, правовые конструкции,
+                                такие как</p>
+                            <p>FILE *fp = NULL;</p>
+                            <p>может потерпеть неудачу.</p>
+                            <p>Тем не менее, в ANSI C позволяет альтернативное определение</p>
+                            <p>#define NULL ((void *)0)</p>
+                            <p>для NULL. Помимо потенциальной помощи в работе некорректных программ (но только на машинах с однородными указателями, что, следовательно, сомнительно допустимая помощь), это определение может отлавливать программы, которые
+                                используют NULL неправильно (например, когда символ ASCII NUL действительно был задуман; см. Вопрос 9). Смотрите также вопрос 7.</p>
+                            <p>В любом случае, прототипы функций ANSI гарантируют, что большинство (хотя и не все; см. Вопрос 2) аргументы указателя будут правильно преобразованы при передаче в качестве аргументов функции, поэтому вопрос в значительной степени
+                                спорный.
+                            </p>
+                            <p>Программистам, которые привыкли к современной «плоской» архитектуре памяти, может быть очень трудно принять идею «различных указателей». Смотрите вопрос 17 для некоторых примеров.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>7</h4>
+                        </td>
+                        <td>
+                            <h4>My vendor provides header files that #define NULL as 0L. Why?</h4>
+                        </td>
+                        <td>
+                            <h4>Мой поставщик предоставляет заголовочные файлы, которые #define NULL равны 0L. Зачем?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>Some programs carelessly attempt to generate null pointers by using the NULL macro, without casts, in non-pointer contexts. (Doing so is not guaranteed to work; see questions 2 and 11.) On machines which have pointers larger
+                                than integers (such as PC compatibles in "large" model; see also question 17), a particular definition of NULL such as 0L can help these incorrect programs to work. (0L is a perfectly valid definition of NULL; it is an
+                                "integral constant expression with value 0.") Whether it is wise to coddle incorrect programs is debatable; see also question 6 and section 17.</p>
+                        </td>
+                        <td>
+                            <p>Некоторые программы небрежно пытаются генерировать нулевые указатели с помощью макроса NULL без приведения в контекстах без указателей. (Это не гарантированно сработает; см. Вопросы 2 и 11.) На машинах, у которых указатели
+                                больше целых чисел (например, совместимые с ПК в «большой» модели; см. Также вопрос 17), конкретное определение NULL, такое как 0L, может помогите этим некорректным программам работать. (0L это вполне допустимо определение
+                                NULL, это «интегральное выражение постоянной со значением 0») Будь мудр нянчиться неправильных программ является спорным; см. также вопрос 6 и раздел 17.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>8</h4>
+                        </td>
+                        <td>
+                            <h4>Is NULL valid for pointers to functions?</h4>
+                        </td>
+                        <td>
+                            <h4>Допустимо ли значение NULL для указателей на функции?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>Yes</p>
+                        </td>
+                        <td>
+                            <p>Да</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>9</h4>
+                        </td>
+                        <td>
+                            <h4>If NULL and 0 are equivalent as null pointer constants, which should I use?</h4>
+                        </td>
+                        <td>
+                            <h4>Если NULL и 0 эквивалентны как константы нулевого указателя, что я должен использовать?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>Many programmers believe that NULL should be used in all pointer contexts, as a reminder that the value is to be thought of as a pointer. Others feel that the confusion surrounding NULL and 0 is only compounded by hiding 0
+                                behind a macro, and prefer to use unadorned 0 instead.</p>
+                            <p>There is no one right answer. C programmers must understand that NULL and 0 are interchangeable in pointer contexts, and that an uncast 0 is perfectly acceptable. Any usage of NULL (as opposed to 0) should be considered a gentle
+                                reminder that a pointer is involved; programmers should not depend on it (either for their own understanding or the compiler's) for distinguishing pointer 0's from integer 0's.</p>
+                            <p>It is only in pointer contexts that NULL and 0 are equivalent. NULL should not be used when another kind of 0 is required, even though it might work, because doing so sends the wrong stylistic message. (Furthermore, ANSI allows
+                                the definition of NULL to be ((void *)0), which will not work at all in non-pointer contexts.) In particular, do not use NULL when the ASCII null character (NUL) is desired. Provide your own definition</p>
+                            <p>#define NUL '\0'</p>
+                            <p>if you must.</p>
+                        </td>
+                        <td>
+                            <p>Многие программисты считают, что NULL следует использовать во всех контекстах указателя, как напоминание о том, что значение следует рассматривать как указатель. Другие считают, что путаница, связанная с NULL и 0, усугубляется
+                                только скрытием 0 за макросом, и предпочитают вместо этого использовать неукрашенный 0.</p>
+                            <p>Там нет ни одного правильного ответа. Программисты C должны понимать, что NULL и 0 являются взаимозаменяемыми в контексте указателя, и что uncast 0 вполне приемлем. Любое использование NULL (в отличие от 0) должно рассматриваться
+                                как мягкое напоминание о том, что указатель задействован; программисты не должны зависеть от этого (ни для собственного понимания, ни для компилятора), чтобы отличать указатели 0 от целых 0.</p>
+                            <p>Только в контекстах указателя NULL и 0 эквивалентны. NULL не следует использовать, когда требуется другой тип 0, даже если он может работать, потому что это отправляет неправильное стилистическое сообщение. (Кроме того, ANSI
+                                позволяет определять значение NULL как ((void *) 0), что не будет работать вообще в контекстах без указателей.) В частности, не используйте NULL, когда требуется нулевой символ ASCII (NUL). Укажите свое собственное определение</p>
+                            <p>#define NUL '\0'</p>
+                            <p>если вы должны.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>10</h4>
+                        </td>
+                        <td>
+                            <h4>But wouldn't it be better to use NULL (rather than 0), in case the value of NULL changes, perhaps on a machine with nonzero internal null pointers?</h4>
+                        </td>
+                        <td>
+                            <h4>Но не лучше ли использовать NULL (а не 0), если значение NULL изменится, возможно, на машине с ненулевыми внутренними нулевыми указателями?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>No. (Using NULL may be preferable, but not for this reason.) Although symbolic constants are often used in place of numbers because the numbers might change, this is not the reason that NULL is used in place of 0. Once again,
+                                the language guarantees that source-code 0's (in pointer contexts) generate null pointers. NULL is used only as a stylistic convention. See questions 5</p>
+                        </td>
+                        <td>
+                            <p>Нет. (Использование NULL может быть предпочтительным, но не по этой причине.) Хотя символические константы часто используются вместо чисел, потому что числа могут меняться, это не причина, по которой NULL используется вместо
+                                0. Еще раз, язык гарантирует, что исходные коды 0 (в контексте указателя) генерируют нулевые указатели. NULL используется только как стилистическое соглашение. Смотрите вопросы 5</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>11</h4>
+                        </td>
+                        <td>
+                            <h4>I once used a compiler that wouldn't work unless NULL was used.</h4>
+                        </td>
+                        <td>
+                            <h4>Однажды я использовал компилятор, который не работал бы, если не был использован NULL.</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>Unless the code being compiled was nonportable, that compiler was probably broken.</p>
+                            <p>Perhaps the code used something like this nonportable version of an example from question 2:</p>
+                            <p>execl("/bin/sh", "sh", "-c", "date", NULL); /* WRONG */</p>
+                            <p>Under a compiler which defines NULL to ((void *)0) (see question 6), this code will happen to work. However, if pointers and integers have different sizes or representations, the (equally incorrect) code</p>
+                            <p>execl("/bin/sh", "sh", "-c", "date", 0); /* WRONG */</p>
+                            <p>may not work.</p>
+                            <p>Correct, portable code uses an explicit cast:</p>
+                            <p>execl("/bin/sh", "sh", "-c", "date", (char *)NULL);</p>
+                            <p>With the cast, the code works correctly no matter what the machine's integer and pointer representations are, and no matter which form of null pointer constant the compiler has chosen as the definition of NULL. (The code fragment
+                                in question 2, which used 0 instead of NULL, is equally correct; see also question 9.) (In general, making decisions about a language based on the behavior of one particular compiler is likely to be counterproductive.)</p>
+                        </td>
+                        <td>
+                            <p>Если компилируемый код не был переносимым, этот компилятор, вероятно, был сломан.</p>
+                            <p>Возможно, код использовал что-то вроде этой непереносимой версии примера из вопроса 2:</p>
+                            <p>execl("/bin/sh", "sh", "-c", "date", NULL); /* WRONG */</p>
+                            <p>В компиляторе, который определяет NULL для ((void *) 0) (см. Вопрос 6), этот код будет работать. Однако, если указатели и целые числа имеют разные размеры или представления, (одинаково неверный) код</p>
+                            <p>execl("/bin/sh", "sh", "-c", "date", 0); /* WRONG */</p>
+                            <p>может не работать.</p>
+                            <p>Правильный, переносимый код использует явное приведение:</p>
+                            <p>execl("/bin/sh", "sh", "-c", "date", (char *)NULL);</p>
+                            <p>При приведении код работает правильно, независимо от того, каковы представления целого и указателя машины, и независимо от того, какую форму константы нулевого указателя компилятор выбрал в качестве определения NULL. (Фрагмент
+                                кода в вопросе 2, который использовал 0 вместо NULL, одинаково корректен; см. Также вопрос 9.) (В общем, принятие решений о языке, основанном на поведении одного конкретного компилятора, может быть контрпродуктивным.)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>12</h4>
+                        </td>
+                        <td>
+                            <h4>I use the preprocessor macro<span><br></span>#define Nullptr(type) (type *)0<span><br></span>to help me build null pointers of the correct type.</h4>
+                        </td>
+                        <td>
+                            <h4>Я использую макрос препроцессора<span><br></span>#define Nullptr(type) (type *)0<span><br></span>чтобы помочь мне построить нулевые указатели правильного типа.</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>This trick, though popular and superficially attractive, does not buy much. It is not needed in assignments or comparisons; see question 2. (It does not even save keystrokes.)</p>
+                        </td>
+                        <td>
+                            <p>Этот трюк, хотя и популярен и внешне привлекателен, мало что покупает. Это не нужно в заданиях или сравнениях; см. вопрос 2. (Он даже не сохраняет нажатия клавиш.)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>13</h4>
+                        </td>
+                        <td>
+                            <h4>This is strange. NULL is guaranteed to be 0, but the null pointer is not?</h4>
+                        </td>
+                        <td>
+                            <h4>Это странно. NULL гарантированно будет 0, но нулевой указатель - нет?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>When the term "null" or "NULL" is casually used, one of several things may be meant:</p>
+                            <ol>
+                                <li>The conceptual null pointer, the abstract language concept defined in question 1. It is implemented with.</li>
+                                <li>The internal (or run-time) representation of a null pointer, which may or may not be all-bits-0 and which may be different for different pointer types. The actual values should be of concern only to compiler writers. Authors
+                                    of C programs never see them, since they use.</li>
+                                <li>The null pointer constant, which is a constant integer 0 (see question 2). It is often hidden behind.</li>
+                                <li>The NULL macro, which is #defined to be 0 (see question 4). Finally, as red herrings, we have.</li>
+                                <li>The ASCII null character (NUL), which does have all bits zero, but has no necessary relation to the null pointer except in name;</li>
+                                <li>The "null string", which is another name for the empty string (""). Using the term "null string" can be confusing in C, because an empty string involves a null ('\0') character, but not a null pointer, which brings us full
+                                    circle.
+                                </li>
+                            </ol>
+                            <p>In other words, to paraphrase the White Knight's description of his song in Through the Looking-Glass, the name of the null pointer is "0", but the name of the null pointer is called "NULL" (and we're not sure what the null
+                                pointer is).</p>
+                            <p>This document uses the phrase "null pointer" (in lower case) for sense 1, the token "0" or the phrase "null pointer constant" for sense 3, and the capitalized word "NULL" for sense 4.</p>
+                        </td>
+                        <td>
+                            <p>Когда термин «ноль» или «NULL» используется случайно, может подразумеваться одна из нескольких вещей:</p>
+                            <ol>
+                                <li>Концептуальный нулевой указатель, абстрактная языковая концепция, определенная в вопросе 1. Он реализуется с помощью.</li>
+                                <li>Внутреннее (или во время выполнения) представление нулевого указателя, который может быть или не быть all-bits-0 и который может отличаться для разных типов указателей. Фактические значения должны интересовать только авторов
+                                    компиляторов. Авторы программ на Си никогда не видят их, так как они используют.</li>
+                                <li>Константа нулевого указателя, которая является константой целого числа 0 (см. Вопрос 2). Это часто скрыто позади.</li>
+                                <li>Макрос NULL, который #defined определен как 0 (см. Вопрос 4). Наконец-то, как красные селедки, у нас есть.</li>
+                                <li>Нулевой символ ASCII (NUL), который имеет все биты ноль, но не имеет необходимого отношения к нулевому указателю, кроме имени;</li>
+                                <li>"Нулевая строка", которая является другим именем для пустой строки (""). Использование термина «пустая строка» может привести к путанице в Си, потому что пустая строка содержит нулевой символ ('\ 0'), но не нулевой указатель,
+                                    что приводит нас к полному кругу.</li>
+                            </ol>
+                            <p>Другими словами, чтобы перефразировать описание Белого Рыцаря своей песни в «Сквозном зеркале», имя нулевого указателя равно «0», но имя нулевого указателя называется «NULL» (и мы не уверены, что такое нулевой указатель).</p>
+                            <p>В этом документе используется фраза «нулевой указатель» (в нижнем регистре) для смысла 1, токен «0» или фраза «константа нулевого указателя» для смысла 3 и заглавное слово «NULL» для смысла 4.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>14</h4>
+                        </td>
+                        <td>
+                            <h4>Why is there so much confusion surrounding null pointers? Why do these questions come up so often?</h4>
+                        </td>
+                        <td>
+                            <h4>Почему так много путаницы вокруг нулевых указателей? Почему эти вопросы возникают так часто?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>C programmers traditionally like to know a lot (perhaps more than they need to) about the underlying machine implementation. The fact that null pointers are represented both in source code, and internally to most machines,
+                                as zero invites unwarranted assumptions. The use of a preprocessor macro (NULL) may seem to suggest that the value could change some day, or on some weird machine. The construct "if(p == 0)" is easily misread as calling
+                                for conversion of p to an integral type, rather than 0 to a pointer type, before the comparison. Finally, the distinction between the several uses of the term "null" (listed in question 13) is often overlooked.</p>
+                            <p>One good way to wade out of the confusion is to imagine that C used a keyword (perhaps nil, like Pascal) as a null pointer constant. The compiler could either turn nil into the appropriate type of null pointer when it could
+                                unambiguously determine that type from the source code, or complain when it could not. Now in fact, in C the keyword for a null pointer constant is not nil but 0, which works almost as well, except that an uncast 0 in a
+                                non-pointer context generates an integer zero instead of an error message, and if that uncast 0 was supposed to be a null pointer constant, the resulting program may not work.</p>
+                        </td>
+                        <td>
+                            <p>Программисты на С традиционно хотят знать много (возможно, больше, чем им нужно) о базовой реализации машины. Тот факт, что нулевые указатели представлены как в исходном коде, так и внутри большинства машин, как ноль, приводит
+                                к необоснованным предположениям. Использование макроса препроцессора (NULL) может указывать на то, что значение может измениться когда-нибудь или на какой-то странной машине. Конструкция "if (p == 0)" легко неверно истолковывается
+                                как вызов преобразования p в целочисленный тип, а не 0 в тип указателя, перед сравнением. Наконец, различие между несколькими употреблениями термина «ноль» (перечисленного в вопросе 13) часто упускается из виду.</p>
+                            <p>Один хороший способ избежать путаницы - представить, что C использовал ключевое слово (возможно, nil, как Pascal) в качестве константы нулевого указателя. Компилятор может либо превратить ноль в соответствующий тип нулевого
+                                указателя, когда он может однозначно определить этот тип из исходного кода, либо жаловаться, когда не может. Теперь фактически, в C ключевое слово для константы нулевого указателя не nil, а 0, что работает почти так же
+                                хорошо, за исключением того, что uncast 0 в контексте без указателя генерирует целое ноль вместо сообщения об ошибке, и если это uncast 0 должен был быть нулевой константой указателя, результирующая программа может не работать.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>15</h4>
+                        </td>
+                        <td>
+                            <h4>I'm confused. I just can't understand all this null pointer stuff.</h4>
+                        </td>
+                        <td>
+                            <h4>Я запутался. Я просто не могу понять все эти вещи с нулевым указателем.</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>Here are two simple rules you can follow:</p>
+                            <ol>
+                                <li>When you want a null pointer constant in source code, use "0" or "NULL"</li>
+                                <li>If the usage of "0" or "NULL" is an argument in a function call, cast it to the pointer type expected by the function being called.</li>
+                            </ol>
+                            <p>The rest of the discussion has to do with other people's misunderstandings, with the internal representation of null pointers (which you shouldn't need to know), and with the complexities of function prototypes. (Taking those
+                                complexities into account, we find that rule 2 is conservative , of course; but it doesn't hurt.) Understand questions 1, 2, and 4, and consider 3, 9, 13, and 14, and you'll do fine.</p>
+                        </td>
+                        <td>
+                            <p>Вот два простых правила, которым вы можете следовать:</p>
+                            <ol>
+                                <li>Если вы хотите, чтобы в исходном коде была константа нулевого указателя, используйте «0» или «NULL»</li>
+                                <li>Если использование «0» или «NULL» является аргументом в вызове функции, приведите его к типу указателя, ожидаемому вызываемой функцией.</li>
+                            </ol>
+                            <p>Остальная часть обсуждения связана с недопониманием других людей, с внутренним представлением нулевых указателей (что вам не нужно знать), а также со сложностями прототипов функций. (Принимая во внимание эти сложности, мы находим,
+                                что правило 2, конечно, консервативно; но это не повредит.) Поймите вопросы 1, 2 и 4, рассмотрите 3, 9, 13 и 14, и вы делать хорошо.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>16</h4>
+                        </td>
+                        <td>
+                            <h4> Given all the confusion surrounding null pointers, wouldn't it be easier simply to require them to be represented internally by zeroes?</h4>
+                        </td>
+                        <td>
+                            <h4>Учитывая всю путаницу, связанную с нулевыми указателями, не будет ли проще просто потребовать, чтобы они были представлены внутри нулями?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>Some implementations naturally represent null pointers by special, nonzero bit patterns, particularly when it can be arranged that inadvertently using those values triggers automatic hardware traps. Requiring null pointers
+                                to be represented internally as 0, and therefore disallowing use of the special, nonzero values, would be an unfortunate step backwards, because catching errors which result in invalid accesses is a Good Thing.</p>
+                            <p>Besides, what would such a requirement really accomplish? Proper understanding of null pointers does not require knowledge of the internal representation, whether zero or nonzero. Assuming that null pointers are internally
+                                zero does not make any code easier to write (except for a certain ill-advised usage of calloc;). Known-zero internal pointers would not reduce the need for casts in function calls, because the size of the pointer might
+                                still be different from that of an int. (If "nil" were used to request null pointers, as mentioned in question 14, the urge to assume an internal zero representation would not even arise.)</p>
+                        </td>
+                        <td>
+                            <p>Некоторые реализации, естественно, представляют нулевые указатели с помощью специальных ненулевых битовых комбинаций, особенно когда это может быть организовано так, что непреднамеренное использование этих значений вызывает
+                                автоматическое аппаратное прерывание. Требование, чтобы нулевые указатели были внутренне представлены как 0, и, следовательно, запрещение использования специальных ненулевых значений, было бы неудачным шагом назад, потому
+                                что перехват ошибок, которые приводят к недопустимым доступам, - это хорошо.</p>
+                            <p>Кроме того, что на самом деле выполнит такое требование? Правильное понимание нулевых указателей не требует знания внутреннего представления, нулевого или ненулевого. Предположение, что нулевые указатели внутренне равны нулю,
+                                не облегчает написание какого-либо кода (за исключением некоторого опрометчивого использования calloc;). Известные нулевые внутренние указатели не уменьшат необходимость приведения в вызовах функций, потому что размер указателя
+                                все еще может отличаться от размера int. (Если бы «ноль» использовался для запроса нулевых указателей, как упомянуто в вопросе 14, желание предположить, что внутреннее нулевое представление не возникнет).</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>17</h4>
+                        </td>
+                        <td>
+                            <h4>Seriously, have any actual machines really used nonzero null pointers, or different representations for pointers to different types?</h4>
+                        </td>
+                        <td>
+                            <h4>Серьезно, на каких-нибудь реальных машинах действительно используются ненулевые нулевые указатели или разные представления для указателей на разные типы?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>The Prime 50 series used segment 07777, offset 0 for the null pointer, at least for PL/I. Later models used segment 0, offset 0 for null pointers in C, necessitating new instructions such as TCNP (Test C Null Pointer), evidently
+                                as a sop to all the extant poorly-written C code which made incorrect assumptions. Older, word-addressed Prime machines were also notorious for requiring larger byte pointers (char *'s) than word pointers (int *'s).</p>
+                            <p>The Eclipse MV series from Data General has three architecturally supported pointer formats (word, byte, and bit pointers), two of which are used by C compilers: byte pointers for char * and void *, and word pointers for everything
+                                else. For historical reasons during the evolution of the 32-bit MV line from the 16-bit Nova line, word pointers and byte pointers had the offset, indirection, and ring protection bits in different places in the word. Passing
+                                a mismatched pointer format to a function resulted in protection faults. Eventually, the MV C compiler added many compatibility options to try to deal with code that had pointer type mismatch errors.</p>
+                            <p>Some Honeywell-Bull mainframes use the bit pattern 06000 for (internal) null pointers.</p>
+                            <p>The CDC Cyber 180 Series has 48-bit pointers consisting of a ring, segment, and offset. Most users (in ring 11) have null pointers of 0xB00000000000. It was common on old CDC ones-complement machines to use an all-one-bits
+                                word as a special flag for all kinds of data, including invalid addresses.</p>
+                            <p>The old HP 3000 series uses a different addressing scheme for byte addresses than for word addresses; like several of the machines above it therefore uses different representations for char * and void * pointers than for other
+                                pointers.
+                            </p>
+                            <p>The Symbolics Lisp Machine, a tagged architecture, does not even have conventional numeric pointers; it uses the pair &lt;NIL, 0&gt; (basically a nonexistent &lt;object, offset&gt; handle) as a C null pointer.</p>
+                            <p>Depending on the "memory model" in use, 8086-family processors (PC compatibles) may use 16-bit data pointers and 32-bit function pointers, or vice versa.</p>
+                            <p>Some 64-bit Cray machines represent int * in the lower 48 bits of a word; char * additionally uses some of the upper 16 bits to indicate a byte address within a word.</p>
+                        </td>
+                        <td>
+                            <p>Серия Prime 50 использовала сегмент 07777, смещение 0 для нулевого указателя, по крайней мере для PL / I. Более поздние модели использовали сегмент 0 со смещением 0 для нулевых указателей в C, что требовало новых инструкций,
+                                таких как TCNP (Test C Null Pointer), очевидно, в качестве дополнения ко всему существующему плохо написанному коду C, который делал неверные предположения. Старые машины Prime с адресацией на слова также были известны
+                                тем, что требовали указателей большего размера (char *), чем указатели на слова (int *).</p>
+                            <p>Серия Eclipse MV от Data General имеет три архитектурно поддерживаемых формата указателей (слово, байт и битовые указатели), два из которых используются компиляторами C: байтовые указатели для char * и void * и указатели слов
+                                для всего остального. По историческим причинам во время эволюции 32-битной линии MV из 16-битной строки Nova указатели слов и указатели байтов имели биты смещения, косвенности и защиты кольца в разных местах слова. Передача
+                                несоответствующего формата указателя в функцию привела к сбоям защиты. В конце концов, компилятор MV C добавил множество опций совместимости, чтобы попытаться справиться с кодом, в котором были ошибки несоответствия типов
+                                указателей.
+                            </p>
+                            <p>Некоторые мэйнфреймы Honeywell-Bull используют битовую комбинацию 06000 для (внутренних) нулевых указателей.</p>
+                            <p>Серия CDC Cyber 180 имеет 48-битные указатели, состоящие из кольца, сегмента и смещения. Большинство пользователей (в кольце 11) имеют нулевые указатели 0xB00000000000. На старых CDC-машинах с одним дополнением часто использовалось
+                                слово «все-один-бит» в качестве специального флага для всех типов данных, включая недопустимые адреса.</p>
+                            <p>Старая серия HP 3000 использует другую схему адресации для байтовых адресов, чем для адресных слов; как и несколько машин выше, он использует разные представления для указателей char * и void *, чем для других указателей.</p>
+                            <p>Symbolis Lisp Machine, помеченная архитектура, даже не имеет обычных числовых указателей; он использует пару &lt;NIL, 0&gt; (в основном несуществующий дескриптор &lt;object, offset&gt;) в качестве нулевого указателя на Си.</p>
+                            <p>В зависимости от используемой «модели памяти», процессоры семейства 8086 (совместимые с ПК) могут использовать 16-битные указатели данных и 32-битные функциональные указатели или наоборот.</p>
+                            <p>Некоторые 64-битные машины Cray представляют int * в младших 48 битах слова; char * дополнительно использует некоторые из старших 16 битов для указания байтового адреса в слове.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>18</h4>
+                        </td>
+                        <td>
+                            <h4>Is a run-time integral value of 0, cast to a pointer, guaranteed to be a null pointer?</h4>
+                        </td>
+                        <td>
+                            <h4>Является ли целочисленное значение времени выполнения 0, приведенное к указателю, гарантированно равным нулевому указателю?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>No. Only constant integral expressions with value 0 are guaranteed to indicate null pointers. See also questions 2, and 19.</p>
+                        </td>
+                        <td>
+                            <p>Нет. Только постоянные интегральные выражения со значением 0 гарантированно указывают на нулевые указатели. Смотрите также вопросы 2 и 19.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>19</h4>
+                        </td>
+                        <td>
+                            <h4>How can I access an interrupt vector located at the machine's location 0? If I set a pointer to 0, the compiler might translate it to some nonzero internal null pointer value.</h4>
+                        </td>
+                        <td>
+                            <h4>Как я могу получить доступ к вектору прерываний, расположенному в местоположении машины 0? Если я установлю указатель на 0, компилятор может перевести его в ненулевое значение внутреннего нулевого указателя.</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>Since whatever is at location 0 is obviously machine dependent, you're free to use whatever machine-dependent trick will work to get there. Read your vendor's documentation (and see section 19). It's likely that if it's at
+                                all meaningful for you to be accessing location 0, the system will be set up to make it reasonably easy to do so. Some possibilities are:</p>
+                            <ol>
+                                <li>Simply set a pointer to 0. (This is the way that doesn't have to work, but if it's meaningful, it probably will.)</li>
+                                <li>Assign the integer 0 to an int variable, and convert that int to a pointer. (This is also not guaranteed to work, but it probably will.)</li>
+                                <li>Use a union to set the bits of a pointer variable to 0:
+                                    <span><br></span>union {<span><br></span>&nbsp;&nbsp;&nbsp;&nbsp;int *u_p;<span><br></span>&nbsp;&nbsp;&nbsp;&nbsp;int u_i; &nbsp;&nbsp;&nbsp;&nbsp;/* assumes sizeof(int) >= sizeof(int *) */<span><br></span>} p;<span><br></span>p.u_i
+                                    = 0;</li>
+                                <li>Use memset to set the bits of a pointer variable to 0:<span><br></span>&nbsp;&nbsp;&nbsp;&nbsp;memset((void *)&p, 0, sizeof(p));</li>
+                                <li>Declare an external variable or array<span><br></span>&nbsp;&nbsp;&nbsp;&nbsp;extern int location0;<span><br></span>and use an assembly language file, or some special linker invocation, to arrange that this symbol refers
+                                    to (i.e. the variable is placed at) address 0.</li>
+                            </ol>
+                        </td>
+                        <td>
+                            <p>Поскольку все, что находится в местоположении 0, очевидно, зависит от машины, вы можете использовать любой машинно-зависимый прием, чтобы сработать. Прочитайте документацию вашего поставщика (и см. Раздел 19). Вероятно, если
+                                для вас вообще имеет смысл доступ к местоположению 0, система будет настроена так, чтобы сделать это достаточно просто. Некоторые возможности:</p>
+                            <ol>
+                                <li>Просто установите указатель на 0. (Это способ, который не должен работать, но если он имеет смысл, он, вероятно, будет.)</li>
+                                <li>Присвойте целое число 0 переменной int и преобразуйте это int в указатель. (Это также не гарантируется, но, вероятно, будет.)</li>
+                                <li>Используйте объединение, чтобы установить биты переменной указателя в 0:
+                                    <span><br></span>union {<span><br></span>&nbsp;&nbsp;&nbsp;&nbsp;int *u_p;<span><br></span>&nbsp;&nbsp;&nbsp;&nbsp;int u_i; &nbsp;&nbsp;&nbsp;&nbsp;/* assumes sizeof(int) >= sizeof(int *) */<span><br></span>} p;<span><br></span>p.u_i
+                                    = 0;
+                                </li>
+                                <li>Используйте memset, чтобы установить биты переменной указателя в 0:<span><br></span>&nbsp;&nbsp;&nbsp;&nbsp;memset((void *)&p, 0, sizeof(p));</li>
+                                <li>Объявите внешнюю переменную или массив<span><br></span>&nbsp;&nbsp;&nbsp;&nbsp;extern int location0;<span><br></span>и использовать файл на языке ассемблера или какой-либо специальный вызов компоновщика, чтобы организовать,
+                                    что этот символ ссылается (то есть, на переменную помещается) по адресу 0.</li>
+                            </ol>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>20</h4>
+                        </td>
+                        <td>
+                            <h4>What does a run-time "null pointer assignment" error mean? How can I track it down?</h4>
+                        </td>
+                        <td>
+                            <h4>Что означает ошибка "присвоение нулевого указателя" во время выполнения? Как я могу отследить это?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p>This message, which typically occurs with MS-DOS compilers, means that you've written, via a null pointer, to an invalid location--probably offset 0 in the default data segment. (The pointer in question might have been uninitialized,
+                                not all uninitialized pointers necessarily start out as null pointers.)</p>
+                            <p>A debugger may let you set some kind of data watchpoint on location 0. Alternatively, you could write a bit of code to stash away a copy of 20 or so bytes from location 0, and periodically check that the memory at location
+                                0 hasn't changed.</p>
+                        </td>
+                        <td>
+                            <p>Это сообщение, которое обычно происходит с компиляторами MS-DOS, означает, что вы записали с помощью нулевого указателя неверное местоположение - вероятно, смещение 0 в сегменте данных по умолчанию. (Указанный указатель мог
+                                быть неинициализирован, не все неинициализированные указатели обязательно начинаются как нулевые указатели.)</p>
+                            <p>Отладчик может позволить вам установить какую-то точку наблюдения за данными в местоположении 0. В качестве альтернативы, вы можете написать немного кода, чтобы спрятать копию примерно в 20 байтов из местоположения 0, и периодически
+                                проверять, что память в местоположении 0 не имеет изменилось.</p>
+                        </td>
+                    </tr>
+                </table>
             </div>
+            <hr>
         </div>
     </div>
 
     <script src="../../js/books.js"></script>
 
 </body>
-<!-- 
-    <div class="slide">
-                    <label for="slide-null_pointer_xxx">
-                        <h4> </h4>
-                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;</h4>
-                    </label>
-                    <input type="checkbox" id="slide-null_pointer_xxx" />
-                    <div class="slide-text">
-                        <table border="1">
-                            <tr>
-                                <th>English</th>
-                                <th>Русский</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p></p>
-                                </td>
-                                <td>
-                                    <p></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p></p>
-                                </td>
-                                <td>
-                                    <p></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p></p>
-                                </td>
-                                <td>
-                                    <p></p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <hr>
--->
