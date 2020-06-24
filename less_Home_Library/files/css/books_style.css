@@ -34,6 +34,23 @@ table td {
     text-align: center;
 }
 
+.border-none {
+    border: none;
+}
+
+.border-none td {
+    border: none;
+}
+
+.border-none a {
+    text-decoration: none;
+    color: black;
+}
+
+.border-none a:hover {
+    text-decoration: underline;
+}
+
 .table-td-left td {
     text-align: left;
 }
@@ -44,4 +61,8 @@ table td {
 
 .text-align-center {
     text-align: center !important;
+}
+
+.ul-no-mark {
+    list-style-type: none;
 }
