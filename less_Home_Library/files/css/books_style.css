@@ -20,6 +20,10 @@
     width: 20%;
 }
 
+.table-w-30per {
+    width: 30%;
+}
+
 table {
     border: 3px inset #b57ee9;
 }
