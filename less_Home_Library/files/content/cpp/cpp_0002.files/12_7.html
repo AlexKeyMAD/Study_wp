@@ -1,0 +1,166 @@
+<head>
+    <link rel="stylesheet" href="../../css/books_style.css">
+</head>
+
+<body>
+    <div class="book-title">
+        <p><a href="./12_6.html">&lArr;12.6 Обзор алгоритмов</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./12_8.html">12.8 Алгоритмы над контейнерами&rArr;</a></p>
+        <h2>12.7. Концепты (С++20)</h2>
+        <hr>
+        <div>
+            <p>В конце концов алгоритмы стандартной библиотеки будут определены с использованием концептов (глава 7, "Концепты и обобщенное программирование"). Предварительные обсуждения этого вопроса можно найти в Ranges Technical Specification [37], а
+                реализации можно найти в Интернете. Концепты определены в &lt;experimental/Ranges&gt;, но, надеюсь, что-то очень похожее будет добавлено в пространство имен std в С++20.</p>
+            <p>Диапазоны Range представляют собой обобщение последовательностей С++98, определяемых парами begin () /end (). Диапазон - это понятие, определяющее, что может представлять собой последовательность элементов. Его можно определить как</p>
+            <ul>
+                <li>пару итераторов {begin, end};</li>
+                <li>пару {begin, n}, где begin представляет собой итератор, а n - количество элементов;</li>
+                <li>пару {begin, pred}, где beg in представляет собой итератор, а pred - предикат; если pred (р) возвращает true для итератора р, мы достигли конца последовательности. Это позволяет нам иметь бесконечные последовательности и последовательности,
+                    генерируемые "на лету".
+                </li>
+            </ul>
+            <p>Этот концепт Range позволяет писать sort(v), а не sort(v.begin(), v.end()) , как нам приходится работать с STL с 1994 года. Например: </p>
+            <img src="./12_7_p001.png" alt="">
+            <p>Отношением для SortaЫe по умолчанию является less.</p>
+            <p>В дополнение к Range спецификация Ranges TS предлагает множество полезных концептов. Эти концепты находятся в &lt;experirnental/Ranges/ concepts&gt;. Точные их определения можно найти в [37].</p>
+            <table border="1">
+                <tr>
+                    <th></th>
+                    <th>Фундаментальные концепты языка</th>
+                </tr>
+                <tr>
+                    <td>Same&lt;T,U&gt;</td>
+                    <td>T представляет собой тот же тип, что и U</td>
+                </tr>
+                <tr>
+                    <td>DerivedFrom&lt;T,U&gt;</td>
+                    <td>T является производным от U</td>
+                </tr>
+                <tr>
+                    <td>ConvertibleTo&lt;T,U&gt;</td>
+                    <td>T может быть преобразован в U</td>
+                </tr>
+                <tr>
+                    <td>CommonReference&lt;T,U&gt;</td>
+                    <td>T и U совместно используют общий ссылочный тип</td>
+                </tr>
+                <tr>
+                    <td>Common&lt;T,U&gt;</td>
+                    <td>T и U совместно используют общий тип</td>
+                </tr>
+                <tr>
+                    <td>Integral&lt;T&gt;</td>
+                    <td>T является целочисленным типом</td>
+                </tr>
+                <tr>
+                    <td>Signedintegral&lt;T&gt;</td>
+                    <td>T является знаковым целочисленным типом</td>
+                </tr>
+                <tr>
+                    <td>Unsignedintegral&lt;T&gt;</td>
+                    <td>T является беззнаковым целочисленным типом</td>
+                </tr>
+                <tr>
+                    <td>Assignable&lt;U,T&gt;</td>
+                    <td>U может быть присвоен T</td>
+                </tr>
+                <tr>
+                    <td>SwappableWith&lt;T,U&gt;</td>
+                    <td>T может быть обменен с U</td>
+                </tr>
+                <tr>
+                    <td>Swappable&lt;T&gt;</td>
+                    <td>SwappableWith&lt;T,T&gt; </td>
+                </tr>
+            </table>
+            <p>Cornrnon важен для указания алгоритмов, которые должны работать с различными связанными типами, оставаясь надежным с математической точки зрения. Common&lt;T,U&gt; - это тип с, который можно использовать для сравнения Т с U, сначала преобразуя
+                оба значения в тип С. Например, мы можем захотеть сравнить std::string со строкой в стиле С (char*) или значения int и double, но не std::string с int. Для этого соответствующим образом специализируется cornrnon_tуре_t, используемый в
+                определении Cornrnon: </p>
+            <img src="./12_7_p002.png" alt="">
+            <p>Определение Common немного сложнее, но решает сложную фундаментальную проблему. К счастью, нам не нужно определять специализацию common_tуре_t, если только мы не хотим использовать операции над смешанными типами, для которых библиотека (пока
+                еще) не имеет подходящих определений. Common или CommonReference используется в определениях большинства концептов и алгоритмов, которые могут сравнивать значения разных типов.</p>
+            <p>На концепты, связанные со сравнением, сильно повлияла книга [40]. </p>
+            <table border="1">
+                <tr>
+                    <th></th>
+                    <th>Концепты сравнений</th>
+                </tr>
+                <tr>
+                    <td>Boolean&lt;T&gt;</td>
+                    <td>T может использоваться как булева величина</td>
+                </tr>
+                <tr>
+                    <td>WeaklyEqualityComparableWith&lt;T,U&gt;</td>
+                    <td>T и U моrут сравниваться на равенство с использованием операторов == и != </td>
+                </tr>
+                <tr>
+                    <td>WeaklyEqualityComparable&lt;T&gt;</td>
+                    <td>WeaklyEqualityComparaЬleWith&lt;T,T&gt;</td>
+                </tr>
+                <tr>
+                    <td>EqualityComparableWith&lt;T,U&gt;</td>
+                    <td>T и U моrут сравниваться на равенство с использованием оператора ==</td>
+                </tr>
+                <tr>
+                    <td>EqualityComparable&lt;T&gt;</td>
+                    <td>EqualityComparableWith&lt;T,T&gt;</td>
+                </tr>
+                <tr>
+                    <td>StrictTotallyOrderedWith&lt;T,U&gt;</td>
+                    <td>T и U моrут сравниваться с использованием операторов &lt;, &lt;=, &gt; и &gt;=,дающих полное упорядочение
+                    </td>
+                </tr>
+                <tr>
+                    <td>StrictTotallyOrdered&lt;T&gt;</td>
+                    <td>StrictTotallyOrderedWith&lt;T,T&gt;</td>
+                </tr>
+            </table>
+            <p>Применение как WeaklyEqualityComparableWith, так и WeaklyEqualityComparable демонстрирует отсутствие (до настоящего времени) возможности перегрузки. </p>
+            <table border="1">
+                <tr>
+                    <th></th>
+                    <th>Концепты, связанные с объектами</th>
+                </tr>
+                <tr>
+                    <td>Destructible&lt;T&gt;</td>
+                    <td>T может быть уничтожен, а его адрес может быть получен с помощью унарного оператора &</td>
+                </tr>
+                <tr>
+                    <td>Constructible&lt;T,Args&gt;</td>
+                    <td>T может быть построен из списка арrументов типа Args</td>
+                </tr>
+                <tr>
+                    <td>DefaultConstructible&lt;T&gt;</td>
+                    <td>T может быть создан с помощью конструктора по умолчанию
+                    </td>
+                </tr>
+                <tr>
+                    <td>MoveConstructible&lt;T&gt;</td>
+                    <td>T может быть создан с помощью перемещающего конструктора
+                    </td>
+                </tr>
+                <tr>
+                    <td>CopyConstructible&lt;T&gt;</td>
+                    <td>T может быть создан с помощью копирующего и перемещающего конструкторов</td>
+                </tr>
+                <tr>
+                    <td>Моvаblе&lt;T&gt;</td>
+                    <td>MoveConstructable&lt;T&gt;, Assignable&lt;T&,T&gt; и Swapable&lt;T&gt;</td>
+                </tr>
+                <tr>
+                    <td>Соруаblе&lt;T&gt;</td>
+                    <td>CopyConstructable&lt;T&gt;,Moveable&lt;T&gt; и Assignable&lt;T, const Т&&gt;</td>
+                </tr>
+                <tr>
+                    <td>Semiregular&lt;T&gt;</td>
+                    <td>Соруаblе&lt;T&gt; и DefaultConstructable&lt;T&gt;</td>
+                </tr>
+                <tr>
+                    <td>Regular&lt;T&gt;</td>
+                    <td>SemiRegular&lt;T&gt; и EqualityComparable&lt;T&gt;</td>
+                </tr>
+            </table>
+            <p>Regular - идеал для типов. Тип, соответствующий концепту Regular, грубо говоря, работает как int и упрощает большую часть наших размышлений о том, как использовать этот тип (§7.2). Отсутствие по умолчанию оператора == для классов означает,
+                что большинство классов относятся к SemiRegular, хотя большинство из них могут и должны быть Regular. </p>
+        </div>
+    </div>
+</body>
