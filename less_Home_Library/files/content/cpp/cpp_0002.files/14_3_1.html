@@ -1,0 +1,64 @@
+<head>
+    <link rel="stylesheet" href="../../css/books_style.css">
+</head>
+
+<body>
+    <div class="book-title">
+        <p><a href="./14_3.html">&lArr;14.3 Числовые алгоритмы</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./14_4.html">14.4 Комплексные числа&rArr;</a></p>
+        <h2>14.3.1. Параллельные алгоритмы</h2>
+        <hr>
+        <div>
+            <p>В заголовочном файле &lt;numeric&gt; числовые алгоритмы имеют немного различающиеся параллельные версии (§ 12.9).</p>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Параллельные числовые алгоритмы</th>
+                </tr>
+                <tr>
+                    <td>x=reduce(b,e,v) </td>
+                    <td>x=accumulate (Ь, е, v), за исключением порядка вычислений
+                    </td>
+                </tr>
+                <tr>
+                    <td>x=reduce(b,e)</td>
+                    <td>x=reduce ( Ь, е, v { } ) , где v -тип значения </td>
+                </tr>
+                <tr>
+                    <td>x=reduce(pol,b,e,v)</td>
+                    <td>x=reduce (Ь, е, v) со стратегией выполнения pol</td>
+                </tr>
+                <tr>
+                    <td>x=reduce(pol,b,e)</td>
+                    <td>x=reduce (pol, Ь, е, V {}),где V -тип значения Ь</td>
+                </tr>
+                <tr>
+                    <td>p=exclusive_scan (pol,b,e,out) </td>
+                    <td>p=partial_sum (Ь, е, out) в соответствии со стратегией pol, исключая i-й элемент из i-й суммы</td>
+                </tr>
+                <tr>
+                    <td>p=inclusive_scan (pol,b,e,out)
+                    </td>
+                    <td>p=partial_sum (Ь, е, out) со стратегией выполнения pol и включением i-го элемента в i-ю сумму</td>
+                </tr>
+                <tr>
+                    <td>p=transform_reduce (pol,b,e, f,v) </td>
+                    <td>f (х) для каждого х из [Ь:е], затем reduce</td>
+                </tr>
+                <tr>
+                    <td>p=transform_exclusive scan(pol,b,e,out,f,v)
+                    </td>
+                    <td>f (х) для каждого х из [Ь:е], затем exclusive_scan</td>
+                </tr>
+                <tr>
+                    <td>p=transform_inclusive_scan(pol,b,e,out,f,v)</td>
+                    <td>f (х) для каждого х из [Ь:е], затем inclusive_scan</td>
+                </tr>
+            </table>
+            <p>Для простоты я не показал версии алгоритмов, которые принимают в качестве аргумента функтор, а не просто используют + и =. За исключением reduce (), я также не показал версии со стратегией выполнения по умолчанию (последовательное выполнение)
+                и значением по умолчанию. </p>
+            <p>Так же, как и для параллельных алгоритмов в заголовочном файле &lt;algorithrn&gt; (§12.9), мы можем определить стратегию выполнения: </p>
+            <img src="./14_3_1_p001.png" alt="">
+            <p>Параллельные алгоритмы (наnример, reduce ()) отличаются от nоследовательных (наnример, accumulate ())тем, что доnускают выnолнение оnераций над элементами в неоnределенном nорядке. </p>
+        </div>
+    </div>
+</body>
