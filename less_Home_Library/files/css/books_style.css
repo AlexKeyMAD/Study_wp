@@ -70,3 +70,8 @@ table td {
 .ul-no-mark {
     list-style-type: none;
 }
+
+.font-bold {
+    color: black;
+    font-weight: bold;
+}
