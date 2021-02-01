@@ -75,3 +75,10 @@ table td {
     color: black;
     font-weight: bold;
 }
+
+.remember {
+    border: 2px solid rebeccapurple;
+    border-radius: 5px;
+    width: 300px;
+    background-color: silver;
+}
