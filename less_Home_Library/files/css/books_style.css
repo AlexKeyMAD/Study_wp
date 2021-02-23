@@ -87,3 +87,18 @@ table td {
     font-style: italic;
     margin-left: 3%;
 }
+
+.cpp_code_1t {
+    font-style: italic;
+    margin: 3px 6%;
+}
+
+.cpp_code_2t {
+    font-style: italic;
+    margin: 3px 9%;
+}
+
+.cpp_code_3t {
+    font-style: italic;
+    margin: 3px 12%;
+}
