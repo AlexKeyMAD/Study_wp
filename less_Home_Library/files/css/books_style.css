@@ -102,3 +102,18 @@ table td {
     font-style: italic;
     margin: 3px 12%;
 }
+
+.cpp_code_4t {
+    font-style: italic;
+    margin: 3px 15%;
+}
+
+.cpp_code_5t {
+    font-style: italic;
+    margin: 3px 20%;
+}
+
+.img-center {
+    display: block;
+    margin: auto;
+}

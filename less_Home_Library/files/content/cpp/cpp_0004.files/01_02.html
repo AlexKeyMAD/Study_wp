@@ -21,6 +21,96 @@
         <p class="cpp_code_1t">static void RegisterWindowClasses(HINSTANCE instanceHandle);</p>
         <p class="cpp_code"> };</p>
         <p>Следующим шагом является создание отдельного окна, которое выполняется классом Window. Все виртуальные методы пусты и предназначены для переопределения подклассами, показанными как следует: </p>
+        <p class="cpp_code">class Window { </p>
+        <p class="cpp_code_1t">public:</p>
+        <p>Окно может быть видимым или невидимым, включенным или отключенным. Когда окно включено, оно принимает ввод с помощью мыши, касания и клавиатуры: </p>
+        <p class="cpp_code_2t">void ShowWindow(bool visible);</p>
+        <p class="cpp_code_2t">void EnableWindow(bool enable);</p>
+        <p>Методы OnMove и OnSize вызываются при перемещении или изменении размера окна. В Метод OnHelp вызывается, когда пользователь нажимает клавишу F1 или кнопку Help в сообщении. коробка: </p>
+        <p class="cpp_code_2t">virtual void OnMove(Point topLeft);</p>
+        <p class="cpp_code_2t">virtual void OnSize(Size windowSize);</p>
+        <p class="cpp_code_2t">virtual void OnHelp();</p>
+        <p>Клиентская область - это часть окна, которую можно закрасить. Неформально клиент площадь - это окно без рамки. Содержимое клиентской области можно увеличивать. В коэффициент масштабирования по умолчанию равен 1.0: </p>
+        <p class="cpp_code_2t">double GetZoom() const;</p>
+        <p class="cpp_code_2t">void SetZoom(double zoom);</p>
+        <p>Таймер можно установить на интервал в миллисекундах. Метод OnTimer вызывается на каждом интервал. Можно установить несколько таймеров, если они имеют разную идентичность. числа: </p>
+        <p class="cpp_code_2t">void SetTimer(int timerId, unsigned int interval);</p>
+        <p class="cpp_code_2t">void DropTimer(int timerId);</p>
+        <p class="cpp_code_2t">virtual void OnTimer(int timerId);</p>
+        <p>Методы OnMouseDown, OnMouseUp и OnDoubleClick вызываются, когда пользователь нажимает, отпускает или дважды щелкает кнопку мыши. Метод OnMouseMove называется когда пользователь перемещает мышь с нажатой хотя бы одной кнопкой. Колесо OnMouseWheel
+            метод вызывается, когда пользователь перемещает колесо мыши одним щелчком мыши: </p>
+        <p class="cpp_code_2t">virtual void OnMouseDown(MouseButton mouseButtons,</p>
+        <p class="cpp_code_5t">Point mousePoint, bool shiftPressed,</p>
+        <p class="cpp_code_5t">bool controlPressed);</p>
+        <p class="cpp_code_2t">virtual void OnMouseUp(MouseButton mouseButtons,</p>
+        <p class="cpp_code_5t">Point mousePoint, bool shiftPressed, </p>
+        <p class="cpp_code_5t">bool controlPressed);</p>
+        <p class="cpp_code_2t">virtual void OnDoubleClick(MouseButton mouseButtons,</p>
+        <p class="cpp_code_5t">Point mousePoint, bool shiftPressed, </p>
+        <p class="cpp_code_5t">bool controlPressed);</p>
+        <p class="cpp_code_2t">virtual void OnMouseMove(MouseButton mouseButtons,</p>
+        <p class="cpp_code_5t">Point mousePoint, bool shiftPressed, </p>
+        <p class="cpp_code_5t">bool controlPressed);</p>
+        <p class="cpp_code_2t">virtual void OnMouseWheel(WheelDirection direction,</p>
+        <p class="cpp_code_5t">bool shiftPressed, bool controlPressed);</p>
+        <p>Методы OnTouchDown, OnTouchMove и OnTouchDown работают так же, как и методы методы мыши. Однако, поскольку пользователь может коснуться нескольких точек одновременно, методы принимают списки точек, а не отдельные точки: </p>
+        <p class="cpp_code_2t">virtual void OnTouchDown(vector&lt;Point&gt; pointList);</p>
+        <p class="cpp_code_2t">virtual void OnTouchMove(vector&lt;Point&gt; pointList);</p>
+        <p class="cpp_code_2t">virtual void OnTouchUp(vector&lt;Point&gt; pointList);</p>
+        <p>Методы OnKeyDown и OnKeyUp вызываются, когда пользователь нажимает или отпускает клавишу. Если пользователь нажимает графический ключ (ключ со значением ASCII от 32 до 127 включительно), метод OnChar вызывается между: </p>
+        <p class="cpp_code_2t">virtual bool OnKeyDown(WORD key, bool shiftPressed,</p>
+        <p class="cpp_code_5t">bool controlPressed);</p>
+        <p class="cpp_code_2t">virtual void OnChar(TCHAR tChar);</p>
+        <p class="cpp_code_2t">virtual bool OnKeyUp(WORD key, bool shiftPressed,</p>
+        <p class="cpp_code_5t">bool controlPressed);</p>
+        <p>Метод Invalidate отмечает часть клиентской области (или всю клиентскую область) как перекрашен; область становится недействительной. Область очищается перед покраской, если чистая истинный. Метод UpdateWindow вызывает перерисовку недействительной
+            области. Это вызывает OnPaint, который будет вызван в конечном итоге: </p>
+        <p class="cpp_code_2t">void Invalidate(Rect areaRect, bool clear = true) const;</p>
+        <p class="cpp_code_2t">void Invalidate(bool clear = true) const;</p>
+        <p class="cpp_code_2t">void UpdateWindow();</p>
+        <p>Метод OnPaint вызывается, когда нужно перекрасить какую-то часть клиентской области и метод OnPrint вызывается при отправке на принтер. Их поведение по умолчанию - вызвать метод OnDraw с Paint или Print в качестве значения параметра drawMode:</p>
+        <p class="cpp_code_2t">virtual void OnPaint(Graphics& graphics) const;</p>
+        <p class="cpp_code_2t">virtual void OnPrint(Graphics& graphics, int page, int copy, int totalPages) const;</p>
+        <p class="cpp_code_2t">virtual void OnDraw(Graphics& graphics, DrawMode drawMode) const;</p>
+        <p>Метод OnClose закрывает окно, если TryClose возвращает true. OnDestroy метод вызывается при закрытии окна: </p>
+        <p class="cpp_code_2t">virtual void OnClose();</p>
+        <p class="cpp_code_2t">virtual bool TryClose();</p>
+        <p class="cpp_code_2t">virtual void OnDestroy();</p>
+        <p>Следующие методы проверяют и изменяют размер и положение окна. Обратите внимание, что мы не можем установить размер клиентской области; его можно установить только косвенно, изменив размер окна: </p>
+        <p class="cpp_code_2t">Size GetWindowSize() const;</p>
+        <p class="cpp_code_2t">void SetWindowSize(Size windowSize);</p>
+        <p class="cpp_code_2t">Point GetWindowPosition() const;</p>
+        <p class="cpp_code_2t">void SetWindowPosition(Point topLeft);</p>
+        <p class="cpp_code_2t">Size GetClientSize() const;</p>
+        <p>В текстовом редакторе и программах для работы с электронными таблицами из этой книги мы обрабатываем текст, и нам нужно рассчитать размер отдельных символов. Следующие методы рассчитывают ширину символ с заданным шрифтом. Также они рассчитывают
+            высоту, подъем и средний характер. ширина шрифта: </p>
+        <p class="cpp_code_2t">int GetCharacterWidth(Font font, TCHAR tChar) const;</p>
+        <p class="cpp_code_2t">int GetCharacterHeight(Font font) const;</p>
+        <p class="cpp_code_2t">int GetCharacterAscent(Font font) const;</p>
+        <p class="cpp_code_2t">int GetCharacterAverageWidth(Font font) const;</p>
+        <p>Линия подъема разделяет верхнюю и нижнюю части буквы, как показано ниже: </p>
+        <img src="./01_02_01.png" alt="" class="img-center">
+        <p>Наконец, метод MessageBox отображает в окне простое окно сообщения: </p>
+        <p class="cpp_code_2t">Answer MessageBox(String message,</p>
+        <p class="cpp_code_5t">String caption = TEXT("Error"),</p>
+        <p class="cpp_code_5t">ButtonGroup buttonGroup = Ok,</p>
+        <p class="cpp_code_5t">Icon icon = NoIcon, bool help = false) const;</p>
+        <p class="cpp_code">}</p>
+        <p>Класс Window также использует класс Graphics, отвечающий за рисование текста и геометрические объекты в окне. Ссылка на объект Graphics отправляется в OnPaint, OnPrint и OnDraw в классе Window. Его можно использовать для рисования линий, прямоугольников,
+            и многоточия и написать текст: </p>
+        <p class="cpp_code">class Graphics {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">void DrawLine(Point startPoint, Point endPoint, Color penColor, PenStyle penStyle = Solid);</p>
+        <p class="cpp_code_2t">void DrawRectangle(Rect rect, Color penColor, PenStyle = Solid);</p>
+        <p class="cpp_code_2t">void FillRectangle(Rect rect, Color penColor, Color brushColor, PenStyle penStyle=Solid);</p>
+        <p class="cpp_code_2t">void DrawEllipse(Rect rect, Color penColor, PenStyle = Solid);</p>
+        <p class="cpp_code_2t">void FillEllipse(Rect rect, Color penColor, Color brushColor, PenStyle penStyle=Solid);</p>
+        <p class="cpp_code_2t">void DrawText(Rect areaRect, String text, Font font, Color textColor,</p>
+        <p class="cpp_code_5t"> Color backColor, bool pointsToMeters = true);</p>
+        <p class="cpp_code">}</p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
         <hr>
         <p></p>
         <p><a href="./01_03.html">Глава 1. ВСТУПЛЕНИЕ. Библиотека.&rArr;</a></p>
