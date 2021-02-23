@@ -108,6 +108,96 @@
         <p class="cpp_code_2t">void DrawText(Rect areaRect, String text, Font font, Color textColor,</p>
         <p class="cpp_code_5t"> Color backColor, bool pointsToMeters = true);</p>
         <p class="cpp_code">}</p>
+        <p>Класс Document расширяет класс Window некоторыми функциями, общими для приложения на основе документов. Ползунки прокрутки автоматически настраиваются на отображение видимого часть документа. Колесико мыши перемещает вертикальную полосу прокрутки
+            на одну строку высоты каждый щелчок. Высота строки устанавливается конструктором. Фрагмент кода для него показан как следует: </p>
+        <p class="cpp_code">class Document : public Window {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p>Флаг грязи истинен, когда пользователь внес изменения в документ, и это необходимо. сохранен. В Document флаг грязи устанавливается вручную, но в следующем StandardDocument подклассом он обрабатывается фреймворком: </p>
+        <p class="cpp_code_2t">bool IsDirty() const;</p>
+        <p class="cpp_code_2t">void SetDirty(bool dirty);</p>
+        <p>Каретка - это мигающий маркер, который указывает пользователю, где следует ввести следующий персонаж. Клавиатуру можно настроить (с помощью клавиши Insert) в режим вставки или перезаписи. В каретка часто представляет собой тонкую вертикальную
+            полосу в режиме вставки и блок со средней шириной символ в режиме перезаписи. </p>
+        <p>Каретку можно установить или удалить. Например, в текстовом редакторе курсор виден, когда пользователь пишет текст и невидимо, когда пользователь отмечает текст. Когда окно получает фокус, каретка становится видимой, если она была установлена
+            ранее. Когда окно теряет фокус, курсор становится невидимым, независимо от того, был ли он установлен ранее: </p>
+        <p class="cpp_code_2t">void SetCaret(Rect caretRect);</p>
+        <p class="cpp_code_2t">void ClearCaret();</p>
+        <p class="cpp_code_2t">void OnGainFocus();</p>
+        <p class="cpp_code_2t">void OnLoseFocus();</p>
+        <p>Документ может содержать строку меню, которая устанавливается методом SetMenuBar: </p>
+        <p class="cpp_code_2t">void SetMenuBar(Menu& menuBar);</p>
+        <p>Метод OnDropFiles вызывается, когда пользователь помещает в окно один или несколько файлов. Их пути хранятся в списке путей: </p>
+        <p class="cpp_code_2t">virtual void OnDropFile(vector&lt;String&gt; pathList);</p>
+        <p>Клавиатурный режим документа можно настроить на вставку или перезапись следующим образом: </p>
+        <p class="cpp_code_2t">KeyboardMode GetKeyboardMode() const;</p>
+        <p class="cpp_code_2t">void SetKeyboardMode(KeyboardMode mode);</p>
+        <p>Методы OnHorizontalScroll и OnVerticalScroll вызываются, когда пользователь прокручивает полосу, щелкая стрелки полосы прокрутки или поля полосы прокрутки, или перетаскивая прокрутите пальцы. Фрагмент кода для него показан следующим образом: </p>
+        <p class="cpp_code_2t">virtual void OnHorizontalScroll(WORD flags,WORD thumbPos=0);</p>
+        <p class="cpp_code_2t">virtual void OnVerticalScroll(WORD flags, WORD thumbPos =0);</p>
+        <p>Существует большой набор методов для проверки или изменения настроек полосы прокрутки. Размер строка или страница задается конструктором: </p>
+        <p class="cpp_code_2t">void SetHorizontalScrollPosition(int scrollPos);</p>
+        <p class="cpp_code_2t">int GetHorizontalScrollPosition() const;</p>
+        <p class="cpp_code_2t">void SetVerticalScrollPosition(int scrollPos);</p>
+        <p class="cpp_code_2t">int GetVerticalScrollPosition() const;</p><br>
+        <p class="cpp_code_2t">void SetHorizontalScrollLineWidth(int lineWidth);</p>
+        <p class="cpp_code_2t">int GetHorizontalScrollLineHeight() const;</p>
+        <p class="cpp_code_2t">void SetVerticalScrollLineHeight(int lineHeight);</p>
+        <p class="cpp_code_2t">int GetVerticalScrollLineHeight() const;</p><br>
+        <p class="cpp_code_2t">void SetHorizontalScrollPageWidth(int pageWidth);</p>
+        <p class="cpp_code_2t">int GetHorizontalScrollPageWidth() const;</p>
+        <p class="cpp_code_2t">void SetVerticalScrollPageHeight(int pageHeight);</p>
+        <p class="cpp_code_2t">int GetVerticalScrollPageHeight() const;</p><br>
+        <p class="cpp_code_2t">void SetHorizontalScrollTotalWidth(int scrollWidth);</p>
+        <p class="cpp_code_2t">int GetHorizontalScrollTotalWidth() const;</p>
+        <p class="cpp_code_2t">void SetVerticalScrollTotalHeight(int scrollHeight);</p>
+        <p class="cpp_code_2t">int GetVerticalScrollTotalHeight() const;</p>
+        <p class="cpp_code">}</p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
