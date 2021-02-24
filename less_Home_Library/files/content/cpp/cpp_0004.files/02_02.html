@@ -79,6 +79,50 @@
         <p class="cpp_code">CircleDocument::CircleDocument(WindowShow windowShow):StandardDocument(LogicalWithScroll,</p>
         <p class="cpp_code_5t">USLetterPortrait,TEXT("Circle Files, cle"),</p>
         <p class="cpp_code_5t">nullptr,OverlappedWindow, windowShow) {</p>
+        <p>Класс StandardDocument добавляет в окно стандартные меню File, Edit и Help. строка меню. В меню «Файл» находятся пункты «Создать», «Открыть», «Сохранить», «Сохранить как», «Параметры страницы», «Предварительный просмотр» и Выйти из пунктов. Параметры
+            страницы и предварительный просмотр не являются обязательными. Седьмой параметр Конструктор StandardDocument (значение по умолчанию - false) указывает на их наличие. В В меню «Правка» находятся пункты «Вырезать», «Копировать», «Вставить» и
+            «Удалить». По умолчанию они отключены; мы не будет использовать их в этом приложении. В меню «Справка» есть элемент «О программе», а имя приложения, установленное в MainWindow, используется для отображения окна сообщения со стандартным сообщение
+            Circle, версия 1.0.</p>
+        <p>Мы добавляем в строку меню стандартные меню File и Edit. Затем мы добавляем Цветное меню, которое является меню этого приложения для конкретного приложения. Наконец, добавляем стандартный Справочное меню и установите строку меню документа. </p>
+        <p>В меню «Цвет» находятся пункты меню, используемые для установки цвета круга. OnRed, OnGreen, и OnBlue методы вызываются, когда пользователь выбирает пункт меню, а RedRadio, Методы GreenRadio и BlueRadio вызываются до того, как пользователь выберет
+            меню Color в чтобы решить, следует ли отмечать элементы с помощью переключателя. OnColorDialog открывает стандартный диалог цвета.</p>
+        <p>В тексте & Red\tCtrl+R в следующем фрагменте кода амперсанд (&) указывает, что в пункте меню есть мнемоника; то есть буква R будет подчеркнута, и можно выберите пункт меню, нажав R после того, как меню было открыто. Персонаж табулятора (\t) указывает,
+            что вторая часть текста определяет ускоритель; то есть текст Ctrl + R появится в пункте меню с выравниванием по правому краю, и этот элемент можно выбрать, нажав Ctrl + R: </p>
+        <p class="cpp_code_1t">Menu menuBar(this);</p>
+        <p>Параметр false для StandardFileMenu указывает, что мы не хотим включать пункты меню файла. </p>
+        <p class="cpp_code_1t">menuBar.AddMenu(StandardFileMenu(false));</p>
+        <p>Метод AddItem в классе Menu также принимает еще два параметра для включения пункт меню и установка флажка. Однако мы не используем их в этом приложении. Поэтому отправляем нулевые указатели: </p>
+        <p class="cpp_code_1t">Menu colorMenu(this, TEXT("&Color"));</p>
+        <p class="cpp_code_1t">colorMenu.AddItem(TEXT("&Red\tCtrl+R"), OnRed, nullptr, nullptr, RedRadio);</p>
+        <p class="cpp_code_1t">colorMenu.AddItem(TEXT("&Green\tCtrl+G"), OnGreen, nullptr, nullptr, GreenRadio);</p>
+        <p class="cpp_code_1t">colorMenu.AddItem(TEXT("&Blue\tCtrl+B"), OnBlue, nullptr, nullptr, BlueRadio);</p>
+        <p class="cpp_code_1t">colorMenu.AddSeparator();</p>
+        <p class="cpp_code_1t">colorMenu.AddItem(TEXT("&Dialog ..."), OnColorDialog);</p>
+        <p class="cpp_code_1t">menuBar.AddMenu(colorMenu);</p><br>
+        <p class="cpp_code_1t">menuBar.AddMenu(StandardHelpMenu());</p>
+        <p class="cpp_code_1t">SetMenuBar(menuBar);</p>
+        <p>Наконец, мы считываем текущий цвет (цвет следующего добавляемого круга) из реестра; красный - это цвет по умолчанию, если в реестре нет цвета: </p>
+        <p class="cpp_code_1t">nextColor.ReadColorFromRegistry(TEXT("NextColor"), Red);</p>
+        <p class="cpp_code">}</p>
+        <p>Деструктор сохраняет текущий цвет в реестре. В этом приложении нам не нужно выполнять обычные задачи деструктора, такие как освобождение памяти или закрытие файлов: </p>
+        <p class="cpp_code">CircleDocument::~CircleDocument() {</p>
+        <p class="cpp_code_1t">nextColor.WriteColorToRegistry(TEXT("NextColor"));</p>
+        <p class="cpp_code">}</p>
+        <p>Метод ClearDocument вызывается, когда пользователь выбирает пункт меню New. В этом В этом случае мы просто очищаем круговой список. Любое другое действие, такое как перерисовка окна или изменение его заголовка выполняется классом StandardDocument:</p>
+        <p class="cpp_code">void CircleDocument::ClearDocument() {</p>
+        <p class="cpp_code_1t">circleList.clear();</p>
+        <p class="cpp_code">}</p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
