@@ -151,40 +151,59 @@
         <p class="cpp_code_2t">void SetVerticalScrollTotalHeight(int scrollHeight);</p>
         <p class="cpp_code_2t">int GetVerticalScrollTotalHeight() const;</p>
         <p class="cpp_code">}</p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
+        <p>Класс Menu обрабатывает строку меню, меню, пункт меню или разделитель пунктов меню ( горизонтальная полоса) в документе. Слушатель выбора вызывается, когда пользователь выбирает пункт меню. Слушатели включения, проверки и радио вызываются (если
+            они не равны нулю), когда объект скоро станет видимым. Если они возвращают истину, элемент включен или аннотирован с флажком или переключателем: </p>
+        <p class="cpp_code">class Menu {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">void AddMenu(Menu& menu);</p>
+        <p class="cpp_code_2t">void AddSeparator();</p>
+        <p class="cpp_code_2t">void AddItem(String text, VoidListener selection, BoolListener enable = nullptr,</p>
+        <p class="cpp_code_5t">BoolListener check = nullptr, BoolListener radio = nullptr);</p>
+        <p class="cpp_code">};</p>
+        <p>Ускоритель - это команда быстрого доступа. Например, часто пункт «Открыть» в меню «Файл» аннотируется текстом Ctrl + O. Это означает, что вы можете получить тот же результат, одновременное нажатие клавиш Ctrl и O, как если бы вы выбрали меню Открыть
+            элемент. В обоих случаях отображается диалоговое окно «Открыть».</p>
+        <p>Класс Accelerator содержит только метод TextToAccelerator. Он интерпретирует текст пункта меню и добавляет ускоритель, если он есть, в набор ускорителей: </p>
+        <p class="cpp_code">class Accelerator {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">static void TextToAccelerator(String& text, int idemId,</p>
+        <p class="cpp_code_5t">list &lt;ACCEL&gt;& acceleratorSet);</p>
+        <p class="cpp_code">};</p>
+        <p>Класс StandardDocument расширяет класс Document и устанавливает платформу, которая заботится обо всех традиционных задачах, таких как загрузка и сохранение, а также вырезание, копирование и вставка в документальное приложение: </p>
+        <p class="cpp_code">class StandardDocument : public Document {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p>Класс StandardDocument имеет общие функции File, Edit и Help. меню. В меню File можно дополнительно (если параметр печати true) добавить пункты меню для печати и предварительного просмотра печати: </p>
+        <p class="cpp_code_2t">Menu StandardFileMenu(bool print);</p>
+        <p class="cpp_code_2t">Menu StandardEditMenu();</p>
+        <p class="cpp_code_2t">Menu StandardHelpMenu();</p>
+        <p>Метод ClearDocument вызывается, когда пользователь выбирает пункт меню New; его задача чтобы очистить документ. Метод WriteDocumentToStream вызывается, когда пользователь выбирает пункт меню Сохранить или Сохранить как, а метод ReadDocumentFromStream
+            вызывается, когда пользователь выбирает пункт меню Открыть: </p>
+        <p class="cpp_code_2t">virtual void ClearDocument();</p>
+        <p class="cpp_code_2t">virtual bool WriteDocumentToStream(String name, ostream& outStream)const;</p>
+        <p class="cpp_code_2t">virtual bool ReadDocumentFromStream(String name, istream& inStream);</p>
+        <p>Методы CopyAscii, CopyUnicode и CopyGeneric вызываются, когда пользователь выбирает пункт меню «Вырезать» или «Копировать», и соответствующий метод готовности возвращает значение true. В Фрагмент кода для него показан следующим образом: </p>
+        <p class="cpp_code_2t">virtual void CopyAscii(vector &lt;String&gt;& textList) const;</p>
+        <p class="cpp_code_2t">virtual bool IsCopyAsciiReady() const;</p>
+        <p class="cpp_code_2t">virtual void CopyUnicode(vector &lt;String&gt;& textList) const;</p>
+        <p class="cpp_code_2t">virtual bool IsCopyUnicodeReady() const;</p>
+        <p class="cpp_code_2t">virtual void CopyGeneric(int format, InfoList& infoList) const;</p>
+        <p class="cpp_code_2t">virtual bool IsCopyGenericReady(int format) const;</p>
+        <p>Таким же образом вызываются методы PasteAscii, PasteUnicode и PasteGeneric. когда пользователь выбирает пункт меню Вставить, и соответствующий метод готовности возвращает истинный: </p>
+        <p class="cpp_code_2t">virtual void PasteAscii(const vector&lt;String&gt;& textList);</p>
+        <p class="cpp_code_2t">virtual bool IsPasteAsciiReady (const vector&lt;String&gt;& textList) const;</p>
+        <p class="cpp_code_2t">virtual void PasteUnicode(const vector&lt;String&gt;& textList);</p>
+        <p class="cpp_code_2t">virtual bool IsPasteUnicodeReady (const vector&lt;String&gt;& textList) const;</p>
+        <p class="cpp_code_2t">virtual void PasteGeneric(int format, InfoList& infoList);</p>
+        <p class="cpp_code_2t">virtual bool IsPasteGenericReady(int format, InfoList& infoList) const;</p>
+        <p>Метод OnDropFile проверяет список путей и принимает удаление, если только один файл имеет суффикс типа документа приложения (задается конструктором): </p>
+        <p class="cpp_code_2t">void OnDropFile(vector&lt;String&gt; pathList);</p>
+        <p class="cpp_code">};</p>
+        <p>В Small Windows нас не волнует размер пикселя. Вместо этого мы используем логические единицы, которые оставаться неизменным, независимо от физического разрешения экрана. Мы можем выбирать из следующие три системы координат: </p>
+        <ul>
+            <li><span class="ex-span-b">LogicalWithScroll:</span> логическая единица - одна сотая миллиметра, учтены текущие настройки полосы прокрутки. Программа для рисования и слово процессор использовать эту систему. </li>
+            <li><span class="ex-span-b">LogicalWithoutScroll:</span> логическая единица составляет одну сотую миллиметра также в в этом случае, но текущие настройки полосы прокрутки игнорируются. Программа электронных таблиц использует эту систему.</li>
+            <li><span class="ex-span-b">PreviewCoordinate:</span> для клиентской области окна задан фиксированный логический размер. когда окно создано. Это означает, что размер логических единиц изменяется. когда пользователь изменяет размер окна. Игра в
+                тетрис и Класс PreviewDocument использует эту систему.</li>
+        </ul>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>

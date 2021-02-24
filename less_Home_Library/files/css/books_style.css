@@ -117,3 +117,7 @@ table td {
     display: block;
     margin: auto;
 }
+
+.ex-span-b {
+    font-weight: bolder;
+}
