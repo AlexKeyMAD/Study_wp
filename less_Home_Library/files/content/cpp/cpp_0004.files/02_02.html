@@ -1,0 +1,55 @@
+<head>
+    <link rel="stylesheet" href="../../../css/books_style.css">
+</head>
+
+<body>
+    <div>
+        <p><a href="./01_02.html">&lArr;Глава 2. Привет, маленький мир!</a></p>
+        <h1>ГЛАВА 2</h1>
+        <h2>Приложение "Круг"</h2>
+        <hr>
+        <p>В этом разделе мы рассмотрим простое круговое приложение. Как следует из названия, он позволяет пользователь для обработки кругов в графическом приложении. Пользователь может добавить новый круг, нажав левая кнопка мыши. Пользователь также может
+            перемещать существующий круг, перетаскивая его. Более того, пользователь может изменить цвет круга, а также сохранить и открыть документ: </p>
+        <img src="02_02_01.png" alt="" class="img-center">
+        <h3>Главное окно</h3>
+        <p>Как мы увидим в этой книге, функция MainWindow всегда делает одно и то же: он устанавливает имя приложения и создает главное окно приложения. Имя используется стандартными диалоговыми окнами «Сохранить» и «Открыть», пунктом меню «О программе»
+            и реестром.</p>
+        <p>Отличие главного окна от других окон приложения в том, что когда пользователь закрывает главное окно, приложение закрывается. Более того, когда пользователь выбирает пункт меню Exit, главное окно закрывается и вызывается его деструктор: </p>
+        <h4>MainWindow.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "Circle.h"</p>
+        <p class="cpp_code">#include "CircleDocument.h"</p>
+        <p class="cpp_code">void MainWindow(vector &lt;String&gt; /* argumentList */, WindowShow windowShow) {</p>
+        <p class="cpp_code_1t">Application::ApplicationName() = TEXT("Circle");</p>
+        <p class="cpp_code_1t">Application::MainWindowPtr() = new CircleDocument(windowShow);</p>
+        <p class="cpp_code">}</p>
+        <h3>Класс CircleDocument</h3>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p><a href="./02_02.html">Глава 2.&rArr;</a></p>
+    </div>
+</body>

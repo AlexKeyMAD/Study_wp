@@ -6,7 +6,7 @@
     <div>
         <p><a href="./01_02.html">&lArr;Глава 1. ВСТУПЛЕНИЕ. Библиотека.</a></p>
         <h1>ГЛАВА 2</h1>
-        <h2>Привет, маленький мир! </h2>
+        <h2>Привет, маленький мир!</h2>
         <hr>
         <p>Эта глава знакомит с Small Windows, представляя следующие два небольших приложения:</p>
         <ul>
@@ -61,86 +61,34 @@
         <p class="cpp_code_2t">HelloWindow(WindowShow windowShow);</p>
         <p class="cpp_code_2t">void OnDraw(Graphics& graphics, DrawMode drawMode) const;</p>
         <p class="cpp_code">};</p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p></p>
-        <p><a href="./02_02.html">Глава 2.&rArr;</a></p>
+        <p>Конструктор HelloWindow вызывает конструктор Window со следующим параметры: </p>
+        <ul>
+            <li>Первый параметр конструктора HelloWindow - это система координат. LogicalWithScroll указывает, что каждая логическая единица составляет одну сотую часть миллиметр вне зависимости от физического разрешения экрана. Текущий свиток учтены настройки
+                бара.
+            </li>
+            <li>Второй параметр конструктора Window - это предпочтительный размер окно. Он указывает, что следует использовать размер по умолчанию.</li>
+            <li>Третий параметр - указатель на родительское окно. Это ноль, поскольку окно не имеет родительского окна.</li>
+            <li>Четвертый и пятый параметры задают стиль окна, в данном случае перекрывающийся окна.</li>
+            <li>Последним параметром является windowShow, передаваемый окружающей системой для MainWindow, который определяет начальный вид окна (свернутый, нормальный или максимальный).</li>
+            <li>Наконец, конструктор устанавливает заголовок окна, вызывая Window метод SetHeader класса. </li>
+        </ul>
+        <h4>HelloWindow.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "HelloWindow.h"</p>
+        <p class="cpp_code">HelloWindow::HelloWindow(WindowShow windowShow)</p>
+        <p class="cpp_code_2t">:Window(LogicalWithScroll, ZeroSize, nullptr,</p>
+        <p class="cpp_code_5t">OverlappedWindow, NoStyle, windowShow) {</p>
+        <p class="cpp_code_1t">SetHeader(TEXT("Hello Window"));</p>
+        <p class="cpp_code">}</p>
+        <p>Метод OnDraw вызывается каждый раз, когда необходимо перерисовать клиентскую область окна. Он получает размер клиентской области и рисует текст в центре с черным текстом на белый фон. Параметр SystemFont заставит текст отображаться по умолчанию
+            системный шрифт. </p>
+        <p>Класс Small WindowsColor содержит константы Black и White. Класс Point удерживает двумерную точку. Класс Size содержит ширину и высоту. Класс Rect держит прямоугольник; более конкретно, он содержит четыре угла прямоугольника: </p>
+        <p class="cpp_code">void HelloWindow::OnDraw(Graphics& graphics,DrawMode /* drawMode */) const {</p>
+        <p class="cpp_code_1t">Size clientSize = GetClientSize();</p>
+        <p class="cpp_code_1t">Rect clientRect(Point(0, 0), clientSize);</p>
+        <p class="cpp_code_1t">graphics.DrawText(clientRect, TEXT("Hello, Small Windows!"),</p>
+        <p class="cpp_code_5t">SystemFont, Black, White);</p>
+        <p class="cpp_code">}</p>
+        <p><a href="./02_02.html">Глава 2. Приложение "Круг"&rArr;</a></p>
     </div>
 </body>
