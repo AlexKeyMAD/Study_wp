@@ -1,0 +1,146 @@
+<head>
+    <link rel="stylesheet" href="../../../css/books_style.css">
+</head>
+
+<body>
+    <div>
+        <p><a href="./01_02.html">&lArr;Глава 1. ВСТУПЛЕНИЕ. Библиотека.</a></p>
+        <h1>ГЛАВА 2</h1>
+        <h2>Привет, маленький мир! </h2>
+        <hr>
+        <p>Эта глава знакомит с Small Windows, представляя следующие два небольших приложения:</p>
+        <ul>
+            <li>Первое приложение пишет: «Привет, маленькая Windows!» в окне </li>
+            <li>Второе приложение обрабатывает кружки разного цвета в окне документа. </li>
+        </ul>
+        <hr>
+        <h2>Hello, Small Windows!</h2>
+        <hr>
+        <p>В языке программирования C Брайана Кернигана и Денниса Ричи привет-мир был представлен пример. Это была небольшая программа, которая писала на экране «привет, мир». В В этом разделе мы напишем аналогичную программу для Small Windows.</p>
+        <p>В обычном C ++ выполнение приложения начинается с функции main. В маленьком Windows, однако, основная скрыта во фреймворке и была заменена на MainWindow, задача которого - определить имя приложения и создать главное окно объект. Следующий параметр
+            argumentsList соответствует argc и argv в main. Параметр commandShow пересылает запрос системы относительно окна внешний вид: </p>
+        <h4>MainWindow.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "HelloWindow.h"</p>
+        <p class="cpp_code">void MainWindow(vector &lt;String&gt; /* argumentList */, WindowShow windowShow) {</p>
+        <p class="cpp_code_1t">Application::ApplicationName() = TEXT("Hello");</p>
+        <p class="cpp_code_1t">Application::MainWindowPtr() = new HelloWindow(windowShow);</p>
+        <p class="cpp_code">}</p>
+        <p>В C ++ существует два типа символов: char и wchar_t, где char содержит обычный символ размером 1 байт, а wchar_t содержит широкий символ большего размера, обычно 2 байта. Там также является строковым классом, который содержит строку значений char,
+            и классом wstring, который содержит строку значений wchar_t.</p>
+        <p>Однако в Windows существует также общий символьный тип TCHAR, который является char или wchar_t, в зависимости от настроек системы. Также существует класс String, который содержит строка значений TCHAR. Более того, TEXT - это макрос, который переводит
+            значение символа в TCHAR. и текстовое значение в массив значений TCHAR.</p>
+        <p>Подводя итог, в следующей таблице показаны типы символов и классы строк: </p>
+        <table>
+            <tr>
+                <th class="table-th table-w-30per">Обычный тип</th>
+                <th class="table-th table-w-30per">Расширенный тип</th>
+                <th class="table-th table-w-30per">Общий тип</th>
+            </tr>
+            <tr>
+                <td>char</td>
+                <td>wchar_t</td>
+                <td>TCHAR</td>
+            </tr>
+            <tr>
+                <td>string</td>
+                <td>wstring</td>
+                <td>String</td>
+            </tr>
+        </table>
+        <p>В приложениях этой книги мы всегда используем тип TCHAR, класс String и ТЕКСТ макрос. Единственным исключением из этого правила является обработка буфера обмена в главе 13, Реестр, буфер обмена, стандартные диалоги и предварительный просмотр перед
+            печатью.
+        </p>
+        <p>Наша версия программы hello-world пишет «Hello, Small Windows!» в центре клиентская зона. Клиентская область окна - это та часть окна, в которой можно рисовать графические объекты. В следующем окне клиентская область - это белая область: </p>
+        <img src="02_01_01.png" alt="" class="img-center">
+        <p>Класс HelloWindow расширяет класс Small Windows Window. Он содержит конструктор и метод Draw. Конструктор вызывает конструктор Window с подходящими информация о внешнем виде окна. Метод Draw вызывается каждый раз клиентскую область окна нужно
+            перерисовать: </p>
+        <h4>HelloWindow.h</h4>
+        <p class="cpp_code">class HelloWindow : public Window {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">HelloWindow(WindowShow windowShow);</p>
+        <p class="cpp_code_2t">void OnDraw(Graphics& graphics, DrawMode drawMode) const;</p>
+        <p class="cpp_code">};</p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p></p>
+        <p><a href="./02_02.html">Глава 2.&rArr;</a></p>
+    </div>
+</body>

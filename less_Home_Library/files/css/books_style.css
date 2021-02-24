@@ -34,6 +34,12 @@ table td {
     margin: 0 auto;
 }
 
+.table-th {
+    vertical-align: top;
+    border: 1px solid #b57ee9;
+    margin: 0 auto;
+}
+
 .table-td-cen td {
     text-align: center;
 }

@@ -204,24 +204,32 @@
             <li><span class="ex-span-b">PreviewCoordinate:</span> для клиентской области окна задан фиксированный логический размер. когда окно создано. Это означает, что размер логических единиц изменяется. когда пользователь изменяет размер окна. Игра в
                 тетрис и Класс PreviewDocument использует эту систему.</li>
         </ul>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
+        <p>Помимо класса StandardDocument, существует также PrintPreviewDocument, который класс, который также расширяет класс Document. Отображает одну из страниц стандартного документ. Пользователь может изменить страницу с помощью клавиш со стрелками
+            и Клавиши Page Up и Page Down или с помощью вертикальной полосы прокрутки: </p>
+        <p class="cpp_code">class PrintPreviewDocument : Document {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">PrintPreviewDocument(StandardDocument* parentDocument, int page = 1,</p>
+        <p class="cpp_code_5t">Size pageSize = USLetterPortrait);</p>
+        <p class="cpp_code_2t">bool OnKeyDown(WORD key, bool shiftPressed, bool controlPressed);</p>
+        <p class="cpp_code_2t">void OnVerticalScroll(WORD flags, WORD thumbPos = 0);</p>
+        <p class="cpp_code_2t">void OnPaint(Graphics& graphics) const;</p>
+        <p class="cpp_code">};</p>
+        <p>Также существуют простые вспомогательные классы: </p>
+        <ul>
+            <li><span class="ex-span-b">Point: </span>Он содержит двумерную точку (x и y)</li>
+            <li><span class="ex-span-b">Size: </span>Он имеет двухмерную ширину и высоту </li>
+            <li><span class="ex-span-b">Rect: </span>Он удерживает четыре угла прямоугольника </li>
+            <li><span class="ex-span-b">DynamicList: </span>Он содержит динамический список </li>
+            <li><span class="ex-span-b">Tree: </span>Он содержит древовидную структуру </li>
+            <li><span class="ex-span-b">InfoList: </span>Он содержит список общей информации, которую можно преобразовать в блок памяти </li>
+        </ul>
+        <p>Класс Registry содержит интерфейс к реестру Windows, базе данных в Система Windows, которую мы можем использовать для хранения значений между запусками наших приложений. Класс Clipboard содержит интерфейс к буферу обмена Windows, область в Windows,
+            предназначенная для краткосрочного хранения данных, которую мы можем использовать для хранения информации, вырезанной, копируется и вставляется между приложениями.</p>
+        <p>Класс Dialog разработан для настраиваемых диалогов. Класс Control является корневым классом для элементы управления диалогового окна. CheckBox, RadioButton, PushButton, ListBox и Классы ComboBox - это классы для определенных элементов управления.
+            Класс TextField содержит текстовое поле которые можно преобразовать в разные типы с помощью класса Converter. Наконец, Класс PageSetupDialog расширяет класс Dialog и реализует диалог с элементами управления и конвертеры. </p>
         <hr>
-        <p></p>
-        <p><a href="./01_03.html">Глава 1. ВСТУПЛЕНИЕ. Библиотека.&rArr;</a></p>
+        <h2>Резюме</h2>
+        <p>Эта глава представляет собой введение в Small Windows. В главе 2 «Привет, маленький мир» мы начнем разрабатывать приложения с помощью Small Windows. </p>
+        <p><a href="./02_01.html">Глава 2. Привет, маленький мир!&rArr;</a></p>
     </div>
 </body>
