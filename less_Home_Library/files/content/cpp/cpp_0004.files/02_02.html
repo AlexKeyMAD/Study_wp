@@ -24,32 +24,76 @@
         <p class="cpp_code_1t">Application::MainWindowPtr() = new CircleDocument(windowShow);</p>
         <p class="cpp_code">}</p>
         <h3>Класс CircleDocument</h3>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
-        <p class="cpp_code"></p>
+        <p>Класс CircleDocument расширяет класс Small Windows StandardDocument, который, в свою очередь, расширяет классы Document и Window. Фактически, класс StandardDocument представляет собой фреймворк, то есть базовый класс с набором виртуальных методов
+            с функциональностью что мы можем переопределить и дополнительно указать.</p>
+        <p>Методы OnMouseDown и OnMouseUp переопределяются из класса Window и являются вызывается, когда пользователь нажимает или отпускает одну из кнопок мыши. OnMouseMove метод вызывается, когда пользователь перемещает мышь. Метод OnDraw также переопределяется
+            из класса Window и вызывается каждый раз, когда окно необходимо перерисовать.</p>
+        <p>ClearDocument, ReadDocumentFromStream и WriteDocumentToStream методы переопределяются из класса StandardDocument и вызываются, когда пользователь создает новый файл, открывает файл или сохраняет файл: </p>
+        <h4>CircleDocument.h</h4>
+        <p class="cpp_code">class CircleDocument : public StandardDocument {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">CircleDocument(WindowShow windowShow);</p>
+        <p class="cpp_code_2t">~CircleDocument();</p>
+        <p class="cpp_code_2t">void OnMouseDown(MouseButton mouseButtons, Point mousePoint,</p>
+        <p class="cpp_code_5t">bool shiftPressed, bool controlPressed);</p>
+        <p class="cpp_code_2t">void OnMouseUp(MouseButton mouseButtons, Point mousePoint,</p>
+        <p class="cpp_code_5t">bool shiftPressed, bool controlPressed);</p>
+        <p class="cpp_code_2t">void OnMouseMove(MouseButton mouseButtons, Point mousePoint,</p>
+        <p class="cpp_code_5t">bool shiftPressed, bool controlPressed);</p>
+        <p class="cpp_code_2t">void OnDraw(Graphics& graphics, DrawMode drawMode) const;</p>
+        <p class="cpp_code_2t">bool ReadDocumentFromStream(String name, istream& inStream);</p>
+        <p class="cpp_code_2t">bool WriteDocumentToStream(String name, ostream& outStream) const;</p>
+        <p class="cpp_code_2t">void ClearDocument();</p>
+        <p>Макросы DEFINE_BOOL_LISTENER и DEFINE_VOID_LISTENER определяют слушателей, которые - это методы без параметров, которые вызываются, когда пользователь выбирает пункт меню. Единственный Разница между макросами заключается в типе возвращаемого значения
+            определенных методов: bool или void.</p>
+        <p>В приложениях этой книги мы используем общий стандарт, согласно которому слушатели вызывают реакция на действия пользователя имеет префикс On, например OnRed, как показано ниже. фрагмент кода. Методы, которые решают, следует ли включать пункт
+            меню: с суффиксом Enable, и методы, которые решают, должен ли пункт меню быть отмеченные галочкой или радиокнопкой, имеют суффикс Check или Radio.</p>
+        <p>В следующем приложении мы определяем пункты меню для красного, зеленого и синего цветов. Мы также определите пункт меню для стандартного диалога цвета: </p>
+        <p class="cpp_code_2t">DEFINE_VOID_LISTENER(CircleDocument,OnRed);</p>
+        <p class="cpp_code_2t">DEFINE_VOID_LISTENER(CircleDocument,OnGreen);</p>
+        <p class="cpp_code_2t">DEFINE_VOID_LISTENER(CircleDocument,OnBlue);</p>
+        <p class="cpp_code_2t">DEFINE_VOID_LISTENER(CircleDocument,OnColorDialog);</p>
+        <p>Когда пользователь выбрал один из цветов, красный, зеленый или синий, соответствующее меню элемент отмечен переключателем. RedRadio, GreenRadio и BlueRadio параметры вызываются до того, как пункты меню становятся видимыми и возвращают логическое
+            значение указывает, должен ли пункт меню быть отмечен переключателем: </p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(CircleDocument, RedRadio);</p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(CircleDocument, GreenRadio);</p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(CircleDocument, BlueRadio);</p>
+        <p>Радиус круга всегда составляет 500 единиц, что соответствует 5 мм: </p>
+        <p class="cpp_code_2t">static const int CircleRadius = 500;</p>
+        <p>Поле circleList содержит круги, причем самый верхний круг находится в начале. списка. Поле nextColor содержит цвет следующего круга, который будет добавлен пользователем. Это инициализируется минус 0ne, чтобы указать, что вначале круг не перемещается.
+            В Поля moveIndex и movePoint используются OnMouseDown и OnMouseMove. методы, позволяющие отслеживать перемещение круга пользователем: </p>
+        <p class="cpp_code_1t">private:</p>
+        <p class="cpp_code_2t">vector&lt;Circle&gt; circleList;</p>
+        <p class="cpp_code_2t">Color nextColor;</p>
+        <p class="cpp_code_2t">int moveIndex = -1;</p>
+        <p class="cpp_code_2t">Point movePoint;</p>
+        <p class="cpp_code">};</p>
+        <p>В вызове конструктора StandardDocument первые два параметра: LogicalWithScroll и USLetterPortrait. Они указывают, что логический размер сотые доли миллиметра и что клиентская область вмещает логический размер американской буквы: 215,9 * 279,4
+            миллиметра (8,5 * 11 дюймов). Если размер окна изменить так, чтобы клиентская область становится меньше буквы США, в окно добавляются полосы прокрутки.</p>
+        <p>Третий параметр устанавливает информацию о файле, используемую стандартными диалогами сохранения и открытия; текстовое описание имеет значение Circle Files, а суффикс файла - cle. Nullptr Параметр указывает, что у окна нет родительского окна.
+            В Параметр константы OverlappedWindow указывает, что окно должно перекрывать другие windows, а параметр windowShow - это исходный внешний вид окна, передаваемый в из окружающей системы классом MainWindow: </p>
+        <h4>CircleDocument.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "Circle.h"</p>
+        <p class="cpp_code">#include "CircleDocument.h"</p><br>
+        <p class="cpp_code">CircleDocument::CircleDocument(WindowShow windowShow):StandardDocument(LogicalWithScroll,</p>
+        <p class="cpp_code_5t">USLetterPortrait,TEXT("Circle Files, cle"),</p>
+        <p class="cpp_code_5t">nullptr,OverlappedWindow, windowShow) {</p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
         <p><a href="./02_02.html">Глава 2.&rArr;</a></p>
     </div>
 </body>
