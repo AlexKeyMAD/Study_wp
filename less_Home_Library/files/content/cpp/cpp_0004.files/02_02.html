@@ -112,6 +112,146 @@
         <p class="cpp_code">void CircleDocument::ClearDocument() {</p>
         <p class="cpp_code_1t">circleList.clear();</p>
         <p class="cpp_code">}</p>
+        <p>Метод WriteDocumentToStream вызывается классом StandardDocument, когда пользователь сохраняет файл (выбирая «Сохранить» или «Сохранить как»). Пишет количество кругов (размер список кругов) в выходной поток и вызывает метод WriteCircle для каждого
+            круга в чтобы записать свои состояния в поток: </p>
+        <p class="cpp_code">bool CircleDocument::WriteDocumentToStream(String name, ostream& outStream) const {</p>
+        <p class="cpp_code_1t">int size = circleList.size();</p>
+        <p class="cpp_code_1t">outStream.write((char*) &size, sizeof size);</p>
+        <p class="cpp_code_1t">for (Circle circle : circleList) {</p>
+        <p class="cpp_code_2t">circle.WriteCircle(outStream);</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code_1t">return ((bool) outStream);</p>
+        <p class="cpp_code">}</p>
+        <p>Метод ReadDocumentFromStream вызывается методом StandardDocument. когда пользователь открывает файл, выбрав пункт меню «Открыть». Он читает количество кругов (размер списка кругов) и для каждого круга создается новый объект класса Circle, вызывает
+            метод ReadCircle для чтения состояния круга и добавляет объект круга в метод circleList: </p>
+        <p class="cpp_code">bool CircleDocument::ReadDocumentFromStream(String name, istream& inStream) {</p>
+        <p class="cpp_code_1t">int size;</p>
+        <p class="cpp_code_1t">inStream.read((char*) &size, sizeof size);</p>
+        <p class="cpp_code_1t">for (int count = 0; count &lt; size; ++count) {</p>
+        <p class="cpp_code_2t">Circle circle;</p>
+        <p class="cpp_code_2t">circle.ReadCircle(inStream);</p>
+        <p class="cpp_code_2t">circleList.push_back(circle);</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code_1t">return ((bool) inStream);</p>
+        <p class="cpp_code">}</p>
+        <p>Метод OnMouseDown вызывается, когда пользователь нажимает одну из кнопок мыши. Первый нам нужно проверить, нажали ли они левую кнопку мыши. Если есть, зацикливаем через список кругов и вызовите метод IsClick для каждого круга, чтобы решить нажали
+            ли они на кружок. Обратите внимание, что самый верхний круг расположен в начало списка; поэтому мы выполняем цикл с начала списка. Если мы обнаружим нажатый круг, разрываем петлю.</p>
+        <p>Если пользователь щелкнул кружок, мы сохраняем его индекс moveIndex и текущую мышь. положение в movePoint. Оба значения необходимы этому методу OnMouseMove, который будет вызывается, когда пользователь перемещает мышь: </p>
+        <p class="cpp_code">void CircleDocument::OnMouseDown (MouseButton mouseButtons, Point mousePoint,</p>
+        <p class="cpp_code_4t">bool shiftPressed /* = false */, bool controlPressed /* = false */) {</p>
+        <p class="cpp_code_1t">if (mouseButtons == LeftButton) {</p>
+        <p class="cpp_code_2t">moveIndex = -1;</p>
+        <p class="cpp_code_2t">int size = circleList.size();</p>
+        <p class="cpp_code_2t">for (int index = 0; index &lt; size; ++index) {</p>
+        <p class="cpp_code_3t">if (circleList[index].IsClick(mousePoint)) {</p>
+        <p class="cpp_code_4t">moveIndex = index;</p>
+        <p class="cpp_code_4t">movePoint = mousePoint;</p>
+        <p class="cpp_code_4t">break;</p>
+        <p class="cpp_code_3t">}</p>
+        <p class="cpp_code_2t">}</p>
+        <p>Однако, если пользователь не щелкнул круг, мы добавляем новый круг. Круг определяется его центральное положение (mousePoint), радиус (CircleRadius) и цвет (nextColor).</p>
+        <p>Недействительная область - это часть клиентской области, которую необходимо перерисовать. Помните, что в Windows, мы обычно не рисуем фигуры напрямую. Вместо этого мы называем Invalidate метод, чтобы сообщить системе, что область необходимо перерисовать,
+            и принудительно выполнить перерисовку путем вызова метода UpdateWindow, который в конечном итоге приводит к вызову OnDraw метод. Аннулированная область всегда представляет собой прямоугольник. Метод Invalidate имеет второй параметр (значение
+            по умолчанию - истина), указывающий, что недействительная область должна быть очищена. </p>
+        <p>Технически он окрашен в клиентский цвет окна, который в данном случае белый. В этом Таким образом, предыдущее положение круга очищается, и круг рисуется в новом месте.</p>
+        <p>Метод SetDirty сообщает платформе, что документ был изменен ( документ стал грязным), что приводит к включению пункта меню Сохранить и пользователю будет предупрежден, если он / она попытается закрыть окно, не сохраняя его: </p>
+        <p class="cpp_code_2t">if (moveIndex == -1) {</p>
+        <p class="cpp_code_3t">Circle newCircle(mousePoint, CircleRadius, nextColor);</p>
+        <p class="cpp_code_3t">circleList.push_back(newCircle);</p>
+        <p class="cpp_code_3t">Invalidate(newCircle.Area());</p>
+        <p class="cpp_code_3t">UpdateWindow();</p>
+        <p class="cpp_code_3t">SetDirty(true);</p>
+        <p class="cpp_code_2t">}</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
+        <p>Метод OnMouseMove вызывается каждый раз, когда пользователь перемещает мышь хотя бы одним кнопка мыши нажата. Сначала нам нужно проверить, нажимает ли пользователь левую кнопку мыши. и щелкает кружок (независимо от того, равен ли метод moveIndex
+            -1). Если user is, мы вычисляем расстояние от предыдущего события мыши (OnMouseDown или OnMouseMove), сравнивая предыдущее и текущее положение мыши с помощью mousePoint метод. Мы обновляем положение круга, аннулируем как старую, так и новую
+            область, принудительно перерисовать недействительные области с помощью метода UpdateWindow и установить грязный флаг: </p>
+        <p class="cpp_code">void CircleDocument::OnMouseMove (MouseButton mouseButtons, Point mousePoint,</p>
+        <p class="cpp_code_5t">bool shiftPressed /* = false */, bool controlPressed /* = false */) {</p>
+        <p class="cpp_code_1t">if ((mouseButtons == LeftButton)&&(moveIndex != -1)) {</p>
+        <p class="cpp_code_2t">Size distanceSize = mousePoint - movePoint;</p>
+        <p class="cpp_code_2t">movePoint = mousePoint;</p><br>
+        <p class="cpp_code_2t">Circle& movedCircle = circleList[moveIndex];</p>
+        <p class="cpp_code_2t">Invalidate(movedCircle.Area());</p>
+        <p class="cpp_code_2t">movedCircle.Center() += distanceSize;</p>
+        <p class="cpp_code_2t">Invalidate(movedCircle.Area());</p><br>
+        <p class="cpp_code_2t">UpdateWindow();</p>
+        <p class="cpp_code_2t">SetDirty(true);</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
+        <p>Строго говоря, метод OnMouseUp можно было исключить, поскольку метод moveIndex установлен на минус один в методе OnMouseDown, который всегда вызывается перед OnMouseMove метод. Однако он был включен для полноты картины: </p>
+        <p class="cpp_code">void CircleDocument::OnMouseUp (MouseButton mouseButtons, Point mousePoint,</p>
+        <p class="cpp_code_4t">bool shiftPressed /* = false */, bool controlPressed /* = false */) {</p>
+        <p class="cpp_code_1t">moveIndex = -1;</p>
+        <p class="cpp_code">}</p>
+        <p>Метод OnDraw вызывается каждый раз, когда окно необходимо (частично или полностью) перерисовано. Вызов может быть инициализирован системой как ответ на событие (например, window был изменен размер) или путем более раннего вызова метода UpdateWindow.
+            В Параметр ссылки на графику был создан фреймворком и может рассматриваться как набор инструментов для рисования линий, рисования областей и ввода текста. Однако в этом приложении мы не пишем текст.</p>
+        <p>Мы перебираем список кругов и для каждого круга вызываем метод Draw. Обратите внимание, что мы делаем не заботится о том, какие круги физически перерисовывать. Просто перерисовываем все кружочки. Однако только круги, расположенные в области, которая
+            была аннулирована предыдущим вызовом Метод Invalidate будет физически перерисован.</p>
+        <p>У метода Draw есть второй параметр, указывающий режим рисования, который может быть Paint или распечатать. Метод Paint указывает, что метод OnDraw вызывается методом OnPaint. в классе Window и что рисование выполняется в клиентской области окна.
+            Метод Print указывает, что метод OnDraw вызывается методом OnPrint и что картина отправлена ​​в типографию. Однако в этом приложении мы не используем это параметр: </p>
+        <p class="cpp_code">void CircleDocument::OnDraw(Graphics& graphics, DrawMode /* drawMode */) const {</p>
+        <p class="cpp_code_1t">for (Circle circle : circleList) {</p>
+        <p class="cpp_code_2t">circle.Draw(graphics);</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
+        <p>Методы RedRadio, GreenRadio и BlueRadio вызываются до того, как элементы меню будут отображается, и элементы будут отмечены переключателем, если они вернут true. Красный, Константы Green и Blue определены в классе Color: </p>
+        <p class="cpp_code">bool CircleDocument::RedRadio() const {</p>
+        <p class="cpp_code_1t">return (nextColor == Red);</p>
+        <p class="cpp_code">}</p>
+        <p class="cpp_code">bool CircleDocument::GreenRadio() const {</p>
+        <p class="cpp_code_1t">return (nextColor == Green);</p>
+        <p class="cpp_code">}</p>
+        <p class="cpp_code">bool CircleDocument::BlueRadio() const {</p>
+        <p class="cpp_code_1t">return (nextColor == Blue);</p>
+        <p class="cpp_code">}</p>
+        <p>Методы OnRed, OnGreen и OnBlue вызываются, когда пользователь выбирает соответствующий пункт меню. Все они устанавливают для поля nextColor соответствующее значение: </p>
+        <p class="cpp_code">void CircleDocument::OnRed() {</p>
+        <p class="cpp_code_1t">nextColor = Red;</p>
+        <p class="cpp_code">}</p>
+        <p class="cpp_code">void CircleDocument::OnGreen() {</p>
+        <p class="cpp_code_1t">nextColor = Green;</p>
+        <p class="cpp_code">}</p>
+        <p class="cpp_code">void CircleDocument::OnBlue() {</p>
+        <p class="cpp_code_1t">nextColor = Blue;</p>
+        <p class="cpp_code">}</p>
+        <p>Метод OnColorDialog вызывается, когда пользователь выбирает пункт меню диалогового окна Color. и отображает стандартный диалог цвета. Если пользователь выбирает новый цвет, следующий цвет методу будет присвоено выбранное значение цвета: </p>
+        <p class="cpp_code">void CircleDocument::OnColorDialog() {</p>
+        <p class="cpp_code_1t">StandardDialog(this, nextColor);</p>
+        <p class="cpp_code">}</p>
+        <h3>Класс Circle</h3>
+        <p>Круг - это класс, содержащий информацию об одном круге. Конструктор по умолчанию используется при чтении круга из файла. Второй конструктор используется при создании нового круг. Метод IsClick возвращает истину, если данная точка находится внутри
+            круга (чтобы проверьте, щелкнул ли пользователь по кругу), метод Area возвращает круг окружающий прямоугольник (для признания недействительным), и вызывается метод Draw для перерисовки круга: </p>
+        <h4>Circle.h</h4>
+        <p class="cpp_code">class Circle {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">Circle();</p>
+        <p class="cpp_code_2t">Circle(Point center, int radius, Color color);</p><br>
+        <p class="cpp_code_2t">bool WriteCircle(ostream& outStream) const;</p>
+        <p class="cpp_code_2t">bool ReadCircle(istream& inStream);</p><br>
+        <p class="cpp_code_2t">bool IsClick(Point point) const;</p>
+        <p class="cpp_code_2t">Rect Area() const;</p>
+        <p class="cpp_code_2t">void Draw(Graphics& graphics) const;</p><br>
+        <p class="cpp_code_2t">Point Center() const {return center;}</p>
+        <p class="cpp_code_2t">Point& Center() {return center;}</p>
+        <p class="cpp_code_2t">Color GetColor() {return color;}</p>
+        <p>Как упоминалось в предыдущем разделе, круг определяется его центральным положением (center), радиус (radius) и цвет (color): </p>
+        <p class="cpp_code_1t">private:</p>
+        <p class="cpp_code_2t">Point center;</p>
+        <p class="cpp_code_2t">int radius;</p>
+        <p class="cpp_code_2t">Color color;</p>
+        <p class="cpp_code">};</p>
+        <p>Конструктору по умолчанию не нужно инициализировать поля, поскольку он вызывается, когда пользователь открывает файл, и значения считываются из файла. Однако второй конструктор инициализирует центральную точку, радиус и цвет круга: </p>
+        <h4>Circle.cpp</h4>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
