@@ -4,7 +4,7 @@
 
 <body>
     <div>
-        <p><a href="./01_02.html">&lArr;Глава 2. Привет, маленький мир!</a></p>
+        <p><a href="./02_01.html">&lArr;Глава 2. Привет, маленький мир!</a></p>
         <h1>ГЛАВА 2</h1>
         <h2>Приложение "Круг"</h2>
         <hr>
@@ -281,8 +281,15 @@
         <p class="cpp_code_2t">bottomRight = center + radius;</p>
         <p class="cpp_code_1t">return Rect(topLeft, bottomRight);</p>
         <p class="cpp_code">}</p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p><a href="./02_02.html">Глава 2.&rArr;</a></p>
+        <p>Мы используем метод FillEllipse (метода FillCircle нет) Small Windows Класс Graphics для рисования круга. Граница круга всегда черная, а его внутренний цвет задается цветовым полем: </p>
+        <p class="cpp_code">void Circle::Draw(Graphics& graphics) const {</p>
+        <p class="cpp_code_1t">Point topLeft = center - radius, bottomRight = center + radius;</p>
+        <p class="cpp_code_1t">Rect circleRect(topLeft, bottomRight);</p>
+        <p class="cpp_code_1t">graphics.FillEllipse(circleRect, Black, color);</p>
+        <p class="cpp_code">}</p>
+        <h3>Резюме</h3>
+        <p>В этой главе вы рассмотрели два приложения в Small Windows: простой привет-мир приложение и чуть более продвинутое круговое приложение, в котором рамки. Вы также изучили меню, рисование кругов и работу с мышью.</p>
+        <p>В главе 3 «Создание приложения Тетрис», мы разработаем классическую игру «Тетрис». </p>
+        <p><a href="./03_01.html">Глава 3. Создание приложения "Тетрис"&rArr;</a></p>
     </div>
 </body>
