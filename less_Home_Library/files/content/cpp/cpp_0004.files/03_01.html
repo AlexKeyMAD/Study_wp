@@ -8,6 +8,100 @@
         <h1>ГЛАВА 3</h1>
         <h2>Создание приложения "Тетрис"</h2>
         <hr>
+        <p>В этой главе мы разрабатываем классический тетрис. Мы смотрим дальше в класс Window, включая написание текста и рисование более сложных фигур. Мы также смотрим на сроки, случайные числа и графические обновления, такие как падающие фигуры и эффекты
+            вспышки. Иллюстрация показана ниже: </p>
+        <img src="03_01_01.png" alt="" class="img-center">
+        <h3>Функция MainWindow</h3>
+        <p>Функция MainWindow аналогична методам из главы 2, Hello, Small World !. Он устанавливает имя приложения и возвращает указатель на главное окно, которое в данном случае является экземпляр класса TetrisWindow. Как сказано в главе 2 «Привет, маленький
+            мир!» то имя приложения используется при доступе к реестру, при открытии или сохранении файла, а также пункт меню «О программе». Однако ни одна из этих функций не используется в этом приложении: </p>
+        <h4>MainWindow.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "GameGrid.h"</p>
+        <p class="cpp_code">#include "TetrisFigure.h"</p>
+        <p class="cpp_code">#include "RedFigure.h"</p>
+        <p class="cpp_code">#include "BrownFigure.h"</p>
+        <p class="cpp_code">#include "TurquoiseFigure.h"</p>
+        <p class="cpp_code">#include "GreenFigure.h"</p>
+        <p class="cpp_code">#include "YellowFigure.h"</p>
+        <p class="cpp_code">#include "BlueFigure.h"</p>
+        <p class="cpp_code">#include "PurpleFigure.h"</p>
+        <p class="cpp_code">#include "TetrisWindow.h"</p><br>
+        <p class="cpp_code">void MainWindow(vector &lt;String&gt; /* argumentList */, WindowShow windowShow) {</p>
+        <p class="cpp_code_1t">Application::ApplicationName() = TEXT("Tetris");</p>
+        <p class="cpp_code_1t">Application::MainWindowPtr() = new TetrisWindow(windowShow);</p>
+        <p class="cpp_code">}</p>
+        <h3>Окно тетриса</h3>
+        <p>В этом приложении мы не используем структуру StandardDocument из Главы 2, Привет, маленький мир !. Вместо этого класс TetrisWindow расширяет корневой класс Small Windows. Окно прямо. Причина в том, что нам не нужна функциональность Платформа StandardDocument
+            или ее базовый класс Document. Мы не используем меню или ускорители, и мы не сохраняем и не загружаем файлы: </p>
+        <h4>TetrisWindow.h</h4>
+        <p class="cpp_code">class TetrisWindow : public Window {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">TetrisWindow(WindowShow windowShow);</p>
+        <p class="cpp_code_2t">~TetrisWindow();</p>
+        <p>В этом приложении мы игнорируем мышь. Вместо этого мы рассмотрим работу с клавиатурой. В Метод OnKeyDown вызывается, когда пользователь нажимает или отпускает клавишу: </p>
+        <p class="cpp_code_2t">bool OnKeyDown(WORD key, bool shiftPressed, bool controlPressed);</p>
+        <p>Подобно круглому приложению, метод OnDraw вызывается каждый раз, когда клиент окна область нужно перерисовать: </p>
+        <p class="cpp_code_2t">void OnDraw(Graphics& graphics, DrawMode drawMode) const;</p>
+        <p>Методы OnGainFocus и OnLoseFocus вызываются, когда окно получает или теряет фокус ввода соответственно. Когда окно теряет фокус ввода, оно не получает никаких ввод с клавиатуры и таймер отключается, предотвращая перемещение падающей фигуры: </p>
+        <p class="cpp_code_2t">void OnGainFocus();</p>
+        <p class="cpp_code_2t">void OnLoseFocus();</p>
+        <p>Метод OnTimer вызывается каждую секунду, когда окно находится в фокусе. Он пытается переместить падающая фигура на один шаг вниз. Он вызывает метод NewFigure, если не удается переместить фигура вниз. Метод NewFigure пытается представить новую
+            фигуру в игре доска. Если это не удается, вызывается метод GameOver, который спрашивает пользователя, хочет ли он новый игра. Метод NewGame вызывается, если пользователь хочет новую игру. Если пользователь не хотите новую игру, выходит из
+            приложения: </p>
+        <p class="cpp_code_2t">void OnTimer(int timerId);</p>
+        <p class="cpp_code_2t">void EndOfFigure();</p>
+        <p class="cpp_code_2t">void GameOver();</p>
+        <p class="cpp_code_2t">void NewGame();</p>
+        <p>DeleteFullRows проверяет каждую строку, вызывая метод IsRowFull, и вызывает Методы FlashRow и DeleteRow для каждой полной строки: </p>
+        <p class="cpp_code_2t">void DeleteFullRows();</p>
+        <p class="cpp_code_2t">bool IsRowFull(int row);</p>
+        <p class="cpp_code_2t">void FlashRow(int row);</p>
+        <p class="cpp_code_2t">void DeleteRow(int markedRow);</p>
+        <p>Метод TryClose вызывается, если пользователь пытается закрыть окно, щелкнув значок крестик в правом верхнем углу окна. Он отображает окно сообщения, которое спрашивает пользователя, если они действительно хотят бросить курить: </p>
+        <p class="cpp_code_2t">bool TryClose();</p>
+        <p>Поле gameGrid содержит сетку, на которой отображаются фигуры (см. Следующий раздел). Падающая фигура (падающая фигура) падает на сетку, а следующая фигура падает down (nextFigure) отображается в правом верхнем углу. Каждый раз, когда игрок заполняет
+            строку, оценка (currScore) увеличивается. Идентификатор таймера (TimerId) необходим для отслеживания таймер и получает произвольное значение 1000. Наконец, список фигур (figureList) будет быть заполненным семью фигурами, по одной каждого цвета.
+            Каждый раз, когда требуется новая фигура, случайным образом выбранная фигура из списка будет выбрана и скопирована: </p>
+        <p class="cpp_code_1t">private:</p>
+        <p class="cpp_code_2t">GameGrid gameGrid;</p>
+        <p class="cpp_code_2t">TetrisFigure fallingFigure, nextFigure;</p><br>
+        <p class="cpp_code_2t">int currScore = 0;</p>
+        <p class="cpp_code_2t">bool timerActive = true, inverse = false;</p><br>
+        <p class="cpp_code_2t">static const int TimerId = 1000;</p>
+        <p class="cpp_code_2t">vector&lt;TetrisFigure&gt; figureList;</p>
+        <p class="cpp_code">};</p>
+        <p>Параметр PreviewCoordinate в вызове конструктора Window указывает, что размер окна фиксированный, а второй параметр указывает, что размер составляет 100 * 100 единиц. Это означает, что, в отличие от приложения круга, размер фигур и игровых полей
+            будет изменить, когда пользователь изменяет размер окна: </p>
+        <h4>TetrisWindow.cpp</h4>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
         <p></p>
         <p><a href="./03_01.html">Глава 3. &rArr;</a></p>
     </div>
