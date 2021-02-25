@@ -244,38 +244,43 @@
         <p class="cpp_code">};</p>
         <p>Конструктору по умолчанию не нужно инициализировать поля, поскольку он вызывается, когда пользователь открывает файл, и значения считываются из файла. Однако второй конструктор инициализирует центральную точку, радиус и цвет круга: </p>
         <h4>Circle.cpp</h4>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "Circle.h"</p> <br>
+        <p class="cpp_code">Circle::Circle() {</p>
+        <p class="cpp_code_1t">// Empty.</p>
+        <p class="cpp_code">}</p><br>
+        <p class="cpp_code">Circle::Circle(Point center, int radius, Color color)</p>
+        <p class="cpp_code_4t">:color(color), center(center), radius(radius) {</p>
+        <p class="cpp_code_1t">// Empty.</p>
+        <p class="cpp_code">}</p>
+        <p>Метод WriteCircle записывает в поток цвет, центральную точку и радиус. С Радиус является обычным целым числом, мы просто используем стандартную функцию C write, а Color и У Point есть свои собственные методы записи значений в поток. В ReadCircle,
+            мы считываем цвет, центральную точку и радиус из потока аналогичным образом: </p>
+        <p class="cpp_code">bool Circle::WriteCircle(ostream& outStream) const {</p>
+        <p class="cpp_code_1t">color.WriteColorToStream(outStream);</p>
+        <p class="cpp_code_1t">center.WritePointToStream(outStream);</p>
+        <p class="cpp_code_1t">outStream.write((char*) &radius, sizeof radius);</p>
+        <p class="cpp_code_1t">return ((bool) outStream);</p>
+        <p class="cpp_code">}</p>
+        <p class="cpp_code">bool Circle::ReadCircle(istream& inStream) {</p>
+        <p class="cpp_code_1t">color.ReadColorFromStream(inStream);</p>
+        <p class="cpp_code_1t">center.ReadPointFromStream(inStream);</p>
+        <p class="cpp_code_1t">inStream.read((char*) &radius, sizeof radius);</p>
+        <p class="cpp_code_1t">return ((bool) inStream);</p>
+        <p class="cpp_code">}</p>
+        <p>Метод IsClick использует теорему Пифагора для вычисления расстояния между заданными точка и центральная точка круга и возвращает истину, если точка находится внутри круга (если расстояние меньше или равно радиусу круга): </p>
+        <img src="02_02_02.png" alt="" class="img-center">
+        <p class="cpp_code">Circle::IsClick(Point point) const {</p>
+        <p class="cpp_code_1t">int width = point.X() - center.X(), </p>
+        <p class="cpp_code_2t">height = point.Y() - center.Y();</p>
+        <p class="cpp_code_1t">int distance = (int) sqrt((width * width) + (height * height));</p>
+        <p class="cpp_code_1t">return (distance &lt;=r adius);</p>
+        <p class="cpp_code">}</p>
+        <p>Левый верхний угол получившегося прямоугольника - это центральная точка минус радиус и нижний правый угол - это центральная точка плюс радиус: </p>
+        <p class="cpp_code">Rect Circle::Area() const {</p>
+        <p class="cpp_code_1t">Point topLeft = center - radius,</p>
+        <p class="cpp_code_2t">bottomRight = center + radius;</p>
+        <p class="cpp_code_1t">return Rect(topLeft, bottomRight);</p>
+        <p class="cpp_code">}</p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p><a href="./02_02.html">Глава 2.&rArr;</a></p>
