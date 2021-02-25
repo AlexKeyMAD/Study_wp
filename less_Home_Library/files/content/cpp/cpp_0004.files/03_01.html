@@ -73,20 +73,42 @@
         <p>Параметр PreviewCoordinate в вызове конструктора Window указывает, что размер окна фиксированный, а второй параметр указывает, что размер составляет 100 * 100 единиц. Это означает, что, в отличие от приложения круга, размер фигур и игровых полей
             будет изменить, когда пользователь изменяет размер окна: </p>
         <h4>TetrisWindow.cpp</h4>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "GameGrid.h"</p>
+        <p class="cpp_code">#include "TetrisFigure.h"</p>
+        <p class="cpp_code">#include "RedFigure.h"</p>
+        <p class="cpp_code">#include "BrownFigure.h"</p>
+        <p class="cpp_code">#include "TurquoiseFigure.h"</p>
+        <p class="cpp_code">#include "GreenFigure.h"</p>
+        <p class="cpp_code">#include "YellowFigure.h"</p>
+        <p class="cpp_code">#include "BlueFigure.h"</p>
+        <p class="cpp_code">#include "PurpleFigure.h"</p>
+        <p class="cpp_code">#include "TetrisWindow.h"</p><br>
+        <p class="cpp_code">TetrisWindow::TetrisWindow(WindowShow windowShow)</p>
+        <p class="cpp_code_3t">:Window(PreviewCoordinate, Rect(0, 0, 100, 100),</p>
+        <p class="cpp_code_5t">nullptr, OverlappedWindow, NoStyle, Normal),</p>
+        <p>Верхние 20 процентов клиентской области зарезервированы для оценки и следующей цифры. А игровая сетка покрывает нижние 80 процентов клиентской области (от 20 до 100 единиц высоты): </p>
+        <p class="cpp_code_5t">gameGrid(Rect(0, 20, 100, 100)) {</p>
+        <p>Поскольку мы расширяем класс Window, нам нужно установить заголовок окна вручную: </p>
+        <p class="cpp_code_1t">SetHeader(TEXT("Tetris"));</p>
+        <p>Интервал таймера установлен на 1000 миллисекунд, что означает, что будет вызываться OnTimer. каждую секунду. Генератор случайных чисел инициализируется вызовом стандартных функций языка Си. srand и время: </p>
+        <p class="cpp_code_1t">SetTimer(TimerId, 1000);</p>
+        <p class="cpp_code_1t">srand((unsigned int) time(nullptr));</p>
+        <p>Список фигур инициализируется одной фигурой каждого цвета; падающая и следующая фигура случайно выбранный из этого списка. Одна из фигур в списке будет копироваться каждый раз, когда мы нужна новая фигура: </p>
+        <p class="cpp_code_1t">figureList.push_back(RedFigure(this, &gameGrid));</p>
+        <p class="cpp_code_1t">figureList.push_back(BrownFigure(this, &gameGrid));</p>
+        <p class="cpp_code_1t">figureList.push_back(TurquoiseFigure(this, &gameGrid));</p>
+        <p class="cpp_code_1t">figureList.push_back(GreenFigure(this, &gameGrid));</p>
+        <p class="cpp_code_1t">figureList.push_back(YellowFigure(this, &gameGrid));</p>
+        <p class="cpp_code_1t">figureList.push_back(BlueFigure(this, &gameGrid));</p>
+        <p class="cpp_code_1t">figureList.push_back(PurpleFigure(this, &gameGrid));</p><br>
+        <p class="cpp_code_1t">fallingFigure = figureList[rand() % figureList.size()];</p>
+        <p class="cpp_code_1t">nextFigure = figureList[rand() % figureList.size()];</p>
+        <p class="cpp_code">}</p>
+        <p>Строго говоря, не обязательно сбрасывать таймер при закрытии окна Тетриса. В деструктор включен только для полноты: </p>
+        <p class="cpp_code">TetrisWindow::~TetrisWindow() {</p>
+        <p class="cpp_code_1t">DropTimer(TimerId);</p>
+        <p class="cpp_code">}</p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
