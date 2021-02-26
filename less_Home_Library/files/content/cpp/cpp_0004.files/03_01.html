@@ -307,20 +307,48 @@
         <p>Конструктор по умолчанию необходим для инициализации FallFigure и nextFigure. методы в классе TetrisWindow. Второй конструктор защищен, поскольку он только вызывается его подклассами. У каждой фигуры есть свой подкласс TetrisFigure. Их конструкторы
             наведите указатель на цветовую сетку и определите ее цвет, начальную позицию и образцы рисунка: </p>
         <h4>TetrisFigure.h</h4>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
+        <p class="cpp_code">class TetrisFigure {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">TetrisFigure();</p><br>
+        <p class="cpp_code_1t">protected:</p>
+        <p class="cpp_code_2t">TetrisFigure(Window* windowPtr, GameGrid* colorGridPtr,</p>
+        <p class="cpp_code_5t">Color color, int row, int col, Direction direction,</p>
+        <p class="cpp_code_5t">IntPair* northList, IntPair* eastList, </p>
+        <p class="cpp_code_5t">IntPair* southList, IntPair* westList);</p><br>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">TetrisFigure& operator=(const TetrisFigure& figure);</p>
+        <p>TryMoveLeft, TryMoveRight, TryRotateClockwise, TryRotateClockwise, Все методы TryRotateAnticlockwise и TryMoveDown пытаются переместить фигуру. Они вызвать метод IsFigureValid, который проверяет, допустимо ли новое местоположение, то есть не находится
+            за пределами игровой сетки или в уже занятой локации. IsFigureValid , в свою очередь, вызывает метод IsSquareValid для каждого из четырех квадратов: </p>
+        <p class="cpp_code_2t">void TryMoveLeft();</p>
+        <p class="cpp_code_2t">void TryMoveRight();</p>
+        <p class="cpp_code_2t">void TryRotateClockwise();</p>
+        <p class="cpp_code_2t">void TryRotateAnticlockwise();</p>
+        <p class="cpp_code_2t">bool TryMoveDown();</p>
+        <p>Существует две версии метода IsFigureValid, первая из которых вызывается метод TetrisWindow, а другая версия вызывается предыдущими методами try в чтобы проверить, действительно ли новое местоположение падающей фигуры: </p>
+        <p class="cpp_code_2t">bool IsFigureValid();</p>
+        <p class="cpp_code_2t">static bool IsFigureValid(int direction, int row, int col, </p>
+        <p class="cpp_code_5t">GameGrid* gameGridPtr, IntPair* figureInfo[]);</p>
+        <p class="cpp_code_2t">static bool IsSquareValid(int row, int col, GameGrid* gameGridPtr);</p>
+        <p>Метод AddToGrid добавляет четыре квадрата фигуры в игровую сетку: </p>
+        <p class="cpp_code_2t">void AddToGrid();</p>
+        <p>Метод InvalidateFigure аннулирует область, занимаемую фигурой, и Метод DrawFigure рисует фигуру: </p>
+        <p class="cpp_code_2t">void InvalidateFigure(Size offsetSize = ZeroSize);</p>
+        <p class="cpp_code_2t">void DrawFigure(Graphics& graphics, Size offsetSize = ZeroSize) const;</p>
+        <p>Поле gameGridPtr - это указатель на игровую сетку, к которой мы обращаемся, когда пытаемся переместить фигура, чтобы решить, действительно ли ее новое местоположение. Цветное поле - это цвет фигура (красный, коричневый, бирюзовый, зеленый, желтый,
+            синий или фиолетовый). Строка, столбец и Поля направления содержат текущее местоположение и направление фигуры.</p>
+        <p>Поле figureInfo содержит форму фигуры. Фигура может вместить до четырех направления: север, восток, юг и запад. Помните, что строка и столбец содержат расположение цифры. В частности, они определяют расположение центрального квадрата из четырех
+            квадратов. составляющие рисунок (отмечены крестиком на следующих рисунках). Остальные три квадраты определяются парами целых чисел, определяющими их положение относительно центрального квадрата. </p>
+        <p>Технически figureInfo представляет собой массив из четырех указателей (по одному для направлений север, восток, юг и запад). Каждый указатель указывает на массив из трех целочисленных пар, содержащих ячейки из трех квадратов относительно центрального
+            квадрата: </p>
+        <p class="cpp_code_1t">protected:</p>
+        <p class="cpp_code_2t">Window* windowPtr;</p>
+        <p class="cpp_code_2t">GameGrid* gameGridPtr;</p>
+        <p class="cpp_code_2t">Color color;</p>
+        <p class="cpp_code_2t">int row, col;</p>
+        <p class="cpp_code_2t">Direction direction;</p>
+        <p class="cpp_code_2t">IntPair* figureInfo[4];</p>
+        <p class="cpp_code">};</p>
+        <p>Конструктор по умолчанию необходим, потому что FallFigure и nextFigure являются членами объекты класса TetrisWindow. Однако их не нужно инициализировать, так как их значениям присваивается одна из семи цифр в массиве figureList: </p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
