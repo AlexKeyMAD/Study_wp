@@ -287,6 +287,118 @@
         <p class="cpp_code_1t">UpdateWindow();</p>
         <p class="cpp_code">}</p>
         <h3>Закрытие окна</h3>
+        <p>Наконец, когда пользователь хочет закрыть окно, щелкнув крестик в правом верхнем углу углу, нам нужно подтвердить, что они действительно хотят бросить курить. Если метод TryClose возвращает правда, окно закрыто: </p>
+        <p class="cpp_code">bool TetrisWindow::TryClose() {</p>
+        <p class="cpp_code_1t">timerActive = false;</p>
+        <p class="cpp_code_1t">if (MessageBox(TEXT("Quit?"), TEXT("Tetris"), YesNo, Question) == Yes) {</p>
+        <p class="cpp_code_2t">return true;</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code_1t">timerActive = true;</p>
+        <p class="cpp_code_1t">return false;</p>
+        <p class="cpp_code">}</p>
+        <h3>Класс TetrisFigure </h3>
+        <p>В этом приложении есть класс корневых фигур и один подкласс для каждого типа падения. фигура. Все фигурки можно двигать боком или поворачивать в ответ на запросы пользователя. Они также перемещаются вниз по таймеру.</p>
+        <p>Есть семь цифр, по одной для каждого цвета: красный, коричневый, бирюзовый, зеленый, желтый, синий и фиолетовый. Каждый из них также имеет уникальную форму. Однако все они содержат четыре квадрата. Они далее можно разделить на три группы в зависимости
+            от их способности вращаться. Красная цифра - это самый простой. Это квадрат и он вообще не вращается. Коричневая, бирюзовая и зеленая фигура можно вращать в вертикальном и горизонтальном направлениях, а желтый, синий и фиолетовый фигуры можно
+            вращать в северном, восточном, южном и западном направлениях. Для красной фигуры это не имеет особого значения, так как он не вращается.</p>
+        <p>Поля row и col класса TetrisFigure содержат центр фигуры, т.е. помечены крестиком на иллюстрациях этого раздела. Цветовое поле содержит цвет figure, а direction - текущее направление фигуры.</p>
+        <p>Наконец, массив направлений содержит относительные положения трех квадратов, окружающих отмеченный квадрат. Максимум четыре направления. В каждом направлении по три квадрата, которые представляют собой три оставшихся квадрата, которые не являются
+            центром фигуры. Каждый квадрат содержит два целых числа: относительное положение центральной строки и столбца.</p>
+        <p>Конструктор по умолчанию необходим для инициализации FallFigure и nextFigure. методы в классе TetrisWindow. Второй конструктор защищен, поскольку он только вызывается его подклассами. У каждой фигуры есть свой подкласс TetrisFigure. Их конструкторы
+            наведите указатель на цветовую сетку и определите ее цвет, начальную позицию и образцы рисунка: </p>
+        <h4>TetrisFigure.h</h4>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
