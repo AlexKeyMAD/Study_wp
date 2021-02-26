@@ -111,6 +111,122 @@
         <p class="cpp_code">}</p>
         <h3>Ввод с клавиатуры </h3>
         <p>Метод OnKeyDown переопределяет метод в классе Window и вызывается каждый раз. пользователь нажимает клавишу. Падающую фигуру стараемся перемещать в соответствии с нажатой клавишей. Нам все равно, нажал ли пользователь клавишу Shift или Ctrl: </p>
+        <p class="cpp_code">bool TetrisWindow::OnKeyDown(WORD key, bool /* shiftPressed */,</p>
+        <p class="cpp_code_5t">bool /* controlPressed */) {</p>
+        <p class="cpp_code_1t">switch (key) {</p>
+        <p class="cpp_code_2t">case KeyLeft:</p>
+        <p class="cpp_code_3t">fallingFigure.TryMoveLeft();</p>
+        <p class="cpp_code_3t">break;</p>
+        <p class="cpp_code_2t">case KeyRight:</p>
+        <p class="cpp_code_3t">fallingFigure.TryMoveRight();</p>
+        <p class="cpp_code_3t">break;</p>
+        <p class="cpp_code_2t">case KeyUp:</p>
+        <p class="cpp_code_3t">fallingFigure.TryRotateAnticlockwise();</p>
+        <p class="cpp_code_3t">break;</p>
+        <p class="cpp_code_2t">case KeyDown:</p>
+        <p class="cpp_code_3t">fallingFigure.TryRotateAnticlockwise();</p>
+        <p class="cpp_code_3t">break;</p>
+        <p>Когда пользователь нажимает клавишу пробела, падающая фигура падает с видимой скоростью, создавая иллюзия падения. Мы пытаемся перемещать падающую фигуру на один шаг вниз каждые 10 миллисекунд на вызов функции Win32 API Sleep. Метод TryMoveDown
+            возвращает false, если он больше невозможно переместить фигуру вниз: </p>
+        <p class="cpp_code_2t">case KeySpace:</p>
+        <p class="cpp_code_3t">while (fallingFigure.TryMoveDown()) {</p>
+        <p class="cpp_code_4t">::Sleep(10);</p>
+        <p class="cpp_code_3t">}</p>
+        <p class="cpp_code_3t">break;</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code_1t">return true;</p>
+        <p class="cpp_code">}</p>
+        <h3>Рисование</h3>
+        <p>Метод OnDraw начинается с рисования игровой сетки и двух линий, разделяющих клиентскую область. на три части. В верхнем левом углу отображается текущий счет, в правом верхнем углу отображается следующий рисунок, а в нижней части отображается фактическая
+            игровая сетка: </p>
+        <p class="cpp_code">void TetrisWindow::OnDraw(Graphics& graphics,</p>
+        <p class="cpp_code_5t"> DrawMode /* drawMode */) const {</p>
+        <p class="cpp_code_1t">gameGrid.DrawGameGrid(graphics, inverse);</p>
+        <p class="cpp_code_1t">graphics.FillRectangle(Rect(Point(0, 0), Point(100,20)), White, White);</p>
+        <p class="cpp_code_1t">graphics.DrawLine(Point(40, 0), Point(40, 20), Black);</p>
+        <p class="cpp_code_1t">graphics.DrawLine(Point(0, 20), Point(100, 20), Black);</p>
+        <p>Обратите внимание, что мы добавляем смещение при рисовании следующей фигуры, чтобы выйти из игры. сетку в верхний правый угол. Значение 25 перемещает фигуру из середины сетки в середину его правой половины, а значение -18 перемещается из сетки
+            вверх в область, предшествующую сетки: </p>
+        <p class="cpp_code_1t">fallingFigure.DrawFigure(graphics);</p>
+        <p class="cpp_code_1t">nextFigure.DrawFigure(graphics, Size(25, -18));</p>
+        <p>Шрифт партитуры установлен на Times New Roman, размер 10. Здесь размер не относится к типографские точки, но до логических единиц. Поскольку в вызове конструктора Window указано, что мы дал систему координат PreviewCoordinate и размер 100 * 100,
+            высоту text будет 10 единиц, что составляет десятую часть высоты текстовой клиентской области. Это тоже половина высоты части клиентской области, где написана оценка: </p>
+        <p class="cpp_code_1t">Font scoreFont(TEXT("Times New Roman"), 10);</p>
+        <p>Последний параметр false в вызове метода DrawText указывает, что размер текст не будет пересчитан. В следующих главах мы будем отображать текст, сохраняющий тот же размер, независимо от размера окна и разрешения экрана. Однако в этой главе размер
+            текста будет изменен, когда пользователь изменит размер окна: </p>
+        <p class="cpp_code_1t">graphics.DrawText(Rect(0, 0, 40, 20), to_String(currScore), </p>
+        <p class="cpp_code_5t">scoreFont, Black, White, false);</p>
+        <p class="cpp_code">}</p>
+        <h3>Фокус ввода</h3>
+        <p>Методы OnGainFocus и OnLoseFocus запускают и останавливают таймер соответственно, чтобы падающая фигура не падает, когда окно не в фокусе: </p>
+        <p class="cpp_code">void TetrisWindow::OnGainFocus() {</p>
+        <p class="cpp_code_1t">SetTimer(TimerId, 1000);</p>
+        <p class="cpp_code">}</p><br>
+        <p class="cpp_code">void TetrisWindow::OnLoseFocus() {</p>
+        <p class="cpp_code_1t">DropTimer(TimerId);</p>
+        <p class="cpp_code">}</p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
+        <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
