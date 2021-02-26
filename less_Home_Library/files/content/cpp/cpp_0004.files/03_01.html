@@ -194,23 +194,37 @@
         <p class="cpp_code_2t">GameOver();</p>
         <p class="cpp_code_1t">}</p>
         <p class="cpp_code">}</p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
+        <h3>Игра окончена</h3>
+        <p>Метод GameOver представляет счет и позволяет пользователю решить, хочет ли он новый игра. Если они хотят новую игру, она инициализируется вызовом NewGame. Если пользователь не хотите новую игру, вызов функции Win32 API PostQuitMessage завершает
+            оформление заявки.</p>
+        <p>Обратите внимание, что мы вызываем другую версию метода Invalidate без параметров. Это делает недействительной всю клиентскую область: </p>
+        <p class="cpp_code">void TetrisWindow::GameOver() {</p>
+        <p class="cpp_code_1t">Invalidate();</p>
+        <p class="cpp_code_1t">UpdateWindow();</p>
+        <p>Таймер неактивен, пока отображается сообщение: </p>
+        <p class="cpp_code_1t">timerActive = false;</p>
+        <p class="cpp_code_1t">String message = TEXT("Game Over.\nYou scored ") +</p>
+        <p class="cpp_code_5t">to_String(currScore) + </p>
+        <p class="cpp_code_5t">TEXT(" points.\nAnother game?");</p>
+        <p class="cpp_code_1t">if (MessageBox(message, TEXT("Tetris"), YesNo, Question)==Yes) {</p>
+        <p class="cpp_code_2t">NewGame();</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code_1t">else {</p>
+        <p class="cpp_code_2t">::PostQuitMessage(0);</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
+        <h3>Новая игра</h3>
+        <p>Метод NewGame инициализирует случайно выбранные новые падающие и следующие фигуры, сбрасывает счет и очищает игровую сетку перед активацией таймера, а также делает недействительными и обновляет окно, в результате чего новая падающая фигура начинает
+            падать, а новая игра начать: </p>
+        <p class="cpp_code">void TetrisWindow::NewGame() {</p>
+        <p class="cpp_code_1t">fallingFigure = figureList[rand() % figureList.size()];</p>
+        <p class="cpp_code_1t">nextFigure = figureList[rand() % figureList.size()];</p><br>
+        <p class="cpp_code_1t">currScore = 0;</p>
+        <p class="cpp_code_1t">gameGrid.ClearGameGrid();</p>
+        <p class="cpp_code_1t">timerActive = true;</p>
+        <p class="cpp_code_1t">Invalidate();</p>
+        <p class="cpp_code_1t">UpdateWindow();</p>
+        <p class="cpp_code">}</p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
