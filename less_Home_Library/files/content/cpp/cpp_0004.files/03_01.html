@@ -165,12 +165,35 @@
         <p class="cpp_code">void TetrisWindow::OnLoseFocus() {</p>
         <p class="cpp_code_1t">DropTimer(TimerId);</p>
         <p class="cpp_code">}</p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
+        <h3>Таймер</h3>
+        <p>Таймер активен, когда он находится в фокусе ввода. Когда он активен, метод TryMoveDown будет вызываться каждый раз при вызове метода OnTimer (раз в секунду). Когда фигура больше не может упасть (метод TryMoveDown возвращает false), EndOfFigure
+            метод называется: </p>
+        <p class="cpp_code">void TetrisWindow::OnTimer(int /* timerId */) {</p>
+        <p class="cpp_code_1t">if (timerActive) {</p>
+        <p class="cpp_code_2t">if (!fallingFigure.TryMoveDown()) {</p>
+        <p class="cpp_code_3t">EndOfFigure();</p>
+        <p class="cpp_code_2t">}</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
+        <h3>Новые фигуры</h3>
+        <p>Когда падающая фигура не может двигаться вниз, метод OnTimer вызывает метод NewFigure. Во-первых, нам нужно сохранить падающую фигуру в игровой сетке, вызвав метод AddToGrid. Затем мы позволяем следующей фигуре стать новой падающей фигурой, и
+            мы случайным образом выбрать новую следующую фигуру из списка фигур. Мы аннулируем площадь новая падающая фигура и область правого верхнего угла, где нарисована следующая фигура: </p>
+        <p class="cpp_code">void TetrisWindow::NewFigure() {</p>
+        <p class="cpp_code_1t">fallingFigure.AddToGrid();</p>
+        <p class="cpp_code_1t">fallingFigure = nextFigure;</p>
+        <p class="cpp_code_1t">fallingFigure.InvalidateFigure();</p>
+        <p class="cpp_code_1t">nextFigure = figureList[rand() % figureList.size()];</p>
+        <p class="cpp_code_1t">Rect nextArea(40, 0, 100, 20);</p>
+        <p class="cpp_code_1t">Invalidate(nextArea);</p>
+        <p class="cpp_code_1t">UpdateWindow();</p>
+        <p>Удаляем возможные полные строки и обновляем окно: </p>
+        <p class="cpp_code_1t">DeleteFullRows();</p>
+        <p class="cpp_code_1t">UpdateWindow();</p>
+        <p>Если новая падающая фигура не действительна с самого начала, игра окончена и GameOver называется: </p>
+        <p class="cpp_code_1t">if (!fallingFigure.IsFigureValid()) {</p>
+        <p class="cpp_code_2t">GameOver();</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
