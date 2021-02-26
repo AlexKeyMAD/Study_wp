@@ -225,49 +225,68 @@
         <p class="cpp_code_1t">Invalidate();</p>
         <p class="cpp_code_1t">UpdateWindow();</p>
         <p class="cpp_code">}</p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
+        <h3>Удаление и мигание строк</h3>
+        <p>При удалении полных строк мы перебираем строки, мигая и удаляя каждую полную строку. Увеличиваем оценку и обновляем площадь строки. Обратите внимание, что строки начинаются сверху сетки. Это означает, что мы должны пройти цикл от самой высокой
+            строки к самой низкой строке, чтобы удалите строку в правильном порядке.</p>
+        <p>Обратите внимание: если строка мигает и удаляется, мы не обновляем переменную строки, так как удаленная строка будет заменена на строку выше, которую также необходимо изучить: </p>
+        <p class="cpp_code">void TetrisWindow::DeleteFullRows() {</p>
+        <p class="cpp_code_1t">int row = Rows - 1;</p>
+        <p class="cpp_code_1t">while (row >= 0) {</p>
+        <p class="cpp_code_2t">if (IsRowFull(row)) {</p>
+        <p class="cpp_code_3t">FlashRow(row);</p>
+        <p class="cpp_code_3t">DeleteRow(row);</p><br>
+        <p class="cpp_code_3t">++currScore;</p>
+        <p class="cpp_code_3t">Rect scoreArea(0, 0, 40, 20);</p>
+        <p class="cpp_code_3t">Invalidate(scoreArea);</p>
+        <p class="cpp_code_3t">UpdateWindow();</p>
+        <p class="cpp_code_2t">}</p>
+        <p class="cpp_code_2t">else {</p>
+        <p class="cpp_code_3t">--row;</p>
+        <p class="cpp_code_2t">}</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
+        <p>Строка считается полной, если в ней нет белого квадрата: </p>
+        <p class="cpp_code">bool TetrisWindow::IsRowFull(int row) {</p>
+        <p class="cpp_code_1t">for (int col = 0; col &lt; Cols; ++col) {</p>
+        <p class="cpp_code_2t">if (gameGrid[row][col] == White) {</p>
+        <p class="cpp_code_3t">return false;</p>
+        <p class="cpp_code_2t">}</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code_1t">return true;</p>
+        <p class="cpp_code">}</p>
+        <p>Эффект вспышки выполняется путем перерисовки строки в нормальном и инвертированном цвете ( установлен обратный метод) трижды с интервалом 50 миллисекунд. При этом он особенно важно, чтобы мы аннулировали только область выбранной строки. В противном
+            случае вся клиентская область окна будет мигать: </p>
+        <p class="cpp_code">void TetrisWindow::FlashRow(int row) {</p>
+        <p class="cpp_code_1t">Rect gridArea = gameGrid.GridArea();</p>
+        <p class="cpp_code_1t">int colWidth = gridArea.Width() / Cols, rowHeight = gridArea.Height() / Rows;</p>
+        <p class="cpp_code_1t">Rect rowArea(0, row * rowHeight, Cols * colWidth, (row + 1) * rowHeight);</p><br>
+        <p class="cpp_code_1t">for (int count = 0; count &lt; 3; ++count) {</p>
+        <p class="cpp_code_2t">inverse = true;</p>
+        <p class="cpp_code_2t">Invalidate(rowArea + gridArea.Top()Left());</p>
+        <p class="cpp_code_2t">UpdateWindow();</p>
+        <p class="cpp_code_2t">::Sleep(50);</p><br>
+        <p class="cpp_code_2t">inverse = false;</p>
+        <p class="cpp_code_2t">Invalidate(rowArea + gridArea.Top()Left());</p>
+        <p class="cpp_code_2t">UpdateWindow();</p>
+        <p class="cpp_code_2t">::Sleep(50);</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
+        <p>При удалении строки мы ее не удаляем. Вместо этого мы перемещаем каждую строку над удалите строку на один шаг вниз и заполните верхнюю строку белыми квадратами. Осложнение что мы считаем строки сверху. Это делает нижнюю строку на экране строкой
+            с самый высокий индекс. Создается впечатление, что мы начинаем снизу и удаляем все полный ряд, пока не дойдем до вершины: </p>
+        <p class="cpp_code">void TetrisWindow::DeleteRow(int markedRow) {</p>
+        <p class="cpp_code_1t">for (int row = markedRow; row &gt; 0; --row) {</p>
+        <p class="cpp_code_2t">for (int col = 0; col &lt; Cols; ++col) {</p>
+        <p class="cpp_code_3t">gameGrid[row][col] = gameGrid[row - 1][col];</p>
+        <p class="cpp_code_2t">}</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code_1t">for (int col = 0; col &lt; Cols; ++col) {</p>
+        <p class="cpp_code_2t">gameGrid[0][col] = White;</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code_1t">Invalidate(gameGrid.GridArea());</p>
+        <p class="cpp_code_1t">Invalidate(g);</p>
+        <p class="cpp_code_1t">UpdateWindow();</p>
+        <p class="cpp_code">}</p>
+        <h3>Закрытие окна</h3>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
