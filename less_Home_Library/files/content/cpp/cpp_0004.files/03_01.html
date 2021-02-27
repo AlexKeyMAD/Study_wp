@@ -475,8 +475,33 @@
         <p class="cpp_code_2t">(*gameGridPtr)[relRow][relCol] = color;</p>
         <p class="cpp_code_1t">}</p>
         <p class="cpp_code">}</p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
+        <p>Когда фигура была перемещена, нам нужно ее перерисовать. Чтобы избежать ослепления, мы хотим сделать недействительной только его область, что выполняется методом InvalidateFigure. Мы смотрим вверх строк и столбцов четырех квадратов фигуры и вызовите
+            метод InvalidateSquare в игровая сетка для каждого из них: </p>
+        <p class="cpp_code">void TetrisFigure::InvalidateFigure(Size offsetSize/*=ZeroSize*/){</p>
+        <p class="cpp_code_1t">gameGridPtr->InvalidateSquare(windowPtr, row, col, offsetSize);</p>
+        <p class="cpp_code_1t">{ int relRow = row + figureInfo[direction][0].first, relCol = col + figureInfo[direction][0].second;</p>
+        <p class="cpp_code_2t">gameGridPtr->InvalidateSquare(windowPtr, relRow, relCol, offsetSize);</p>
+        <p class="cpp_code_1t">}</p><br>
+        <p class="cpp_code_1t">{ int relRow = row + figureInfo[direction][1].first, relCol = col + figureInfo[direction][1].second;</p>
+        <p class="cpp_code_2t">gameGridPtr->InvalidateSquare(windowPtr, relRow, relCol, offsetSize);</p>
+        <p class="cpp_code_1t">}</p><br>
+        <p class="cpp_code_1t">{ int relRow = row + figureInfo[direction][2].first, relCol = col + figureInfo[direction][2].second;</p>
+        <p class="cpp_code_2t">gameGridPtr->InvalidateSquare(windowPtr, relRow, relCol, offsetSize);</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
+        <p>При рисовании фигуры нам нужно найти расположение квадратов фигуры. прежде чем рисовать их аналогично методу InvalidateFigure: </p>
+        <p class="cpp_code">void TetrisFigure::DrawFigure(Graphics& graphics,Size offsetSize) const {</p>
+        <p class="cpp_code_1t">gameGridPtr->DrawSquare(graphics, row, col, Black, color, offsetSize);</p>
+        <p class="cpp_code_1t">{ int relRow = row + figureInfo[direction][0].first, relCol = col + figureInfo[direction][0].second;</p>
+        <p class="cpp_code_2t">gameGridPtr->DrawSquare(graphics, relRow, relCol, Black, color, offsetSize);</p>
+        <p class="cpp_code_1t">}</p><br>
+        <p class="cpp_code_1t">{ int relRow = row + figureInfo[direction][1].first, relCol = col + figureInfo[direction][1].second;</p>
+        <p class="cpp_code_2t">gameGridPtr->DrawSquare(graphics, relRow, relCol, Black, color, offsetSize);</p>
+        <p class="cpp_code_1t">}</p><br>
+        <p class="cpp_code_1t">{ int relRow = row + figureInfo[direction][2].first, relCol = col + figureInfo[direction][2].second;</p>
+        <p class="cpp_code_2t">gameGridPtr->DrawSquare(graphics, relRow, relCol, Black, color, offsetSize);</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
