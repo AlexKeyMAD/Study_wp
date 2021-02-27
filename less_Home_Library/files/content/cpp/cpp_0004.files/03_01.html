@@ -349,44 +349,132 @@
         <p class="cpp_code_2t">IntPair* figureInfo[4];</p>
         <p class="cpp_code">};</p>
         <p>Конструктор по умолчанию необходим, потому что FallFigure и nextFigure являются членами объекты класса TetrisWindow. Однако их не нужно инициализировать, так как их значениям присваивается одна из семи цифр в массиве figureList: </p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
+        <h4>TetrisFigure.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "GameGrid.h"</p>
+        <p class="cpp_code">#include "TetrisFigure.h"</p>
+        <p class="cpp_code">#include "TetrisWindow.h"</p><br>
+        <p class="cpp_code">TetrisFigure::TetrisFigure() {</p>
+        <p class="cpp_code_1t">// Empty</p>
+        <p class="cpp_code">}</p>
+        <p>Второй конструктор вызывается конструктором подкласса цветного рисунка, чтобы инициализировать фигуру. Требуется указатель на главное окно и игровую сетку, цвет фигура, ее начальное местоположение и направление, а также списки ее местоположений
+            на севере, востоке, юге и западные направления. Каждый из списков содержит три пары целых чисел, представляющих расположение квадраты относительно центрального квадрата: </p>
+        <p class="cpp_code">TetrisFigure::TetrisFigure(Window*windowPtr, GameGrid*gameGridPtr,</p>
+        <p class="cpp_code_5t">Color color, int row, int col, Direction direction,</p>
+        <p class="cpp_code_5t">IntPair* northList, IntPair* eastList,</p>
+        <p class="cpp_code_5t">IntPair* southList, IntPair* westList)</p>
+        <p class="cpp_code_1t">:windowPtr(windowPtr),</p>
+        <p class="cpp_code_1t">gameGridPtr(gameGridPtr),</p>
+        <p class="cpp_code_1t">color(color),</p>
+        <p class="cpp_code_1t">row(row),</p>
+        <p class="cpp_code_1t">col(col),</p>
+        <p class="cpp_code_1t">direction(direction) {</p>
+        <p class="cpp_code_2t">figureInfo[North] = northList;</p>
+        <p class="cpp_code_2t">figureInfo[East] = eastList;</p>
+        <p class="cpp_code_2t">figureInfo[South] = southList;</p>
+        <p class="cpp_code_2t">figureInfo[West] = westList;</p>
+        <p class="cpp_code">}</p>
+        <p>Оператор присваивания необходим, потому что падающие рисунки и nextFigure методы в классе TetrisWindow копируются из списка рисунков: </p>
+        <p class="cpp_code">TetrisFigure& TetrisFigure::operator=(const TetrisFigure& figure) {</p>
+        <p class="cpp_code_1t">if (this != &figure) {</p>
+        <p class="cpp_code_2t">windowPtr = figure.windowPtr;</p>
+        <p class="cpp_code_2t">gameGridPtr = figure.gameGridPtr;</p>
+        <p class="cpp_code_2t">color = figure.color;</p>
+        <p class="cpp_code_2t">row = figure.row;</p>
+        <p class="cpp_code_2t">col = figure.col;</p>
+        <p class="cpp_code_2t">direction = figure.direction;</p>
+        <p class="cpp_code_2t">figureInfo[North] = figure.figureInfo[North];</p>
+        <p class="cpp_code_2t">figureInfo[East] = figure.figureInfo[East];</p>
+        <p class="cpp_code_2t">figureInfo[South] = figure.figureInfo[South];</p>
+        <p class="cpp_code_2t">figureInfo[West] = figure.figureInfo[West];</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code_1t">return *this;</p>
+        <p class="cpp_code">}</p>
+        <p>TryMoveLeft, TryMoveRight, TryRotateClockwise и Методы TryRotateAnticlockwise вызываются, когда пользователь нажимает клавиши со стрелками. Они попробуйте переместить фигуру и аннулировать ее предыдущую и текущую области, если им это удастся:</p>
+        <p class="cpp_code">void TetrisFigure::TryMoveLeft() {</p>
+        <p class="cpp_code_1t">if (IsFigureValid(direction, row, col - 1 gameGridPtr, figureInfo)) {</p>
+        <p class="cpp_code_2t">windowPtr-&gt;Invalidate(Area());</p>
+        <p class="cpp_code_2t">--col;</p>
+        <p class="cpp_code_2t">windowPtr-&gt;Invalidate(Area());</p>
+        <p class="cpp_code_2t">windowPtr-&gt;UpdateWindow();</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p><br>
+        <p class="cpp_code">void TetrisFigure::TryMoveRight() {</p>
+        <p class="cpp_code_1t">if (IsFigureValid(direction, row, col + 1 gameGridPtr, figureInfo)) {</p>
+        <p class="cpp_code_2t">windowPtr->Invalidate(Area());</p>
+        <p class="cpp_code_2t">++col;</p>
+        <p class="cpp_code_2t">windowPtr->Invalidate(Area());</p>
+        <p class="cpp_code_2t">windowPtr->UpdateWindow();</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p><br>
+        <p class="cpp_code">void TetrisFigure::TryRotateClockwise() {</p>
+        <p class="cpp_code_1t">Direction newDirection = (direction == West) ? North : ((Direction) (direction + 1));</p>
+        <p class="cpp_code_1t">if (IsFigureValid(newDirection, row, col, gameGridPtr, figureInfo)) {</p>
+        <p class="cpp_code_2t">InvalidateFigure();</p>
+        <p class="cpp_code_2t">direction = newDirection;</p>
+        <p class="cpp_code_2t">InvalidateFigure();</p>
+        <p class="cpp_code_2t">windowPtr->UpdateWindow();</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p><br>
+        <p class="cpp_code">void TetrisFigure::TryRotateAnticlockwise() {</p>
+        <p class="cpp_code_1t">Direction newDirection = (this->direction == North) ? West : ((Direction) (direction - 1));</p>
+        <p class="cpp_code_1t">if (IsFigureValid(newDirection, row, col, gameGridPtr, figureInfo)) {</p>
+        <p class="cpp_code_2t">InvalidateFigure();</p>
+        <p class="cpp_code_2t">direction = newDirection;</p>
+        <p class="cpp_code_2t">InvalidateFigure();</p>
+        <p class="cpp_code_2t">windowPtr->UpdateWindow();</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
+        <p>Метод TryMoveDown вызывается таймером, когда игрок нажимает клавишу пробела. это также вызывается методом OnTimer в классе TetrisWindow; возвращает логическое значение указывает, удалось ли движение: </p>
+        <p class="cpp_code">bool TetrisFigure::TryMoveDown() {</p>
+        <p class="cpp_code_1t">if (IsFigureValid(direction, row + 1, col gameGridPtr, figureInfo)) {</p>
+        <p class="cpp_code_2t">windowPtr->Invalidate(Area());</p>
+        <p class="cpp_code_2t">++row;</p>
+        <p class="cpp_code_2t">windowPtr->Invalidate(Area());</p>
+        <p class="cpp_code_2t">windowPtr->UpdateWindow();</p>
+        <p class="cpp_code_2t">return true;</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code_1t">return false;</p>
+        <p class="cpp_code">}</p>
+        <p>Первая версия метода IsFigureValid вызывается классом TetrisWindow и вызывает вторую статическую версию с текущим расположением и направлением фигуры: </p>
+        <p class="cpp_code">bool TetrisFigure::IsFigureValid() {</p>
+        <p class="cpp_code_1t">return IsFigureValid(direction, row, col gameGridPtr, figureInfo);</p>
+        <p class="cpp_code">}</p>
+        <p>Вторая версия метода IsFigureValid вызывается предыдущими методами try и проверяет правильность цифры, вызывая метод IsSquareValid для каждого квадрата в фигура. Для этого ему необходимо найти относительные положения включенных квадраты в методе
+            figureInfo. Первое значение целочисленных пар - это строка, а второе значение - столбец: </p>
+        <p class="cpp_code">bool TetrisFigure::IsFigureValid(int direction, int row, int col,</p>
+        <p class="cpp_code_5t">GameGrid* gameGridPtr, IntPair* figureInfo[]) {</p>
+        <p class="cpp_code_1t">int relRow0 = row + figureInfo[direction][0].first,</p>
+        <p class="cpp_code_2t">relCol0 = col + figureInfo[direction][0].second,</p>
+        <p class="cpp_code_2t">relRow1 = row + figureInfo[direction][1].first,</p>
+        <p class="cpp_code_2t">relCol1 = col + figureInfo[direction][1].second,</p>
+        <p class="cpp_code_2t">relRow2 = row + figureInfo[direction][2].first,</p>
+        <p class="cpp_code_2t">relCol2 = col + figureInfo[direction][2].second;</p><br>
+        <p class="cpp_code_1t">return IsSquareValid(row, col, gameGridPtr) &&</p>
+        <p class="cpp_code_3t">IsSquareValid(relRow0, relCol0, gameGridPtr) &&</p>
+        <p class="cpp_code_3t">IsSquareValid(relRow1, relCol1, gameGridPtr) &&</p>
+        <p class="cpp_code_3t">IsSquareValid(relRow2, relCol2, gameGridPtr);</p>
+        <p class="cpp_code">}</p>
+        <p>Метод IsSquareValid возвращает true, если данный квадрат находится внутри игры. сетка и еще не занята. Квадрат на игровом поле считается незанятым, если он белый: </p>
+        <p class="cpp_code">bool TetrisFigure::IsSquareValid(int row, int col, GameGrid* gameGridPtr) {</p>
+        <p class="cpp_code_1t">return (row &gt;= 0) && (row &lt; Rows) &&</p>
+        <p class="cpp_code_3t">(col &gt;= 0) && (col &lt; Cols) &&</p>
+        <p class="cpp_code_3t">((*gameGridPtr)[row][col] == White);</p>
+        <p class="cpp_code">}</p>
+        <p>Когда падающая фигура достигает своего конечного положения, она добавляется в игровую сетку. это выполняется путем установки цвета фигурки квадратов в игровой сетке в ее текущем местоположении. Падающая фигура достигла своего окончательного положения,
+            когда она больше не может падать без сталкивается с более ранней фигурой или достиг нижней границы игровой сетки: </p>
+        <p class="cpp_code">void TetrisFigure::AddToGrid() {</p>
+        <p class="cpp_code_1t">(*gameGridPtr)[row][col] = color;</p>
+        <p class="cpp_code_1t">{ int relRow = row + figureInfo[direction][0].first, relCol = col + figureInfo[direction][0].second;</p>
+        <p class="cpp_code_2t">(*gameGridPtr)[relRow][relCol] = color;</p>
+        <p class="cpp_code_1t">}</p><br>
+        <p class="cpp_code_1t">{ int relRow = row + figureInfo[direction][1].first, relCol = col + figureInfo[direction][1].second;</p>
+        <p class="cpp_code_2t">(*gameGridPtr)[relRow][relCol] = color;</p>
+        <p class="cpp_code_1t">}</p><br>
+        <p class="cpp_code_1t">{ int relRow = row + figureInfo[direction][2].first, relCol = col + figureInfo[direction][2].second;</p>
+        <p class="cpp_code_2t">(*gameGridPtr)[relRow][relCol] = color;</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
