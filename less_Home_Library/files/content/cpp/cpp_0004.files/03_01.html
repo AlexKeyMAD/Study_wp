@@ -591,48 +591,137 @@
         <p class="cpp_code_3t">HorizontalList, VerticalList, HorizontalList, VerticalList) {</p>
         <p class="cpp_code_4t">// Empty.</p>
         <p class="cpp_code">}</p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p></p>
-        <p><a href="./03_01.html">Глава 3. &rArr;</a></p>
+        <h3>Желтая фигура</h3>
+        <p>Желтую фигуру можно вращать в северном, восточном, южном и западном направлениях. Он инициализируется юг, как показано на следующем рисунке: </p>
+        <img src="03_01_06.png" alt="" class="img-center">
+        <h4>YellowFigure.h</h4>
+        <p class="cpp_code">class YellowFigure : public TetrisFigure {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">static IntPair NorthList[], EastList[], SouthList[], WestList[];</p>
+        <p class="cpp_code_2t">YellowFigure(Window* windowPtr, GameGrid* gameGridPtr);</p>
+        <p class="cpp_code">};</p>
+        <h4>YellowFigure.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "GameGrid.h"</p>
+        <p class="cpp_code">#include "TetrisFigure.h"</p>
+        <p class="cpp_code">#include "YellowFigure.h"</p><br>
+        <p class="cpp_code">IntPair YellowFigure::NorthList[] = {IntPair(0,-1), IntPair(-1,0), IntPair(0,1)},</p>
+        <p class="cpp_code_2t">YellowFigure::EastList[] = {IntPair(-1,0),IntPair(0,1),IntPair(1,0)},</p>
+        <p class="cpp_code_2t">YellowFigure::SouthList[] = {IntPair(0,-1),IntPair(1,0),IntPair(0,1)},</p>
+        <p class="cpp_code_2t">YellowFigure::WestList[] = {IntPair(-1,0),IntPair(0,-1),IntPair(1,0)};</p>
+        <p class="cpp_code_2t">YellowFigure::YellowFigure(Window* windowPtr, GameGrid* gameGridPtr)</p>
+        <p class="cpp_code_3t">:TetrisFigure(windowPtr, gameGridPtr, Yellow, 1, (Cols / 2) - 1, </p>
+        <p class="cpp_code_5t">South, NorthList, EastList, SouthList, WestList) {</p>
+        <p class="cpp_code_4t">// Empty.</p>
+        <p class="cpp_code">}</p>
+        <h3>Синяя фигура</h3>
+        <p>Синяя фигура также может быть направлена во все четыре направления. Он инициализируется на юг, так как показано на следующем рисунке: </p>
+        <img src="03_01_07.png" alt="" class="img-center">
+        <h4>BlueFigure.h</h4>
+        <p class="cpp_code">class BlueFigure : public TetrisFigure {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">static IntPair NorthList[], EastList[], SouthList[], WestList[];</p>
+        <p class="cpp_code_2t">BlueFigure(Window* windowPtr, GameGrid* gameGridPtr);</p>
+        <p class="cpp_code">};</p>
+        <h4>BlueFigure.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "GameGrid.h"</p>
+        <p class="cpp_code">#include "TetrisFigure.h"</p>
+        <p class="cpp_code">#include "BlueFigure.h"</p><br>
+        <p class="cpp_code">IntPair BlueFigure::NorthList[] = {IntPair(0,-2),IntPair(0,-1),IntPair(-1,0)},</p>
+        <p class="cpp_code_2t">BlueFigure::EastList[] = {IntPair(-2,0), IntPair(-1,0), IntPair(0,1)},</p>
+        <p class="cpp_code_2t">BlueFigure::SouthList[] = {IntPair(1,0), IntPair(0,1), IntPair(0,2)},</p>
+        <p class="cpp_code_2t">BlueFigure::WestList[] = {IntPair(0,-1), IntPair(1,0), IntPair(2,0)};</p><br>
+        <p class="cpp_code">BlueFigure::BlueFigure(Window* windowPtr, GameGrid* gameGridPtr)</p>
+        <p class="cpp_code_2t">:TetrisFigure(windowPtr, gameGridPtr, Blue, 1, (Cols / 2) - 1, </p>
+        <p class="cpp_code_5t">South, NorthList, EastList, SouthList, WestList) {</p>
+        <p class="cpp_code_2t">// Empty.</p>
+        <p class="cpp_code">}</p>
+        <h3>Фиолетовая фигура </h3>
+        <p>Наконец, фиолетовая фигура зеркально отображается относительно синей фигуры, а также инициализируется юг, как показано на следующем изображении: </p>
+        <img src="03_01_08.png" alt="" class="img-center">
+        <h4>PurpleFigure.h</h4>
+        <p class="cpp_code">class PurpleFigure : public TetrisFigure {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">static IntPair NorthList[], EastList[], SouthList[], WestList[];</p>
+        <p class="cpp_code_2t">PurpleFigure(Window* windowPtr, GameGrid* gameGridPtr);</p>
+        <p class="cpp_code">};</p>
+        <h4>PurpleFigure.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "GameGrid.h"</p>
+        <p class="cpp_code">#include "TetrisFigure.h"</p>
+        <p class="cpp_code">#include "PurpleFigure.h"</p><br>
+        <p class="cpp_code">IntPair PurpleFigure::NorthList[] = {IntPair(-1,0),IntPair(0,1),IntPair(0,2)},</p>
+        <p class="cpp_code_2t">PurpleFigure::EastList[] = {IntPair(1,0), IntPair(2,0), IntPair(0,1)},</p>
+        <p class="cpp_code_2t">PurpleFigure::SouthList[] = {IntPair(0,-2),IntPair(0,-1),IntPair(1,0)},</p>
+        <p class="cpp_code_2t">PurpleFigure::WestList[] = {IntPair(0,-1),IntPair(-2,0),IntPair(-1,0)};</p><br>
+        <p class="cpp_code">PurpleFigure::PurpleFigure(Window* windowPtr, GameGrid* gameGridPtr)</p>
+        <p class="cpp_code_2t">:TetrisFigure(windowPtr, gameGridPtr, Purple, 1, Cols / 2, South,</p>
+        <p class="cpp_code_5t">NorthList, EastList, SouthList, WestList) {</p>
+        <p class="cpp_code_2t">// Empty.</p>
+        <p class="cpp_code">}</p>
+        <h3>Класс GameGrid</h3>
+        <p>Наконец, класс GameGrid довольно прост. Он отслеживает квадраты на игровом поле. Поле gridArea - это часть общей клиентской области, которая занята сеткой: </p>
+        <h4>GameGrid.h</h4>
+        <p class="cpp_code">const int Rows = 20, Cols = 10;</p><br>
+        <p class="cpp_code">class GameGrid {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">GameGrid(Rect gridArea);</p>
+        <p class="cpp_code_2t">void ClearGameGrid();</p><br>
+        <p class="cpp_code_2t">Color* operator[](int row) {return gameGrid[row];}</p>
+        <p class="cpp_code_2t">void InvalidateSquare(Window* windowPtr, int row, int col, Size offsetSize);</p>
+        <p class="cpp_code_2t">void DrawGameGrid(Graphics& graphics, bool inverse) const;</p>
+        <p class="cpp_code_2t">void DrawSquare(Graphics& graphics, int row, int col,</p>
+        <p class="cpp_code_5t">Color penColor, Color brushColor, Size offsetSize = ZeroSize) const;</p>
+        <p class="cpp_code_2t">Rect GridArea() const {return gridArea;}</p>
+        <p class="cpp_code_1t">private:</p>
+        <p class="cpp_code_2t">Rect gridArea;</p>
+        <p class="cpp_code_2t">Color gameGrid[Rows][Cols];</p>
+        <p class="cpp_code">};</p>
+        <p>При вызове конструктором TetrisWindow область сетки будет установлена в (0, 20, 100, 100) единиц, поместив его в нижние 80 процентов клиентской области окна: </p>
+        <h4>GameGrid.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "GameGrid.h"</p><br>
+        <p class="cpp_code">GameGrid::GameGrid(Rect gridArea):gridArea(gridArea) {</p>
+        <p class="cpp_code_1t">ClearGameGrid();</p>
+        <p class="cpp_code">}</p>
+        <p>При очистке сетки мы фактически устанавливаем белый цвет для каждого квадрата: </p>
+        <p class="cpp_code">void GameGrid::ClearGameGrid () {</p>
+        <p class="cpp_code_1t">for (int row = 0; row &lt; Rows; ++row) {</p>
+        <p class="cpp_code_2t">for (int col = 0; col &lt; Cols; ++col) {</p>
+        <p class="cpp_code_3t">gameGrid[row][col] = White;</p>
+        <p class="cpp_code_2t">}</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
+        <h3>Признание недействительными и рисование квадратов </h3>
+        <p>DrawGameGrid выполняет итерацию по квадратам сетки. Белые квадраты окружены белой рамкой, а квадраты любого другого цвета - черной рамкой. Если Параметр inverseColor имеет значение true, цвет квадрата перед отрисовкой инвертируется. Это полезно
+            при прошивке строк: </p>
+        <p class="cpp_code">void GameGrid::DrawGameGrid(Graphics& graphics, bool inverse) const {</p>
+        <p class="cpp_code_1t">for (int row = 0; row &lt; Rows; ++row) {</p>
+        <p class="cpp_code_2t">for (int col = 0; col &lt; Cols; ++col) {</p>
+        <p class="cpp_code_3t">Color squareColor = gameGrid[row][col];</p>
+        <p class="cpp_code_3t">Color penColor = (squareColor == White) ? White : Black;</p>
+        <p class="cpp_code_3t">Color brushColor = inverse ? squareColor.Inverse() : squareColor;</p>
+        <p class="cpp_code_3t">DrawSquare(graphics, row, col, penColor, brushColor);</p>
+        <p class="cpp_code_2t">}</p>
+        <p class="cpp_code_1t">}</p>
+        <p class="cpp_code">}</p>
+        <p>Обратите внимание, что методы InvalidateSquare и DrawSquare добавляют смещение. Это ноль во всех случаев, кроме случаев, когда недействителен или отрисовывается следующая фигура в классе TetrisWindow. Обе методы вычисляют размер строк и столбцов
+            сетки и определяют площадь квадрат аннулирован или нарисован: </p>
+        <p class="cpp_code">void GameGrid::InvalidateSquare(Window* windowPtr, int row, int col, Size offsetSize) {</p>
+        <p class="cpp_code_1t">int colWidth = gridArea.Width() / Cols, rowHeight = gridArea.Height() / Rows;</p>
+        <p class="cpp_code_1t">Rect squareArea(col * colWidth, row * rowHeight, (col + 1) * colWidth, (row + 1) * rowHeight);</p>
+        <p class="cpp_code_1t">windowPtr->Invalidate(gridArea.TopLeft() + squareArea + offsetSize);</p>
+        <p class="cpp_code">}</p><br>
+        <p class="cpp_code">void GameGrid::DrawSquare(Graphics& graphics, int row, int col, Color penColor, </p>
+        <p class="cpp_code_5t">Color brushColor, Size offsetSize /* = ZeroSize */) const{</p>
+        <p class="cpp_code_1t">int colWidth = gridArea.Width() / Cols, rowHeight = gridArea.Height() / Rows;</p>
+        <p class="cpp_code_1t">Rect squareArea (col * colWidth, row * rowHeight, (col + 1) * colWidth, (row + 1) * rowHeight);</p>
+        <p class="cpp_code_1t">graphics.FillRectangle(gridArea.TopLeft() + squareArea + offsetSize, penColor, brushColor);</p>
+        <p class="cpp_code">}</p>
+        <h3>Резюме</h3>
+        <p>В этой главе мы разработали игру Тетрис. Вы изучили тайминг и рандомизацию, поскольку а также новую систему координат, более продвинутый рисунок, как улавливать события клавиатуры, и как писать текст.</p>
+        <p>В главе 4, Работа с фигурами и фигурами, мы разработаем программу рисования, способную рисования линий, стрелок, прямоугольников и эллипсов. </p>
+        <p><a href="./04_01.html">Глава 4. &rArr;</a></p>
     </div>
 </body>
