@@ -502,14 +502,95 @@
         <p class="cpp_code_2t">gameGridPtr->DrawSquare(graphics, relRow, relCol, Black, color, offsetSize);</p>
         <p class="cpp_code_1t">}</p>
         <p class="cpp_code">}</p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
-        <p class="cpp_code_2t"></p>
+        <h3>Красная фигура</h3>
+        <p>Красная фигура представляет собой один большой квадрат, состоящий из четырех меньших правильных квадратов. Это самый простой фигурка игры, так как она не меняет форму при вращении. Это означает, что мы просто нужно посмотреть на одну цифру, показанную
+            следующим образом: </p>
+        <img src="03_01_02.png" alt="" class="img-center">
+        <p>Это также означает, что достаточно определить квадраты для одного направления, и это позволяет определить форма фигуры во всех четырех направлениях: </p>
+        <h4>RedFigure.h</h4>
+        <p class="cpp_code">class RedFigure : public TetrisFigure {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">static IntPair GenericList[];</p>
+        <p class="cpp_code_2t">RedFigure(Window* windowPtr, GameGrid* gameGridPtr);</p>
+        <p class="cpp_code">};</p>
+        <h4>RedFigure.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "GameGrid.h"</p>
+        <p class="cpp_code">#include "TetrisFigure.h"</p>
+        <p class="cpp_code">#include "RedFigure.h"</p><br>
+        <p class="cpp_code">IntPair RedFigure::GenericList[] = {IntPair(0,1), IntPair(1,0), IntPair(1,1)};</p><br>
+        <p class="cpp_code">RedFigure::RedFigure(Window* windowPtr, GameGrid* gameGridPtr) </p>
+        <p class="cpp_code_1t">:TetrisFigure(windowPtr, gameGridPtr, Red, 1, (Cols / 2) - 1, </p>
+        <p class="cpp_code_2t">North, GenericList, GenericList, GenericList, GenericList) {</p>
+        <p class="cpp_code_3t">// Empty.</p>
+        <p class="cpp_code">}</p>
+        <p>Первая пара целых чисел (rel row 0, rel col 1) общего списка представляет квадрат для справа от отмеченного квадрата вторая пара целых чисел (rel row 1, rel col 0) представляет квадрат под отмеченным квадратом и третья пара целых чисел (отн. строка
+            1, отн. столбец 1) представляет квадрат ниже и правее отмеченного квадрата. Обратите внимание, что строки увеличиваются вниз, а столбцы увеличиваются вправо. </p>
+        <h3>Коричневая фигура </h3>
+        <p>Коричневая фигура может быть ориентирована в горизонтальном или вертикальном направлении. Он инициализируется вертикальный режим, так как его можно повернуть только в двух направлениях. Северный и южный массивы инициализируются вертикальным массивом,
+            а массивы восток и запад инициализируются горизонтальный массив, как показано на следующем изображении: </p>
+        <img src="03_01_03.png" alt="" class="img-center">
+        <p>Поскольку номера строк увеличиваются вниз, а номера столбцов - вправо, самый верхний квадрат в вертикальном направлении (и крайний левый квадрат в горизонтальном направление) представлены отрицательными значениями: </p>
+        <h4>BrownFigure.h</h4>
+        <p class="cpp_code">class BrownFigure : public TetrisFigure {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">static IntPair HorizontalList[], VerticalList[];</p>
+        <p class="cpp_code_2t">BrownFigure(Window* windowPtr, GameGrid* gameGridPtr);</p>
+        <p class="cpp_code">};</p>
+        <h4>BrownFigure.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "GameGrid.h"</p>
+        <p class="cpp_code">#include "TetrisFigure.h"</p>
+        <p class="cpp_code">#include "BrownFigure.h"</p><br>
+        <p class="cpp_code">IntPair BrownFigure::HorizontalList[] = {IntPair(-1,0), IntPair(1,0), IntPair(2,0)}, </p>
+        <p class="cpp_code_2t">BrownFigure::VerticalList[] = {IntPair(0,-1), IntPair(0,1), IntPair(0,2)};</p><br>
+        <p class="cpp_code">BrownFigure::BrownFigure(Window* windowPtr, GameGrid* gameGridPtr) </p>
+        <p class="cpp_code_1t">:TetrisFigure(windowPtr, gameGridPtr, Brown, 1, (Cols / 2) - 1, </p>
+        <p class="cpp_code_5t">North, HorizontalList, VerticalList, HorizontalList, VerticalList) {</p>
+        <p class="cpp_code_2t">// Empty.</p>
+        <p class="cpp_code">}</p>
+        <h3>Бирюзовая фигура</h3>
+        <p>Подобно коричневой фигуре, бирюзовую фигуру можно вращать по вертикали и горизонтали. направление, как показано на следующем рисунке: </p>
+        <img src="03_01_04.png" alt="" class="img-center">
+        <h4>TurquoiseFigure.h</h4>
+        <p class="cpp_code">class TurquoiseFigure : public TetrisFigure {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">static IntPair HorizontalList[], VerticalList[];</p>
+        <p class="cpp_code_2t">TurquoiseFigure(Window* windowPtr, GameGrid* gameGridPtr);</p>
+        <p class="cpp_code">};</p>
+        <h4>TurquoiseFigure cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "GameGrid.h"</p>
+        <p class="cpp_code">#include "TetrisFigure.h"</p>
+        <p class="cpp_code">#include "TurquoiseFigure.h"</p><br>
+        <p class="cpp_code">IntPair TurquoiseFigure::HorizontalList[] = {IntPair(-1,0), IntPair(0,1), IntPair(1,1)}, </p>
+        <p class="cpp_code_2t">TurquoiseFigure::VerticalList[] = {IntPair(1,-1), IntPair(1,0), IntPair(0,1)};</p><br>
+        <p class="cpp_code">TurquoiseFigure::TurquoiseFigure(Window* windowPtr, GameGrid* gameGridPtr)</p>
+        <p class="cpp_code_1t">:TetrisFigure(windowPtr, gameGridPtr, Turquoise, 1, (Cols/2) - 1, </p>
+        <p class="cpp_code_3t">North, HorizontalList, VerticalList, HorizontalList, VerticalList) {</p>
+        <p class="cpp_code_4t">// Empty.</p>
+        <p class="cpp_code">}</p>
+        <h3>Зеленая фигура </h3>
+        <p>Зеленая фигура зеркально отражена по отношению к бирюзовой фигуре, как показано ниже: </p>
+        <img src="03_01_05.png" alt="" class="img-center">
+        <h4>GreenFigure.h</h4>
+        <p class="cpp_code">class GreenFigure : public TetrisFigure {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">static IntPair HorizontalList[], VerticalList[];</p>
+        <p class="cpp_code_2t">GreenFigure(Window* windowPtr, GameGrid* gameGridPtr);</p>
+        <p class="cpp_code">};</p>
+        <h4>GreenFigure.cpp</h4>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "GameGrid.h"</p>
+        <p class="cpp_code">#include "TetrisFigure.h"</p>
+        <p class="cpp_code">#include "GreenFigure.h"</p><br>
+        <p class="cpp_code">IntPair GreenFigure::HorizontalList[] = {IntPair(1,-1), IntPair(0,-1), IntPair(-1,0)}, </p>
+        <p class="cpp_code_2t">GreenFigure::VerticalList[] = {IntPair(0,-1), IntPair(1,0), IntPair(1,1)};</p><br>
+        <p class="cpp_code">GreenFigure::GreenFigure(Window* windowPtr, GameGrid* gameGridPtr) </p>
+        <p class="cpp_code_1t">:TetrisFigure(windowPtr, gameGridPtr, Green, 1, Cols / 2, North, </p>
+        <p class="cpp_code_3t">HorizontalList, VerticalList, HorizontalList, VerticalList) {</p>
+        <p class="cpp_code_4t">// Empty.</p>
+        <p class="cpp_code">}</p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
         <p class="cpp_code_2t"></p>
