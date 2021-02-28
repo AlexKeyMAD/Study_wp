@@ -1,0 +1,212 @@
+<head>
+    <link rel="stylesheet" href="../../../css/books_style.css">
+</head>
+
+<body>
+    <div>
+        <p><a href="./03_01.html">&lArr;Глава 3. Создание приложения "Тетрис"</a></p>
+        <h1>ГЛАВА 4</h1>
+        <h2>Работа с фигурами и цифрами</h2>
+        <hr>
+        <p>В этой главе мы разрабатываем программу, способную рисовать линии, стрелки, прямоугольники и эллипсы. Приложение можно рассматривать как более продвинутую версию приложения Circle. Как и в случае с круговым приложением, у нас есть список фигур,
+            и мы ловим мышку пользователя. действия. Однако есть четыре вида фигур: линии, стрелки, прямоугольники и эллипсы. Они определены в иерархии классов, аналогичной, но более продвинутой, чем иерархия в игре Тетрис. Кроме того, мы также вводим
+            вырезание, копирование, вставку, управление курсором, и обработка реестра: </p>
+        <img src="04_01_01.png" alt="" class="img-center">
+        <p>Пользователь может добавлять новые фигуры, перемещать одну или несколько фигур, изменять фигуры, хватая их конечных точек, помечайте и снимайте пометки с фигур, нажимая кнопку мыши и клавишу Ctrl, и отметьте несколько фигур, заключив их в прямоугольник.
+            Когда цифра отмечена, она становится аннотированы маленькими черными квадратами. Пользователь может изменить форму фигуры, взяв один из квадратов. Пользователь также может перемещать фигуру, хватаясь за другую часть фигура. </p>
+        <h3>Функция MainWindow</h3>
+        <p>Функция MainWindow в этом приложении очень похожа на функцию в главе 3, Создание Приложение Тетрис; он устанавливает имя приложения и создает главное окно документа: </p>
+        <p class="cpp_code">#include "..\\SmallWindows\\SmallWindows.h"</p>
+        <p class="cpp_code">#include "DrawFigure.h"</p>
+        <p class="cpp_code">#include "LineFigure.h"</p>
+        <p class="cpp_code">#include "ArrowFigure.h"</p>
+        <p class="cpp_code">#include "RectangleFigure.h"</p>
+        <p class="cpp_code">#include "EllipseFigure.h"</p>
+        <p class="cpp_code">#include "TextFigure.h"</p>
+        <p class="cpp_code">#include "DrawDocument.h"</p><br>
+        <p class="cpp_code">void MainWindow(vector&lt;String&gt; /* argumentList */, WindowShow windowShow) {</p>
+        <p class="cpp_code_1t">Application::ApplicationName() = TEXT("DrawFigure");</p>
+        <p class="cpp_code_1t">Application::MainWindowPtr() = new DrawDocument(windowShow);</p>
+        <p class="cpp_code">}</p>
+        <h3>Класс DrawDocument</h3>
+        <p>Класс DrawDocument расширяет структуру StandardDocument, подобно кругу заявление. Он улавливает события мыши, отменяет методы файла, реализует вырезание, копирование, и вставить, а также обработку курсора: </p>
+        <h4>DrawDocument.h</h4>
+        <p class="cpp_code">class DrawDocument : public StandardDocument {</p>
+        <p class="cpp_code_1t">public:</p>
+        <p class="cpp_code_2t">DrawDocument(WindowShow windowShow);</p>
+        <p class="cpp_code_2t">~DrawDocument();</p>
+        <p>Как и в случае с круговым приложением, мы ловим действие мыши с помощью OnMouseDown, OnMouseMove и OnMouseUp. Однако в этом приложении мы также ловим двойной щелчок с помощью метода OnDoubleClick. Когда пользователь дважды щелкает фигуру, она
+            предпринимает индивидуальные действия: </p>
+        <p class="cpp_code_2t">void OnMouseDown(MouseButton mouseButtons, Point mousePoint, </p>
+        <p class="cpp_code_5t">bool shiftPressed, bool controlPressed);</p>
+        <p class="cpp_code_2t">void OnMouseMove(MouseButton mouseButtons, Point mousePoint, </p>
+        <p class="cpp_code_5t">bool shiftPressed, bool controlPressed);</p>
+        <p class="cpp_code_2t">void OnDoubleClick(MouseButton mouseButtons, Point mousePoint, </p>
+        <p class="cpp_code_5t">bool shiftPressed, bool controlPressed);</p>
+        <p class="cpp_code_2t">void OnMouseUp(MouseButton mouseButtons, Point mousePoint, </p>
+        <p class="cpp_code_5t">bool shiftPressed, bool controlPressed);</p>
+        <p>Метод OnDraw вызывается, когда необходимо перерисовать клиентскую область окна. Он привлекает цифры и прямоугольник, охватывающий фигуры, если пользователь делает отметку фигуры с прямоугольником: </p>
+        <p class="cpp_code_2t">void OnDraw(Graphics& graphics, DrawMode drawMode) const;</p>
+        <p>Метод ClearDocument вызывается, когда пользователь выбирает пункт меню New, Метод ReadDocumentFromStream вызывается, когда они выбирают пункт меню Open, и метод WriteDocumentToStream вызывается, когда они выбирают меню Сохранить или Сохранить
+            как элемент: </p>
+        <p class="cpp_code_2t">void ClearDocument();</p>
+        <p class="cpp_code_2t">bool WriteDocumentToStream(String name, ostream& outstream) const;</p>
+        <p>Каждый рисунок имеет целочисленное значение идентификатора, которое записывается WriteDocumentToStream и считывается методом ReadDocumentFromStream, чтобы решить, какая цифра должна быть создан. Учитывая значение идентификатора, метод CreateFigure
+            создает новую фигуру: </p>
+        <p class="cpp_code_2t">bool ReadDocumentFromStream(String name, istream& instream);</p>
+        <p class="cpp_code_2t">DrawFigure* CreateFigure(FigureId figureId) const;</p>
+        <p>В этом приложении мы представляем функции вырезания, копирования и вставки. CopyGeneric вызывается, когда пользователь выбирает пункт меню Вырезать или Копировать в меню Правка и Метод PasteGeneric вызывается, когда пользователь выбирает пункт
+            меню «Вставить». в StandardDocument framework, есть методы вырезания, копирования и вставки ASCII а также текст в Юникоде. Однако мы не используем их в этом приложении: </p>
+        <p class="cpp_code_2t">bool IsCopyGenericReady(int /* format */) const;</p>
+        <p class="cpp_code_2t">void CopyGeneric(int format, InfoList& infoList) const;</p>
+        <p class="cpp_code_2t">void PasteGeneric(int format, InfoList& infoList);</p>
+        <p>Метод CopyEnable возвращает true, если информация готова к копированию. В этом случае Пункты меню Вырезать, Копировать и Удалить включены. В этом приложении мы не отменяем PasteEnable, поскольку платформа StandardDocument проверяет, есть ли буфер
+            памяти в глобальном буфере обмена, пригодный для вставки. Вызывается метод OnDelete когда пользователь выбирает пункт меню Удалить: </p>
+        <p class="cpp_code_2t">bool CopyEnable() const;</p>
+        <p class="cpp_code_2t">void OnDelete();</p>
+        <p>Как и в случае с круговым приложением, у нас есть набор слушателей, хотя в этот случай. Каждый слушатель добавляется в меню в конструкторе. В отличие от круга приложение, мы также используем методы включения: методы, которые вызываются перед пунктом
+            меню становится видимым. Если методы возвращают false, пункты меню становятся недоступными и отображаются серым цветом. Если пункт меню подключен к ускорителю, ускоритель также отключается. Мы поместите элементы Modify, Color и Fill в меню
+            Modify, а Line, Arrow, Элементы Rectangle и Ellipse в меню Add: </p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, ModifyEnable)</p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, ModifyRadio)</p>
+        <p class="cpp_code_2t">DEFINE_VOID_LISTENER(DrawDocument, OnModify)</p><br>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, ColorEnable)</p>
+        <p class="cpp_code_2t">DEFINE_VOID_LISTENER(DrawDocument, OnColor)</p><br>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, FillEnable)</p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, FillCheck)</p>
+        <p class="cpp_code_2t">DEFINE_VOID_LISTENER(DrawDocument, OnFill)</p><br>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, LineEnable);</p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, ArrowEnable);</p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, RectangleEnable);</p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, EllipseEnable);</p><br>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, LineRadio);</p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, ArrowRadio);</p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, RectangleRadio);</p>
+        <p class="cpp_code_2t">DEFINE_BOOL_LISTENER(DrawDocument, EllipseRadio);</p><br>
+        <p class="cpp_code_2t">DEFINE_VOID_LISTENER(DrawDocument, OnLine);</p>
+        <p class="cpp_code_2t">DEFINE_VOID_LISTENER(DrawDocument, OnArrow);</p>
+        <p class="cpp_code_2t">DEFINE_VOID_LISTENER(DrawDocument, OnRectangle);</p>
+        <p class="cpp_code_2t">DEFINE_VOID_LISTENER(DrawDocument, OnEllipse);</p>
+        <p>В этом приложении мы также вводим управление курсором. Метод UpdateCursor устанавливает курсор к соответствующему виду в зависимости от того, создает ли пользователь, изменяет, или движущиеся фигуры: </p>
+        <p class="cpp_code_2t">void UpdateCursor();</p>
+        <p>Центральным моментом этого приложения является его режим: метод applicationMode отслеживает действий, когда пользователь нажимает левую кнопку мыши. Он поддерживает следующие режимы: </p>
+        <ul>
+            <li><span class="ex-span-b">Idle:</span> приложение ожидает ввода от пользователя. Это всегда режим, как пока пользователь не нажимает левую кнопку мыши. Однако когда пользователь нажимает кнопку мыши до тех пор, пока ее не отпустят, метод applicationMode
+                содержит одно значение. Пользователь нажимает клавишу Ctrl и щелкает по уже отмеченному фигура. Фигура становится немаркированной, больше ничего не происходит.</li>
+            <li><span class="ex-span-b">ModifySingle:</span> пользователь берет одну изменяемую фигуру (если пользователь нажимает на одну из своих конечных точек) или перемещается (если пользователь нажимает на любую другую часть рисунка).</li>
+            <li><span class="ex-span-b">ModifyRectangle:</span> пользователь щелкнул клиентскую область, не нажав фигура, в результате чего нарисован прямоугольник. Когда пользователь отпускает мышь кнопки, каждая фигура, полностью заключенная в прямоугольник,
+                будет отмечена.</li>
+            <li><span class="ex-span-b">MoveMultiple:</span> пользователь нажимает клавишу Ctrl и щелкает по немаркированной фигуре. Одновременно невозможно изменить более одной цифры. </li>
+        </ul>
+        <p>Обратите внимание, что метод applicationMode актуален только до тех пор, пока пользователь нажимает левую кнопка мыши. Как только они отпускают кнопку мыши, метод applicationMode становится всегда Idle: </p>
+        <p class="cpp_code_1t">private:</p>
+        <p class="cpp_code_2t">enum ApplicationMode {Idle, ModifySingle, MoveMultiple, ModifyRectangle};</p>
+        <p class="cpp_code_2t">ApplicationMode applicationMode = Idle;</p>
+        <p>Когда метод applicationMode удерживает режим ожидания, приложение ожидает дальнейший ввод от пользователя. Поле actionMode определяет следующее действие, которое может содержать следующие значения: </p>
+        <ul>
+            <li><span class="ex-span-b">Modify:</span>Когда пользователь нажимает кнопку мыши, applicationMode устанавливается в режим ModifySingle, если они щелкают по фигуре, Режим MoveMultiple, если они нажимают на немаркированную фигуру, удерживая Ctrl
+                клавиша, режим ожидания, если фигура уже отмечена, или ModifyRectangle режим, если они щелкают по клиентской области, не касаясь фигуры. </li>
+            <li><span class="ex-span-b">Add:</span>Когда пользователь нажимает левую кнопку мыши, новая фигура создается в местоположение, независимо от того, есть ли уже фигура в этом месте. Значение метода addFigureId решает, какой тип фигуры следует добавить;
+                может содержать любое из значений LineId, ArrowId, RectangleId или EllipseId. </li>
+        </ul>
+        <p class="cpp_code_2t">enum ActionMode {Modify, Add};</p>
+        <p class="cpp_code_2t">ActionMode actionMode = Add;</p>
+        <p class="cpp_code_2t">FigureId addFigureId = LineId;</p>
+        <p>Позже в этой главе мы встретимся с такими выражениями, как в режиме изменения и в Добавить. mode, которые относятся к значению переменной actionMode: Modify или Add.</p>
+        <p>Поля nextColor и nextFill содержат цвет фигуры и статус заливки (в случае прямоугольник или эллипс), соответственно, следующего добавляемого рисунка: </p>
+        <p class="cpp_code_2t">Color nextColor;</p>
+        <p class="cpp_code_2t">bool nextFill;</p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p class="cpp_code"></p>
+        <p></p>
+        <h3>Резюме</h3>
+        <p></p>
+        <p><a href="./04_01.html">Глава 4.&rArr;</a></p>
+    </div>
+</body>
