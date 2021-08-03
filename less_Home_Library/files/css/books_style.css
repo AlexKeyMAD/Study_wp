@@ -127,3 +127,7 @@ table td {
 .ex-span-b {
     font-weight: bolder;
 }
+
+code p {
+    margin: unset;
+}
