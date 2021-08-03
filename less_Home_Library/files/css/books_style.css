@@ -131,3 +131,7 @@ table td {
 code p {
     margin: unset;
 }
+
+code {
+    margin-left: 3px;
+}
