@@ -65,14 +65,14 @@
                 <td class="table-w-30per">
                     <ul>
                         <li>SQLITE_OK <span><a href="#er_SQLITE_OK">(0)</a></span></li>
-                        <li>SQLITE_PERM <span><a href="#er_">()</a></span>(3)</li>
-                        <li>SQLITE_PROTOCOL <span><a href="#er_">()</a></span>(15)</li>
-                        <li>SQLITE_RANGE <span><a href="#er_">()</a></span>(25)</li>
-                        <li>SQLITE_READONLY <span><a href="#er_">()</a></span>(8)</li>
-                        <li>SQLITE_ROW <span><a href="#er_">()</a></span>(100)</li>
-                        <li>SQLITE_SCHEMA <span><a href="#er_">()</a></span>(17)</li>
-                        <li>SQLITE_TOOBIG <span><a href="#er_">()</a></span>(18)</li>
-                        <li>SQLITE_WARNING <span><a href="#er_">()</a></span>(28)</li>
+                        <li>SQLITE_PERM <span><a href="#er_SQLITE_PERM">(3)</a></span></li>
+                        <li>SQLITE_PROTOCOL <span><a href="#er_SQLITE_PROTOCOL">(15)</a></span></li>
+                        <li>SQLITE_RANGE <span><a href="#er_SQLITE_RANGE">(25)</a></span></li>
+                        <li>SQLITE_READONLY <span><a href="#er_SQLITE_READONLY">(8)</a></span></li>
+                        <li>SQLITE_ROW <span><a href="#er_SQLITE_ROW">(100)</a></span></li>
+                        <li>SQLITE_SCHEMA <span><a href="#er_SQLITE_SCHEMA">(17)</a></span></li>
+                        <li>SQLITE_TOOBIG <span><a href="#er_SQLITE_TOOBIG">(18)</a></span></li>
+                        <li>SQLITE_WARNING <span><a href="#er_SQLITE_WARNING">(28)</a></span></li>
                     </ul>
                 </td>
             </tr>
@@ -204,51 +204,59 @@
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_BUSY">5</td>
+                <td>SQLITE_BUSY</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Указывает, что файл базы данных не может быть записан (или в некоторых случаях прочитан) из-за одновременной активности какого-либо другого соединения с базой данных, обычно соединения с базой данных в отдельном процессе.
+                    </p>
+                    <p>Например, если процесс A находится в середине большой транзакции записи и в то же время процесс B пытается начать новую транзакцию записи, процесс B вернет результат SQLITE_BUSY, потому что SQLite поддерживает только одну запись за
+                        раз. Процессу B нужно будет дождаться, пока процесс A завершит свою транзакцию, прежде чем начинать новую транзакцию. Интерфейсы sqlite3_busy_timeout () и sqlite3_busy_handler () и прагма busy_timeout доступны для процесса B, чтобы
+                        помочь ему справиться с ошибками SQLITE_BUSY.</p>
+                    <p>Ошибка SQLITE_BUSY может возникнуть в любой момент транзакции: при первом запуске транзакции, во время любых операций записи или обновления или при фиксации транзакции. Чтобы избежать ошибок SQLITE_BUSY в середине транзакции, приложение
+                        может использовать BEGIN IMMEDIATE вместо просто BEGIN для запуска транзакции. Команда BEGIN IMMEDIATE может сама вернуть SQLITE_BUSY, но в случае успеха SQLite гарантирует, что никакие последующие операции с той же базой данных
+                        через следующий COMMIT не вернут SQLITE_BUSY.</p>
+                    <p>См. Также: <span><a href="er_SQLITE_BUSY_RECOVERY">SQLITE_BUSY_RECOVERY</a></span> и <span><a href="er_SQLITE_BUSY_RECOVERY">SQLITE_BUSY_SNAPSHOT</a></span>. </p>
+                    <p>Код результата SQLITE_BUSY отличается от <span><a href="er_SQLITE_LOCKED">SQLITE_LOCKED</a></span> тем, что SQLITE_BUSY указывает на конфликт с отдельным соединением с базой данных, вероятно, в отдельном процессе, тогда как <span><a href="er_SQLITE_LOCKED">SQLITE_LOCKED</a></span>                        указывает на конфликт внутри того же соединения с базой данных (или иногда соединения с базой данных с общим кешем). </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_LOCKED">6</td>
+                <td>SQLITE_LOCKED</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Указывает, что операция записи не может быть продолжена из-за конфликта внутри того же соединения с базой данных или конфликта с другим соединением с базой данных, которое использует общий кэш.</p>
+                    <p>Например, оператор DROP TABLE не может быть запущен, пока другой поток читает из этой таблицы в том же соединении с базой данных, потому что удаление таблицы приведет к удалению таблицы из-под одновременного чтения.</p>
+                    <p>Код результата SQLITE_LOCKED отличается от <span><a href="er_SQLITE_BUSY">SQLITE_BUSY</a></span> тем, что SQLITE_LOCKED указывает на конфликт в том же соединении с базой данных (или в соединении с общим кешем), тогда как <span><a href="er_SQLITE_BUSY">SQLITE_BUSY</a></span>                        указывает на конфликт с другим соединением с базой данных, возможно, в другом процессе. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_NOMEM">7</td>
+                <td>SQLITE_NOMEM</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Указывает, что SQLite не смог выделить всю память, необходимую для завершения операции. Другими словами, внутренний вызов sqlite3_malloc () или sqlite3_realloc () завершился неудачно в случае, когда выделяемая память требовалась для
+                        продолжения операции. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_READONLY">8</td>
+                <td>SQLITE_READONLY</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Возвращается, когда делается попытка изменить некоторые данные, для которых текущее соединение с базой данных не имеет разрешения на запись. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_INTERRUPT">9</td>
+                <td>SQLITE_INTERRUPT</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>указывает, что операция была прервана интерфейсом sqlite3_interrupt(). См. Также: <span><a href="er_SQLITE_ABORT">SQLITE_ABORT</a></span></p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR">10</td>
+                <td>SQLITE_IOERR</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>сообщает, что операция не может быть завершена, поскольку операционная система сообщила об ошибке ввода-вывода.</p>
+                    <p>Полный диск обычно дает ошибку <span><a href="er_SQLITE_FULL">SQLITE_FULL</a></span>, а не ошибку SQLITE_IOERR.</p>
+                    <p>Существует множество различных расширенных кодов результатов для ошибок ввода-вывода, которые идентифицируют конкретную операцию ввода-вывода, в которой произошел сбой. </p>
                 </td>
             </tr>
             <tr>
