@@ -16,12 +16,20 @@
     width: 48%;
 }
 
+.table-w-5per {
+    width: 5%;
+}
+
 .table-w-20per {
     width: 20%;
 }
 
 .table-w-30per {
     width: 30%;
+}
+
+.table-w-70per {
+    width: 70%;
 }
 
 table {

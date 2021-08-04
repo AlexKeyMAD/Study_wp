@@ -30,6 +30,884 @@
         <p>Имена и числовые значения для существующих кодов результатов являются фиксированными и неизменными. Однако новые коды результатов и особенно новые расширенные коды результатов могут появиться в будущих выпусках SQLite. </p>
         <h2>4. Список первичных кодов результатов</h2>
         <p>31 код результата определены в sqlite3.h и перечислены в алфавитном порядке ниже:</p>
+        <table>
+            <tr>
+                <td class="table-w-30per">
+                    <ul>
+                        <li>SQLITE_ABORT <span><a href="#er_SQLITE_ABORT">(4)</a></span></li>
+                        <li>SQLITE_AUTH <span><a href="#er_SQLITE_AUTH">(23)</a></span></li>
+                        <li>SQLITE_BUSY <span><a href="#er_SQLITE_BUSY">(5)</a></span></li>
+                        <li>SQLITE_CANTOPEN <span><a href="#er_SQLITE_CANTOPEN">(14)</a></span></li>
+                        <li>SQLITE_CONSTRAINT <span><a href="#er_SQLITE_CONSTRAINT">(19)</a></span></li>
+                        <li>SQLITE_CORRUPT <span><a href="#er_SQLITE_CORRUPT">(11)</a></span></li>
+                        <li>SQLITE_DONE <span><a href="#er_SQLITE_DONE">(101)</a></span></li>
+                        <li>SQLITE_EMPTY <span><a href="#er_SQLITE_EMPTY">(16)</a></span></li>
+                        <li>SQLITE_ERROR <span><a href="#er_SQLITE_ERROR">(1)</a></span></li>
+                        <li>SQLITE_FORMAT <span><a href="#er_SQLITE_FORMAT">(24)</a></span></li>
+                        <li>SQLITE_FULL <span><a href="#er_SQLITE_FULL">(13)</a></span></li>
+                    </ul>
+                </td>
+                <td class="table-w-30per">
+                    <ul>
+                        <li>SQLITE_INTERNAL <span><a href="#er_SQLITE_INTERNAL">(2)</a></span></li>
+                        <li>SQLITE_INTERRUPT <span><a href="#er_SQLITE_INTERRUPT">(9)</a></span></li>
+                        <li>SQLITE_IOERR <span><a href="#er_SQLITE_IOERR">(10)</a></span></li>
+                        <li>SQLITE_LOCKED <span><a href="#er_SQLITE_LOCKED">(6)</a></span></li>
+                        <li>SQLITE_MISMATCH <span><a href="#er_SQLITE_MISMATCH">(20)</a></span></li>
+                        <li>SQLITE_MISUSE <span><a href="#er_SQLITE_MISUSE">(21)</a></span></li>
+                        <li>SQLITE_NOLFS <span><a href="#er_SQLITE_NOLFS">(22)</a></span></li>
+                        <li>SQLITE_NOMEM <span><a href="#er_SQLITE_NOMEM">(7)</a></span></li>
+                        <li>SQLITE_NOTADB <span><a href="#er_SQLITE_NOTADB">(26)</a></span></li>
+                        <li>SQLITE_NOTFOUND <span><a href="#er_SQLITE_NOTFOUND">(12)</a></span></li>
+                        <li>SQLITE_NOTICE <span><a href="#er_SQLITE_NOTICE">(27)</a></span></li>
+                    </ul>
+                </td>
+                <td class="table-w-30per">
+                    <ul>
+                        <li>SQLITE_OK <span><a href="#er_SQLITE_OK">(0)</a></span></li>
+                        <li>SQLITE_PERM <span><a href="#er_">()</a></span>(3)</li>
+                        <li>SQLITE_PROTOCOL <span><a href="#er_">()</a></span>(15)</li>
+                        <li>SQLITE_RANGE <span><a href="#er_">()</a></span>(25)</li>
+                        <li>SQLITE_READONLY <span><a href="#er_">()</a></span>(8)</li>
+                        <li>SQLITE_ROW <span><a href="#er_">()</a></span>(100)</li>
+                        <li>SQLITE_SCHEMA <span><a href="#er_">()</a></span>(17)</li>
+                        <li>SQLITE_TOOBIG <span><a href="#er_">()</a></span>(18)</li>
+                        <li>SQLITE_WARNING <span><a href="#er_">()</a></span>(28)</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <h2>5. Расширенный список кодов результатов </h2>
+        <p>71 расширенный код результата определены в sqlite3.h и перечислены в алфавитном порядке ниже: </p>
+        <table>
+            <tr>
+                <td class="table-en-ru">
+                    <ul>
+                        <li>SQLITE_ABORT_ROLLBACK <span><a href="#er_">()</a></span>(516)</li>
+                        <li>SQLITE_BUSY_RECOVERY <span><a href="#er_">()</a></span>(261)</li>
+                        <li>SQLITE_BUSY_SNAPSHOT <span><a href="#er_">()</a></span>(517)</li>
+                        <li>SQLITE_BUSY_TIMEOUT <span><a href="#er_">()</a></span>(773)</li>
+                        <li>SQLITE_CANTOPEN_CONVPATH <span><a href="#er_">()</a></span>(1038)</li>
+                        <li>SQLITE_CANTOPEN_DIRTYWAL <span><a href="#er_">()</a></span>(1294)</li>
+                        <li>SQLITE_CANTOPEN_FULLPATH <span><a href="#er_">()</a></span>(782)</li>
+                        <li>SQLITE_CANTOPEN_ISDIR <span><a href="#er_">()</a></span>(526)</li>
+                        <li>SQLITE_CANTOPEN_NOTEMPDIR <span><a href="#er_">()</a></span>(270)</li>
+                        <li>SQLITE_CANTOPEN_SYMLINK <span><a href="#er_">()</a></span>(1550)</li>
+                        <li>SQLITE_CONSTRAINT_CHECK <span><a href="#er_">()</a></span>(275)</li>
+                        <li>SQLITE_CONSTRAINT_COMMITHOOK <span><a href="#er_">()</a></span>(531)</li>
+                        <li>SQLITE_CONSTRAINT_FOREIGNKEY <span><a href="#er_">()</a></span>(787)</li>
+                        <li>SQLITE_CONSTRAINT_FUNCTION <span><a href="#er_">()</a></span>(1043)</li>
+                        <li>SQLITE_CONSTRAINT_NOTNULL <span><a href="#er_">()</a></span>(1299)</li>
+                        <li>SQLITE_CONSTRAINT_PINNED <span><a href="#er_">()</a></span>(2835)</li>
+                        <li>SQLITE_CONSTRAINT_PRIMARYKEY <span><a href="#er_">()</a></span>(1555)</li>
+                        <li>SQLITE_CONSTRAINT_ROWID <span><a href="#er_">()</a></span>(2579)</li>
+                        <li>SQLITE_CONSTRAINT_TRIGGER <span><a href="#er_">()</a></span>(1811)</li>
+                        <li>SQLITE_CONSTRAINT_UNIQUE <span><a href="#er_">()</a></span>(2067)</li>
+                        <li>SQLITE_CONSTRAINT_VTAB <span><a href="#er_">()</a></span>(2323)</li>
+                        <li>SQLITE_CORRUPT_INDEX <span><a href="#er_">()</a></span>(779)</li>
+                        <li>SQLITE_CORRUPT_SEQUENCE <span><a href="#er_">()</a></span>(523)</li>
+                        <li>SQLITE_CORRUPT_VTAB <span><a href="#er_">()</a></span>(267)</li>
+                        <li>SQLITE_ERROR_MISSING_COLLSEQ <span><a href="#er_">()</a></span>(257)</li>
+                        <li>SQLITE_ERROR_RETRY <span><a href="#er_">()</a></span>(513)</li>
+                        <li>SQLITE_ERROR_SNAPSHOT <span><a href="#er_">()</a></span>(769)</li>
+                        <li>SQLITE_IOERR_ACCESS <span><a href="#er_">()</a></span>(3338)</li>
+                        <li>SQLITE_IOERR_AUTH <span><a href="#er_">()</a></span>(7178)</li>
+                        <li>SQLITE_IOERR_BEGIN_ATOMIC <span><a href="#er_">()</a></span>(7434)</li>
+                        <li>SQLITE_IOERR_BLOCKED <span><a href="#er_">()</a></span>(2826)</li>
+                        <li>SQLITE_IOERR_CHECKRESERVEDLOCK <span><a href="#er_">()</a></span>(3594)</li>
+                        <li>SQLITE_IOERR_CLOSE <span><a href="#er_">()</a></span>(4106)</li>
+                        <li>SQLITE_IOERR_COMMIT_ATOMIC <span><a href="#er_">()</a></span>(7690)</li>
+                        <li>SQLITE_IOERR_CONVPATH <span><a href="#er_">()</a></span>(6666)</li>
+                        <li>SQLITE_IOERR_DATA <span><a href="#er_">()</a></span>(8202)</li>
+                    </ul>
+                </td>
+                <td class="table-en-ru">
+                    <ul>
+                        <li>SQLITE_IOERR_DELETE <span><a href="#er_">()</a></span>(2570)</li>
+                        <li>SQLITE_IOERR_DELETE_NOENT <span><a href="#er_">()</a></span>(5898)</li>
+                        <li>SQLITE_IOERR_DIR_CLOSE <span><a href="#er_">()</a></span>(4362)</li>
+                        <li>SQLITE_IOERR_DIR_FSYNC <span><a href="#er_">()</a></span>(1290)</li>
+                        <li>SQLITE_IOERR_FSTAT <span><a href="#er_">()</a></span>(1802)</li>
+                        <li>SQLITE_IOERR_FSYNC <span><a href="#er_">()</a></span>(1034)</li>
+                        <li>SQLITE_IOERR_GETTEMPPATH <span><a href="#er_">()</a></span>(6410)</li>
+                        <li>SQLITE_IOERR_LOCK <span><a href="#er_">()</a></span>(3850)</li>
+                        <li>SQLITE_IOERR_MMAP <span><a href="#er_">()</a></span>(6154)</li>
+                        <li>SQLITE_IOERR_NOMEM <span><a href="#er_">()</a></span>(3082)</li>
+                        <li>SQLITE_IOERR_RDLOCK <span><a href="#er_">()</a></span>(2314)</li>
+                        <li>SQLITE_IOERR_READ <span><a href="#er_">()</a></span>(266)</li>
+                        <li>SQLITE_IOERR_ROLLBACK_ATOMIC <span><a href="#er_">()</a></span>(7946)</li>
+                        <li>SQLITE_IOERR_SEEK <span><a href="#er_">()</a></span>(5642)</li>
+                        <li>SQLITE_IOERR_SHMLOCK <span><a href="#er_">()</a></span>(5130)</li>
+                        <li>SQLITE_IOERR_SHMMAP <span><a href="#er_">()</a></span>(5386)</li>
+                        <li>SQLITE_IOERR_SHMOPEN <span><a href="#er_">()</a></span>(4618)</li>
+                        <li>SQLITE_IOERR_SHMSIZE <span><a href="#er_">()</a></span>(4874)</li>
+                        <li>SQLITE_IOERR_SHORT_READ <span><a href="#er_">()</a></span>(522)</li>
+                        <li>SQLITE_IOERR_TRUNCATE <span><a href="#er_">()</a></span>(1546)</li>
+                        <li>SQLITE_IOERR_UNLOCK <span><a href="#er_">()</a></span>(2058)</li>
+                        <li>SQLITE_IOERR_VNODE <span><a href="#er_">()</a></span>(6922)</li>
+                        <li>SQLITE_IOERR_WRITE <span><a href="#er_">()</a></span>(778)</li>
+                        <li>SQLITE_LOCKED_SHAREDCACHE <span><a href="#er_">()</a></span>(262)</li>
+                        <li>SQLITE_LOCKED_VTAB <span><a href="#er_">()</a></span>(518)</li>
+                        <li>SQLITE_NOTICE_RECOVER_ROLLBACK <span><a href="#er_">()</a></span>(539)</li>
+                        <li>SQLITE_NOTICE_RECOVER_WAL <span><a href="#er_">()</a></span>(283)</li>
+                        <li>SQLITE_OK_LOAD_PERMANENTLY <span><a href="#er_">()</a></span>(256)</li>
+                        <li>SQLITE_READONLY_CANTINIT <span><a href="#er_">()</a></span>(1288)</li>
+                        <li>SQLITE_READONLY_CANTLOCK <span><a href="#er_">()</a></span>(520)</li>
+                        <li>SQLITE_READONLY_DBMOVED <span><a href="#er_">()</a></span>(1032)</li>
+                        <li>SQLITE_READONLY_DIRECTORY <span><a href="#er_">()</a></span>(1544)</li>
+                        <li>SQLITE_READONLY_RECOVERY <span><a href="#er_">()</a></span>(264)</li>
+                        <li>SQLITE_READONLY_ROLLBACK <span><a href="#er_">()</a></span>(776)</li>
+                        <li>SQLITE_WARNING_AUTOINDEX <span><a href="#er_">()</a></span>(284)</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <h2>6. Значение кода результата</h2>
+        <p>Значения для всех 102 значений кода результата показаны ниже в числовом порядке. </p>
+        <table>
+            <tr>
+                <th class="table-w-5per">Числовой код</th>
+                <th class="table-w-30per">Символьный код</th>
+                <th class="table-w-70per">Расшифровка</th>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_OK">0</td>
+                <td>SQLITE_OK</td>
+                <td>Операция прошла успешно и ошибок не было. Большинство других кодов результатов указывают на ошибку. </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_ERROR">1</td>
+                <td>SQLITE_ERROR</td>
+                <td>Это общий код ошибки, который используется, когда другой более конкретный код ошибки недоступен. </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_INTERNAL">2</td>
+                <td>SQLITE_INTERNAL</td>
+                <td>
+                    <p>Указывает на внутреннюю неисправность. В рабочей версии SQLite приложение никогда не должно видеть этот код результата. Если приложение обнаруживает этот результирующий код, это означает, что в ядре базы данных есть ошибка.</p>
+                    <p>SQLite в настоящее время не генерирует этот код результата. Однако определяемые приложением функции SQL или виртуальные таблицы, виртуальные файловые системы или другие расширения могут привести к возврату этого кода результата.</p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_PERM">3</td>
+                <td>SQLITE_PERM</td>
+                <td>Указывает, что запрошенный режим доступа для вновь созданной базы данных не может быть предоставлен. </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_ABORT">4</td>
+                <td>SQLITE_ABORT</td>
+                <td>
+                    <p>Указывает, что операция была прервана до завершения, обычно это запрос приложения. См. Также: SQLITE_INTERRUPT.</p>
+                    <p>Если функция обратного вызова sqlite3_exec() возвращает ненулевое значение, тогда sqlite3_exec() вернет SQLITE_ABORT.</p>
+                    <p>Если операция ROLLBACK происходит в том же соединении с базой данных, что и ожидающее чтение или запись, то ожидающее чтение или запись может завершиться ошибкой SQLITE_ABORT или SQLITE_ABORT_ROLLBACK.</p>
+                    <p>Помимо кода результата, значение SQLITE_ABORT также используется в качестве режима разрешения конфликтов, возвращаемого интерфейсом sqlite3_vtab_on_conflict().</p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_"></td>
+                <td></td>
+                <td>
+                    <p></p>
+                    <p></p>
+                </td>
+            </tr>
+        </table>
         <p></p>
         <p><a href="./00_06.html">***&rArr;</a></p>
     </div>
