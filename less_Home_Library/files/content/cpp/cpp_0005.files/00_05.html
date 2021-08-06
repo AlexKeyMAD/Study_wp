@@ -83,9 +83,9 @@
             <tr>
                 <td class="table-en-ru">
                     <ul>
-                        <li>SQLITE_ABORT_ROLLBACK <span><a href="#er_">()</a></span>(516)</li>
-                        <li>SQLITE_BUSY_RECOVERY <span><a href="#er_">()</a></span>(261)</li>
-                        <li>SQLITE_BUSY_SNAPSHOT <span><a href="#er_">()</a></span>(517)</li>
+                        <li>SQLITE_ABORT_ROLLBACK <span><a href="#er_SQLITE_ABORT_ROLLBACK">(516)</a></span></li>
+                        <li>SQLITE_BUSY_RECOVERY <span><a href="#er_SQLITE_BUSY_RECOVERY">(261)</a></span></li>
+                        <li>SQLITE_BUSY_SNAPSHOT <span><a href="#er_SQLITE_BUSY_SNAPSHOT">(517)</a></span></li>
                         <li>SQLITE_BUSY_TIMEOUT <span><a href="#er_">()</a></span>(773)</li>
                         <li>SQLITE_CANTOPEN_CONVPATH <span><a href="#er_">()</a></span>(1038)</li>
                         <li>SQLITE_CANTOPEN_DIRTYWAL <span><a href="#er_">()</a></span>(1294)</li>
@@ -723,215 +723,260 @@
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_READONLY_DIRECTORY">1544</td>
+                <td>SQLITE_READONLY_DIRECTORY</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Указывает, что база данных доступна только для чтения, поскольку процесс не имеет разрешения на создание файла журнала в том же каталоге, что и база данных, и создание файла журнала является предварительным условием для записи. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_TRUNCATE">1546</td>
+                <td>SQLITE_IOERR_TRUNCATE</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода на уровне VFS при попытке усечь файл до меньшего размера.</p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_CANTOPEN_SYMLINK">1550</td>
+                <td>SQLITE_CANTOPEN_SYMLINK</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Возвращается интерфейсом sqlite3_open() и его родственниками, когда используется флаг SQLITE_OPEN_NOFOLLOW и файл базы данных является символической ссылкой.</p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_CONSTRAINT_PRIMARYKEY">1555</td>
+                <td>SQLITE_CONSTRAINT_PRIMARYKEY</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_CONSTRAINT, указывающий на сбой ограничения PRIMARY KEY. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_FSTAT">1802</td>
+                <td>SQLITE_IOERR_FSTAT</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода на уровне VFS при попытке вызвать fstat() (или эквивалент) для файла, чтобы определить такую информацию, как размер файла или права доступа. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_CONSTRAINT_TRIGGER">1811</td>
+                <td>SQLITE_CONSTRAINT_TRIGGER</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_CONSTRAINT, указывающий, что сработала функция RAISE в триггере, что привело к прерыванию оператора SQL. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_UNLOCK">2058</td>
+                <td>SQLITE_IOERR_UNLOCK</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в методе xUnlock объекта sqlite3_io_methods. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_CONSTRAINT_UNIQUE">2067</td>
+                <td>SQLITE_CONSTRAINT_UNIQUE</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_CONSTRAINT, указывающий на сбой ограничения UNIQUE. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_RDLOCK">2314</td>
+                <td>SQLITE_IOERR_RDLOCK</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в методе xLock объекта sqlite3_io_methods при попытке получить блокировку чтения. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_CONSTRAINT_VTAB">2323</td>
+                <td>SQLITE_CONSTRAINT_VTAB</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>В настоящее время не используется ядром SQLite. Однако этот код ошибки доступен для использования виртуальными таблицами, определяемыми приложением. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_DELETE">2570</td>
+                <td>SQLITE_IOERR_DELETE</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в методе xDelete объекта sqlite3_vfs.</p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_CONSTRAINT_ROWID">2579</td>
+                <td>SQLITE_CONSTRAINT_ROWID</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_CONSTRAINT, указывающий, что идентификатор строки не уникален. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_BLOCKED">2826</td>
+                <td>SQLITE_IOERR_BLOCKED</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Больше не используется.</p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_CONSTRAINT_PINNED">2835</td>
+                <td>SQLITE_CONSTRAINT_PINNED</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_CONSTRAINT, указывающий, что попытка триггера UPDATE удаляет строку, которая обновлялась в середине обновления.</p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_NOMEM">3082</td>
+                <td>SQLITE_IOERR_NOMEM</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Код ошибки SQLITE_IOERR_NOMEM иногда возвращается уровнем VFS, чтобы указать, что операция не может быть завершена из-за невозможности выделить достаточно памяти. Этот код ошибки обычно преобразуется в SQLITE_NOMEM более высокими уровнями
+                        SQLite перед возвратом в приложение. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_ACCESS">3338</td>
+                <td>SQLITE_IOERR_ACCESS</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в методе xAccess объекта sqlite3_vfs. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_CHECKRESERVEDLOCK">3594</td>
+                <td>SQLITE_IOERR_CHECKRESERVEDLOCK</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в методе xCheckReservedLock объекта sqlite3_io_methods. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_LOCK">3850</td>
+                <td>SQLITE_IOERR_LOCK</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в логике блокировки рекомендательного файла. Обычно ошибка SQLITE_IOERR_LOCK указывает на проблему с получением блокировки PENDING. Однако он также может
+                        указывать на различные ошибки блокировки на некоторых специализированных VFS, используемых на компьютерах Mac. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_CLOSE">4106</td>
+                <td>SQLITE_IOERR_CLOSE</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в методе xClose объекта sqlite3_io_methods. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_DIR_CLOSE">4362</td>
+                <td>SQLITE_IOERR_DIR_CLOSE</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Больше не используется.</p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_SHMOPEN">4618</td>
+                <td>SQLITE_IOERR_SHMOPEN</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в методе xShmMap объекта sqlite3_io_methods при попытке открыть новый сегмент разделяемой памяти. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_SHMSIZE">4874</td>
+                <td>SQLITE_IOERR_SHMSIZE</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в методе xShmMap объекта sqlite3_io_methods при попытке увеличить файл "shm" как часть обработки транзакции в режиме WAL. Эта ошибка может указывать на
+                        то, что на томе базовой файловой системы не хватает места. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_SHMLOCK">5130</td>
+                <td>SQLITE_IOERR_SHMLOCK</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Больше не используется.</p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_SHMMAP">5386</td>
+                <td>SQLITE_IOERR_SHMMAP</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в методе xShmMap объекта sqlite3_io_methods при попытке сопоставить сегмент разделяемой памяти в адресное пространство процесса.</p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
-                <td></td>
+                <td id="er_SQLITE_IOERR_SEEK">5642</td>
+                <td>SQLITE_IOERR_SEEK</td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в методах xRead или xWrite в объекте sqlite3_io_methods при попытке поиска файлового дескриптора в начальной точке файла, где должно произойти чтение или
+                        запись. </p>
                 </td>
             </tr>
             <tr>
-                <td id="er_"></td>
+                <td id="er_SQLITE_IOERR_DELETE_NOENT">5898</td>
+                <td>SQLITE_IOERR_DELETE_NOENT</td>
+                <td>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий, что метод xDelete объекта sqlite3_vfs завершился неудачно, поскольку удаляемый файл не существует. </p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_IOERR_MMAP">6154</td>
+                <td>SQLITE_IOERR_MMAP</td>
+                <td>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий на ошибку ввода-вывода в методах xFetch или xUnfetch объекта sqlite3_io_methods при попытке сопоставить или отменить отображение части файла базы данных в адресное пространство
+                        процесса. </p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_IOERR_GETTEMPPATH">6410</td>
+                <td>SQLITE_IOERR_GETTEMPPATH</td>
+                <td>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, указывающий, что VFS не может определить подходящий каталог для размещения временных файлов. </p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_IOERR_CONVPATH">6666</td>
+                <td>SQLITE_IOERR_CONVPATH</td>
+                <td>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, используемый только Cygwin VFS и указывающий на сбой системного вызова cygwin_conv_path(). См. Также: SQLITE_CANTOPEN_CONVPATH </p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_IOERR_VNODE">6922</td>
+                <td>SQLITE_IOERR_VNODE</td>
+                <td>
+                    <p>Это код, зарезервированный для использования расширениями. Он не используется ядром SQLite. </p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_IOERR_AUTH">7178</td>
                 <td></td>
                 <td>
-                    <p></p>
-                    <p></p>
+                    <p>Это код, зарезервированный для использования расширениями. Он не используется ядром SQLite. </p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_IOERR_BEGIN_ATOMIC">7434</td>
+                <td>SQLITE_IOERR_BEGIN_ATOMIC</td>
+                <td>
+                    <p>Указывает, что базовая операционная система сообщила об ошибке в элементе управления файлом SQLITE_FCNTL_BEGIN_ATOMIC_WRITE. Это происходит только тогда, когда SQLITE_ENABLE_ATOMIC_WRITE включен и база данных размещена в файловой системе,
+                        которая поддерживает атомарные записи. </p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_IOERR_COMMIT_ATOMIC">7690</td>
+                <td>SQLITE_IOERR_COMMIT_ATOMIC</td>
+                <td>
+                    <p>Указывает, что базовая операционная система сообщила об ошибке в элементе управления файлом SQLITE_FCNTL_COMMIT_ATOMIC_WRITE. Это происходит только тогда, когда SQLITE_ENABLE_ATOMIC_WRITE включен и база данных размещена в файловой
+                        системе, которая поддерживает атомарные записи. </p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_IOERR_ROLLBACK_ATOMIC">7946</td>
+                <td>SQLITE_IOERR_ROLLBACK_ATOMIC</td>
+                <td>
+                    <p>Указывает, что базовая операционная система сообщила об ошибке в элементе управления файлом SQLITE_FCNTL_ROLLBACK_ATOMIC_WRITE. Это происходит только тогда, когда SQLITE_ENABLE_ATOMIC_WRITE включен и база данных размещена в файловой
+                        системе, которая поддерживает атомарные записи. </p>
+                </td>
+            </tr>
+            <tr>
+                <td id="er_SQLITE_IOERR_DATA">8202</td>
+                <td>SQLITE_IOERR_DATA</td>
+                <td>
+                    <p>Это расширенный код ошибки для SQLITE_IOERR, используемый только прокладкой контрольной суммы VFS, чтобы указать, что контрольная сумма на странице файла базы данных неверна. </p>
                 </td>
             </tr>
         </table>
         <p></p>
-        <p><a href="./00_06.html">***&rArr;</a></p>
+        <p><a href="./00_06.html">Синтаксис SQL&rArr;</a></p>
     </div>
 </body>

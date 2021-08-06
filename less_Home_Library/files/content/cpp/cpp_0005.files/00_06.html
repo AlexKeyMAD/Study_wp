@@ -1,0 +1,78 @@
+<head>
+    <link rel="stylesheet" href="../../../css/books_style.css">
+</head>
+
+<body>
+    <div>
+        <p><a href="./00_05.html">&lArr;Коды результатов и ошибок</a></p>
+        <h1>Синтаксис SQL</h1>
+        <h2>Этот документ описывает язык SQL, который понимает SQLite.</h2>
+        <hr>
+        <h2>SQL в понимании SQLite </h2>
+        <p>SQLite понимает большую часть стандартного языка SQL. Но он опускает некоторые функции, но в то же время добавляет несколько собственных функций. В этом документе делается попытка точно описать, какие части языка SQL SQLite поддерживает и не поддерживает.
+            Также предоставляется список ключевых слов SQL. Синтаксис языка SQL описывается синтаксическими диаграммами.</p>
+        <p>Доступны следующие разделы документации по синтаксису: </p>
+        <table>
+            <tr>
+                <td class="table-w-30per">
+                    <ul>
+                        <li>aggregate functions</li>
+                        <li>ALTER TABLE</li>
+                        <li>ANALYZE</li>
+                        <li>ATTACH DATABASE</li>
+                        <li>BEGIN TRANSACTION</li>
+                        <li>comment</li>
+                        <li>COMMIT TRANSACTION</li>
+                        <li>core functions</li>
+                        <li>CREATE INDEX</li>
+                        <li>CREATE TABLE</li>
+                        <li>CREATE TRIGGER</li>
+                        <li>CREATE VIEW</li>
+                        <li>CREATE VIRTUAL TABLE</li>
+                    </ul>
+                </td>
+                <td class="table-w-30per">
+                    <ul>
+                        <li>date and time functions</li>
+                        <li>DELETE</li>
+                        <li>DETACH DATABASE</li>
+                        <li>DROP INDEX</li>
+                        <li>DROP TABLE</li>
+                        <li>DROP TRIGGER</li>
+                        <li>DROP VIEW</li>
+                        <li>END TRANSACTION</li>
+                        <li>EXPLAIN</li>
+                        <li>expression</li>
+                        <li>INDEXED BY</li>
+                        <li>INSERT</li>
+                        <li>keywords</li>
+                    </ul>
+                </td>
+                <td class="table-w-30per">
+                    <ul>
+                        <li>ON CONFLICT clause</li>
+                        <li>PRAGMA</li>
+                        <li>REINDEX</li>
+                        <li>RELEASE SAVEPOINT</li>
+                        <li>REPLACE</li>
+                        <li>RETURNING clause</li>
+                        <li>ROLLBACK TRANSACTION</li>
+                        <li>SAVEPOINT</li>
+                        <li>SELECT</li>
+                        <li>UPDATE</li>
+                        <li>UPSERT</li>
+                        <li>VACUUM</li>
+                        <li>WITH clause</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p>Подпрограммы sqlite3_prepare_v2(), sqlite3_prepare(), sqlite3_prepare16(), sqlite3_prepare16_v2(), sqlite3_exec() и sqlite3_get_table() принимают список операторов SQL (sql-stmt-list), который представляет собой список операторов, разделенных
+            точкой с запятой. </p>
+        <h2>sql-stmt-list:</h2>
+        <img src="00_06_01.png" alt="">
+        <h2>Каждый оператор SQL в списке операторов является экземпляром следующего: </h2>
+        <img src="00_06_02.png" alt="">
+        <p><a href="./00_07.html">Команды Pragma&rArr;</a></p>
+    </div>
+</body>
