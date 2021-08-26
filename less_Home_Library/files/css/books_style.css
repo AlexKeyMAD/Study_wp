@@ -151,3 +151,8 @@ code p {
 code {
     margin-left: 3px;
 }
+
+.book-object {
+    width: 100%;
+    height: 75%;
+}
