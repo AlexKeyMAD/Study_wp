@@ -1,0 +1,71 @@
+<head>
+    <link rel="stylesheet" href="../../../css/books_style.css">
+</head>
+
+<body>
+    <div>
+        <p><a href="./00_05.html">&lArr;Компиляция SFML с помощью CMake</a></p>
+        <h1>Обработка времени</h1>
+        <hr>
+        <h2>Время в SFML</h2>
+        <p>В отличие от многих других библиотек, где время представляет собой число миллисекунд uint32 или число секунд с плавающей запятой, SFML не навязывает какие-либо конкретные единицы или тип для значений времени. Вместо этого он оставляет этот выбор
+            пользователю через гибкий класс: sf::Time. Все классы и функции SFML, которые управляют значениями времени, используют этот класс.</p>
+        <p>sf::Time представляет период времени (другими словами, время, прошедшее между двумя событиями). Это не класс даты и времени, который будет представлять текущий год/месяц/день/час/минуту/секунду в виде метки времени, это просто значение, представляющее
+            определенное количество времени, и то, как его интерпретировать, зависит от контекста, в котором Это использовано.</p>
+        <hr>
+        <h2>Преобразование времени</h2>
+        <p>Значение sf::Time может быть создано из разных исходных единиц измерения: секунд, миллисекунд и микросекунд. Существует функция (не член) для превращения каждого из них в sf::Time:</p>
+        <code>
+            <p class="cpp_code">sf::Time t1 = sf::microseconds(10000);</p>
+            <p class="cpp_code">sf::Time t2 = sf::milliseconds(10);</p>
+            <p class="cpp_code">sf::Time t3 = sf::seconds(0.01f);</p>
+        </code>
+        <p>Обратите внимание, что все эти три времени равны.</p>
+        <p>Точно так же sf::Time можно преобразовать обратно в секунды, миллисекунды или микросекунды:</p>
+        <code>
+            <p class="cpp_code">sf::Time time = ...;</p>
+            <br>
+            <p class="cpp_code">sf::Int64 usec = time.asMicroseconds();</p>
+            <p class="cpp_code">sf::Int32 msec = time.asMilliseconds();</p>
+            <p class="cpp_code">float sec  = time.asSeconds();</p>
+        </code>
+        <hr>
+        <h2>Игра со значениями времени</h2>
+        <p>sf::Time — это просто количество времени, поэтому он поддерживает арифметические операции, такие как сложение, вычитание, сравнение и т. д. Время также может быть отрицательным.</p>
+        <code>
+            <p class="cpp_code">sf::Time t1 = ...;</p>
+            <p class="cpp_code">sf::Time t2 = t1 * 2;</p>
+            <p class="cpp_code">sf::Time t3 = t1 + t2;</p>
+            <p class="cpp_code">sf::Time t4 = -t3;</p>
+            <br>
+            <p class="cpp_code">bool b1 = (t1 == t2);</p>
+            <p class="cpp_code">bool b2 = (t3 > t4);</p>
+        </code>
+        <hr>
+        <h2>Измерение времени</h2>
+        <p>Теперь, когда мы увидели, как манипулировать значениями времени с помощью SFML, давайте посмотрим, как сделать то, что нужно почти каждой программе: измерить прошедшее время.</p>
+        <p>В SFML есть очень простой класс для измерения времени: sf::Clock. У него есть только две функции: getElapsedTime, чтобы получить время, прошедшее с момента запуска часов, и restart, чтобы перезапустить часы.</p>
+        <code>
+            <p class="cpp_code">sf::Clock clock; // starts the clock</p>
+            <p class="cpp_code">...</p>
+            <p class="cpp_code">sf::Time elapsed1 = clock.getElapsedTime();</p>
+            <p class="cpp_code">std::cout &laquo; elapsed1.asSeconds() &laquo; std::endl;</p>
+            <p class="cpp_code">clock.restart();</p>
+            <p class="cpp_code">...</p>
+            <p class="cpp_code">sf::Time elapsed2 = clock.getElapsedTime();</p>
+            <p class="cpp_code">std::cout &laquo; elapsed2.asSeconds() &laquo; std::endl;</p>
+        </code>
+        <p>Обратите внимание, что перезапуск также возвращает прошедшее время, так что вы можете избежать небольшого разрыва, который возник бы, если бы вам пришлось явно вызывать getElapsedTime перед перезапуском.</p>
+        <p>Вот пример, который использует время, прошедшее на каждой итерации игрового цикла, для обновления игровой логики:</p>
+        <code>
+            <p class="cpp_code">sf::Clock clock;</p>
+            <p class="cpp_code">while (window.isOpen())</p>
+            <p class="cpp_code">{</p>
+            <p class="cpp_code_1t">sf::Time elapsed = clock.restart();</p>
+            <p class="cpp_code_1t">updateGame(elapsed);</p>
+            <p class="cpp_code_1t">...</p>
+            <p class="cpp_code">}</p>
+        </code>
+        <p><a href="./01_02.html">Потоки&rArr;</a></p>
+    </div>
+</body>
