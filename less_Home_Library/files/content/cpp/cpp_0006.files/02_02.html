@@ -87,6 +87,149 @@
             клавиатуре создаст два события KeyPressed, но одно событие TextEntered, содержащее символ «ê». Он работает со всеми методами ввода, предоставляемыми операционной системой, даже с самыми специфическими или сложными.</p>
         <p>Это событие обычно используется для перехвата пользовательского ввода в текстовом поле.</p>
         <p>Элемент, связанный с этим событием, — это event.text, он содержит значение Unicode введенного символа. Вы можете либо поместить его непосредственно в sf::String, либо преобразовать в char, убедившись, что он находится в диапазоне ASCII (0–127).</p>
-        <p><a href="./02_03.html">&rArr;</a></p>
+        <code>
+            <p class="cpp_code">if (event.type == sf::Event::TextEntered)</p>
+            <p class="cpp_code">{</p>
+            <p class="cpp_code_1t">if (event.text.unicode &lt; 128)</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "ASCII character typed: " &lt;&lt; static_cast<char>(event.text.unicode) &lt;&lt; std::endl;</p>
+            <p class="cpp_code">}</p>
+        </code>
+        <p>Обратите внимание, что, поскольку они являются частью стандарта Unicode, некоторые непечатаемые символы, такие как backspace, генерируются этим событием. В большинстве случаев вам нужно будет отфильтровать их.</p>
+        <div class="atention">
+            <p>Многие программисты используют событие KeyPressed для получения пользовательского ввода и начинают реализовывать сумасшедшие алгоритмы, которые пытаются интерпретировать все возможные комбинации клавиш для получения правильных символов. Не
+                делай этого!</p>
+        </div>
+        <hr>
+        <h2>События KeyPressed и KeyReleased (нажатие и отжатие клавиши)</h2>
+        <p>События sf::Event::KeyPressed и sf::Event::KeyReleased запускаются при нажатии/отпускании клавиши клавиатуры.</p>
+        <p>Если клавиша удерживается, будет сгенерировано несколько событий KeyPressed с задержкой операционной системы по умолчанию (т. е. той же задержкой, которая применяется, когда вы удерживаете букву в текстовом редакторе). Чтобы отключить повторяющиеся
+            события KeyPressed, вы можете вызвать window.setKeyRepeatEnabled(false). С другой стороны, очевидно, что события KeyReleased никогда не могут повторяться.</p>
+        <p>Это событие следует использовать, если вы хотите инициировать действие ровно один раз при нажатии или отпускании клавиши, например, прыжок персонажа с пробелом или выход из чего-либо с помощью escape.</p>
+        <div class="atention">
+            <p>Иногда люди пытаются реагировать на события KeyPressed напрямую, чтобы реализовать плавное движение. Это не даст ожидаемого эффекта, потому что, когда вы удерживаете клавишу, вы получаете только несколько событий (помните, задержка повтора).
+                Чтобы добиться плавного перемещения событий, вы должны использовать логическое значение, которое вы устанавливаете для KeyPressed и очищаете для KeyReleased; затем вы можете перемещаться (независимо от событий), пока установлено логическое
+                значение.
+            </p>
+            <p>Другое (более простое) решение для создания плавного движения — использовать ввод с клавиатуры в реальном времени с помощью sf::Keyboard (см. специальный учебник).</p>
+        </div>
+        <p>Элемент, связанный с этими событиями, — это event.key, он содержит код нажатой/отпущенной клавиши, а также текущее состояние клавиш-модификаторов (alt, control, shift, system).</p>
+        <code>
+            <p class="cpp_code">if (event.type == sf::Event::KeyPressed)</p>
+            <p class="cpp_code">{</p>
+            <p class="cpp_code_1t">if (event.key.code == sf::Keyboard::Escape)</p>
+            <p class="cpp_code_1t">{</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "the escape key was pressed" &lt;&lt; std::endl;</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "control:" &lt;&lt; event.key.control &lt;&lt; std::endl;</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "alt:" &lt;&lt; event.key.alt &lt;&lt; std::endl;</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "shift:" &lt;&lt; event.key.shift &lt;&lt; std::endl;</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "system:" &lt;&lt; event.key.system &lt;&lt; std::endl;</p>
+            <p class="cpp_code_1t">}</p>
+            <p class="cpp_code">}</p>
+        </code>
+        <p>Обратите внимание, что некоторые клавиши имеют особое значение для операционной системы и могут привести к неожиданному поведению. Примером может служить клавиша F10 в Windows, которая «крадет» фокус, или клавиша F12, которая запускает отладчик
+            при использовании Visual Studio. Вероятно, это будет решено в будущей версии SFML.</p>
+        <hr>
+        <h2>Событие MouseWheelMoved (Перемещение колесиком мыши)</h2>
+        <p>Событие sf::Event::MouseWheelMoved устарело, начиная с SFML 2.3, вместо этого используйте событие MouseWheelScrolled.</p>
+        <hr>
+        <h2>Событие MouseWheelScrolled (Прокрутка колеса мыши)</h2>
+        <p>Событие sf::Event::MouseWheelScrolled запускается, когда колесико мыши перемещается вверх или вниз, а также в боковом направлении, если мышь это поддерживает.</p>
+        <p>Элемент, связанный с этим событием, — event.mouseWheelScroll, он содержит количество тиков, на которые переместилось колесо, ориентацию колеса и текущую позицию курсора мыши.</p>
+        <code>
+            <p class="cpp_code">if (event.type == sf::Event::MouseWheelScrolled)</p>
+            <p class="cpp_code">{</p>
+            <p class="cpp_code_1t">if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "wheel type: vertical" &lt;&lt; std::endl;</p>
+            <p class="cpp_code_1t">else if (event.mouseWheelScroll.wheel == sf::Mouse::HorizontalWheel)</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "wheel type: horizontal" &lt;&lt; std::endl;</p>
+            <p class="cpp_code_1t">else</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "wheel type: unknown" &lt;&lt; std::endl;</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "wheel movement: " &lt;&lt; event.mouseWheelScroll.delta &lt;&lt; std::endl;</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "mouse x: " &lt;&lt; event.mouseWheelScroll.x &lt;&lt; std::endl;</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "mouse y: " &lt;&lt; event.mouseWheelScroll.y &lt;&lt; std::endl;</p>
+            <p class="cpp_code">}</p>
+        </code>
+        <hr>
+        <h2>События MouseButtonPressed и MouseButtonReleased (Нажате и отпуск кнопки мыши)</h2>
+        <p>События sf::Event::MouseButtonPressed и sf::Event::MouseButtonReleased запускаются при нажатии/отпускании кнопки мыши.</p>
+        <p>SFML поддерживает 5 кнопок мыши: левую, правую, среднюю (колесико), дополнительную №1 и дополнительную №2 (боковые кнопки).</p>
+        <p>Элемент, связанный с этими событиями, — это event.mouseButton, он содержит код нажатой/отпущенной кнопки, а также текущую позицию курсора мыши.</p>
+        <code>
+            <p class="cpp_code">if (event.type == sf::Event::MouseButtonPressed)</p>
+            <p class="cpp_code">{</p>
+            <p class="cpp_code_1t">if (event.mouseButton.button == sf::Mouse::Right)</p>
+            <p class="cpp_code_1t">{</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "the right button was pressed" &lt;&lt; std::endl;</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "mouse x: " &lt;&lt; event.mouseButton.x &lt;&lt; std::endl;</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "mouse y: " &lt;&lt; event.mouseButton.y &lt;&lt; std::endl;</p>
+            <p class="cpp_code_1t">}</p>
+            <p class="cpp_code">}</p>
+        </code>
+        <hr>
+        <h2>События MouseMoved (Перемещение мыши)</h2>
+        <p>Событие sf::Event::MouseMoved запускается, когда мышь перемещается в пределах окна.</p>
+        <p>Это событие запускается, даже если окно не сфокусировано. Однако он срабатывает только тогда, когда мышь перемещается во внутренней области окна, а не когда она перемещается по строке заголовка или границам.</p>
+        <p>Член, связанный с этим событием, — event.mouseMove, он содержит текущую позицию курсора мыши относительно окна.</p>
+        <code>
+            <p class="cpp_code">if (event.type == sf::Event::MouseMoved)</p>
+            <p class="cpp_code">{</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "new mouse x: " &lt;&lt; event.mouseMove.x &lt;&lt; std::endl;</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "new mouse y: " &lt;&lt; event.mouseMove.y &lt;&lt; std::endl;</p>
+            <p class="cpp_code">}</p>
+        </code>
+        <hr>
+        <h2>События MouseEntered и MouseLeft</h2>
+        <p>События sf::Event::MouseEntered и sf::Event::MouseLeft запускаются, когда курсор мыши входит в окно или покидает его.</p>
+        <p>В объединении sf::Event нет члена, связанного с этими событиями.</p>
+        <code>
+            <p class="cpp_code">if (event.type == sf::Event::MouseEntered)</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "the mouse cursor has entered the window" &lt;&lt; std::endl;</p>
+            <br>
+            <p class="cpp_code">if (event.type == sf::Event::MouseLeft)</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "the mouse cursor has left the window" &lt;&lt; std::endl;</p>
+        </code>
+        <hr>
+        <h2>События JoystickButtonPressed и JoystickButtonReleased (Джойстик нажатие и отпуск кнопки)</h2>
+        <p>События sf::Event::JoystickButtonPressed и sf::Event::JoystickButtonReleased запускаются при нажатии/отпускании кнопки джойстика.</p>
+        <p>SFML поддерживает до 8 джойстиков и 32 кнопки.</p>
+        <p>Элемент, связанный с этими событиями, — это event.joystickButton, он содержит идентификатор джойстика и индекс нажатой/отпущенной кнопки.</p>
+        <code>
+            <p class="cpp_code">if (event.type == sf::Event::JoystickButtonPressed)</p>
+            <p class="cpp_code">{</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "joystick button pressed!" &lt;&lt; std::endl;</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "joystick id: " &lt;&lt; event.joystickButton.joystickId &lt;&lt; std::endl;</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "button: " &lt;&lt; event.joystickButton.button &lt;&lt; std::endl;</p>
+            <p class="cpp_code">}</p>
+        </code>
+        <hr>
+        <h2>Событие JoystickMoved (Перемещение джойстика)</h2>
+        <p>Событие sf::Event::JoystickMoved запускается при перемещении оси джойстика.</p>
+        <p>Оси джойстика, как правило, очень чувствительны, поэтому SFML использует порог обнаружения, чтобы избежать спама в вашем цикле событий тоннами событий JoystickMoved. Этот порог можно изменить с помощью функции Window::setJoystickThreshold, если
+            вы хотите получать больше или меньше событий перемещения джойстика.</p>
+        <p>SFML поддерживает 8 осей джойстика: X, Y, Z, R, U, V, POV X и POV Y. Как они соотносятся с вашим джойстиком, зависит от его драйвера.</p>
+        <p>Член, связанный с этим событием, — event.joystickMove, он содержит идентификатор джойстика, имя оси и ее текущую позицию (в диапазоне [-100, 100]).</p>
+        <code>
+            <p class="cpp_code">if (event.type == sf::Event::JoystickMoved)</p>
+            <p class="cpp_code">{</p>
+            <p class="cpp_code_1t">if (event.joystickMove.axis == sf::Joystick::X)</p>
+            <p class="cpp_code_1t">{</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "X axis moved!" &lt;&lt; std::endl;</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "joystick id: " &lt;&lt; event.joystickMove.joystickId &lt;&lt; std::endl;</p>
+            <p class="cpp_code_2t">std::cout &lt;&lt; "new position: " &lt;&lt; event.joystickMove.position &lt;&lt; std::endl;</p>
+            <p class="cpp_code_1t">}</p>
+            <p class="cpp_code">}</p>
+        </code>
+        <hr>
+        <h2>События JoystickConnected и JoystickDisconnected (Подключение и отключение джойстика)</h2>
+        <p>События sf::Event::JoystickConnected и sf::Event::JoystickDisconnected запускаются при подключении/отключении джойстика.</p>
+        <p>Элемент, связанный с этим событием, — event.joystickConnect, он содержит идентификатор подключенного/отключенного джойстика.</p>
+        <code>
+            <p class="cpp_code">if (event.type == sf::Event::JoystickConnected)</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "joystick connected: " &lt;&lt; event.joystickConnect.joystickId &lt;&lt; std::endl;</p>
+            <br>
+            <p class="cpp_code">if (event.type == sf::Event::JoystickDisconnected)</p>
+            <p class="cpp_code_1t">std::cout &lt;&lt; "joystick disconnected: " &lt;&lt; event.joystickConnect.joystickId &lt;&lt; std::endl;</p>
+        </code>
+        <p><a href="./02_03.html">Клавиатура, мышь и джойстик&rArr;</a></p>
     </div>
 </body>
