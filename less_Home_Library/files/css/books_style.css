@@ -99,6 +99,10 @@ table td {
     font-weight: bold;
 }
 
+.font-italic {
+    font-style: italic;
+}
+
 .remember {
     border: 2px solid rebeccapurple;
     border-radius: 5px;
