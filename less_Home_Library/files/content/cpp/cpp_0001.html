@@ -1075,6 +1075,54 @@
                     <li><span class="font-bold">Полиморфизм</span> – свойство классов, позволяющее использовать объекты классов с одинаковым интерфейсом без информации о типе и внутренней структуре объекта.</li>
                 </ol>
                 <p>А теперь рассмотрим структуру объявления классов:</p>
+                <p class="cpp_code">// объявление классов в С++</p>
+                <p class="cpp_code">class /*имя класса*/</p>
+                <p class="cpp_code">{</p>
+                <p class="cpp_code_1t">private:</p>
+                <p class="cpp_code_2t">/* список свойств и методов для использования внутри класса */</p>
+                <p class="cpp_code_1t"> public:</p>
+                <p class="cpp_code_2t"> /* список методов доступных другим функциям и объектам программы */</p>
+                <p class="cpp_code_1t">protected:</p>
+                <p class="cpp_code_2t">/*список средств, доступных при наследовании*/</p>
+                <p class="cpp_code">};</p>
+                <p>Объявление класса начинается с зарезервированного ключевого слова <span class="font-bold font-italic">class</span>, после которого пишется имя класса. В фигурных скобках, строки 3 — 10 объявляется тело класса, причём после закрывающейся
+                    скобки обязательно нужно ставить точку с запятой, строка 10. В теле класса объявляются три метки спецификации доступа, строки 4, 6, 8, после каждой метки нужно ставить двоеточие. В строке 4 объявлена метка спецификатора доступа
+                    <span class="font-bold font-italic">private</span>. Все методы и свойства класса, объявленные после спецификатор доступа <span class="font-bold font-italic">private</span> будут доступны только внутри класса. В строке 6 объявлен спецификатор
+                    доступа <span class="font-bold font-italic">public</span>, все методы и свойства класса, объявленные после спецификатора доступа <span class="font-bold font-italic">public</span> будут доступны другим функциям и объектам в программе.</p>
+                <p>При объявлении класса, не обязательно объявлять три спецификатора доступа, и не обязательно их объявлять в таком порядке. Но лучше сразу определиться с порядком объявления спецификаторов доступа, и стараться его придерживаться. </p>
+                <p>Разработаем программу, в которой объявим простейший класс, в котором будет объявлена одна функция, печатающая сообщение:</p>
+                <p class="cpp_code">// classes.cpp: определяет точку входа для консольного приложения.</p>
+                <p></p>
+                <p class="cpp_code">#include "stdafx.h"</p>
+                <p class="cpp_code">#include &lt;iostream&gt;</p>
+                <p></p>
+                <p class="cpp_code">using namespace std;</p>
+                <p></p>
+                <p class="cpp_code">// начало объявления класса</p>
+                <p class="cpp_code">class CppStudio // имя класса</p>
+                <p class="cpp_code">{</p>
+                <p class="cpp_code_1t">public: // спецификатор доступа</p>
+                <p class="cpp_code_2t">void message() // функция (метод класса) выводящая сообщение на экран</p>
+                <p class="cpp_code_2t">{</p>
+                <p class="cpp_code_3t">cout &lt;&lt; "website: cppstudio. comntheme: Classes and Objects in C + +n";</p>
+                <p class="cpp_code_2t">}</p>
+                <p class="cpp_code">}; // конец объявления класса CppStudio</p>
+                <p></p>
+                <p class="cpp_code">int main(int argc, char* argv[])</p>
+                <p class="cpp_code">{</p>
+                <p class="cpp_code_1t">CppStudio objMessage; // объявление объекта</p>
+                <p class="cpp_code_1t">objMessage.message(); // вызов функции класса message</p>
+                <p></p>
+                <p class="cpp_code_1t">system("pause");</p>
+                <p class="cpp_code_1t">return 0;</p>
+                <p></p>
+                <p class="cpp_code">}</p>
+                <p>В строках 7 — 14 мы определили класс с именем <span class="font-bold font-italic">CppStudio</span>. Имя класса принято начинать с большой буквы, последующие слова в имени также должны начинаться с большой буквы. В теле класса объявлен
+                    спецификатор доступа <span class="font-bold font-italic">public</span>, который позволяет вызывать другим функциям методы класса, объявленные после <span class="font-bold font-italic">public</span>. Вот именно поэтому в главной функции,
+                    в строке 19 мы смогли вызвать функцию message. В классе <span class="font-bold font-italic">CppStudio</span> объявлена всего одна функция, которая не имеет параметров и выводит сообщение на экран, строка 12. В строке 18 объявлена переменная
+                    <span class="font-bold font-italic">objMessage</span> типа <span class="font-bold font-italic">CppStudio</span>, так вот, переменная <span class="font-bold font-italic">objMessage</span> — это объект класса <span class="font-bold font-italic">CppStudio</span>.
+                    Таким образом, класс является сложным типом данных. После того как объект класса объявлен, можно воспользоваться его методами. Метод всего один — функция message. Для этого обращаемся к методу объекта objMessage через точку, как показано
+                    в строке 19, в результате программа выдаст текстовое сообщение.</p>
                 <hr>
                 <p><a href="https://t.me/HowTo_C/101" target="_blank">Взято от сюда</a></p>
             </div>
