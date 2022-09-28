@@ -1124,6 +1124,72 @@
                     Таким образом, класс является сложным типом данных. После того как объект класса объявлен, можно воспользоваться его методами. Метод всего один — функция message. Для этого обращаемся к методу объекта objMessage через точку, как показано
                     в строке 19, в результате программа выдаст текстовое сообщение.</p>
                 <hr>
+                <div class="slide" style="padding-left: 3%;">
+                    <label for="slide-set_get_classes">
+                        <h3>Set and get class functions / Set и get функции классов</h3> 
+                    </label>
+                    <input type="checkbox" id="slide-set_get_classes" />
+                    <div class="slide-text">
+                        <p>Каждый объект имеет какие-то свои свойства или атрибуты, которые характеризуют его на протяжении всей жизни. Атрибуты объекта хранятся в переменных, объявленных внутри класса, которому принадлежит данный объект. Причём, объявление переменных должно выполняться со спецификатором доступа <span class="font-bold font-italic">private</span>. Такие переменные называются элементами данных. Так как элементы данных объявлены в <span class="font-bold font-italic">private</span>, то и доступ к ним могут получить только методы класса, внешний доступ к элементам данных запрещён. Поэтому принято объявлять в классах специальные методы — так называемые <span class="font-bold font-italic">set</span> и <span class="font-bold font-italic">get функции</span>, с помощью которых можно манипулировать элементами данных. <span class="font-bold font-italic">Set-функции</span> инициализируют элементы данных, <span class="font-bold font-italic">get-функции</span> позволяют просмотреть значения элементов данных. Класс <span class="font-bold font-italic">CppStudio</span> можно доработать так, чтобы в нём можно было хранить дату в формате <span class="font-italic">дд.мм.гг</span>. Для изменения и просмотра даты реализуем <span class="font-bold font-italic">set</span> и <span class="font-bold font-italic">get</span> функции.</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="slide" style="padding-left: 3%;">
+                    <label for="slide-constructors_classes">
+                        <h3>Constructors / Конструкторы</h3> 
+                    </label>
+                    <input type="checkbox" id="slide-constructors_classes" />
+                    <div class="slide-text">
+                        <p><span class="font-bold">Конструктор</span> — специальная функция, которая выполняет начальную инициализацию элементов данных, причём имя конструктора обязательно должно совпадать с именем класса. Важным отличием конструктора от остальных функций является то, что он не возвращает никаких значений, в том числе и <span class="font-bold font-italic">void</span>. В любом классе должен быть конструктор, даже если явным образом конструктор не объявлен (как в предыдущем классе), то компилятор предоставляет конструктор по умолчанию, без параметров.</p>
+                        <p>Доработаем класс <span class="font-bold font-italic">CppStudio</span>, добавив к нему конструктор:</p>
+                        <p class="cpp_code">// classes.cpp: определяет точку входа для консольного приложения.</p>
+                        <p></p>
+                        <p class="cpp_code">#include "stdafx.h"</p>
+                        <p class="cpp_code">#include &lt;iostream&gt;</p>
+                        <p></p>
+                            <p class="cpp_code">using namespace std;</p>
+                            <p></p>
+                            <p class="cpp_code">class CppStudio // имя класса</p>
+                            <p class="cpp_code">{</p>
+                                <p class="cpp_code_1t">private: // спецификатор доступа private</p>
+                                <p class="cpp_code_2t">int day, // день</p>
+                                <p class="cpp_code_2t">month, // месяц</p>
+                                <p class="cpp_code_2t">year; // год</p>
+                                <p class="cpp_code_1t">public: // спецификатор доступа public</p>
+                                <p class="cpp_code_2t">CppStudio(int date_day, int date_month, int date_year ) // конструктор класса</p>
+                                <p class="cpp_code_2t">{</p>
+                                    <p class="cpp_code_3t">setDate(date_day, date_month, date_year); // вызов функции установки даты</p>
+                                    <p class="cpp_code_2t">}</p>
+                                    <p class="cpp_code_2t">void message() // функция (метод класса) выводящая сообщение на экран</p>
+                                    <p class="cpp_code_2t">{</p>
+                                        <p class="cpp_code_3t">cout &lt;&lt; "nwebsite: cppstudio.comntheme: Classes and Objects in C + +n";</p>
+                                        <p class="cpp_code_2t">}</p>
+                                        <p class="cpp_code_2t">void setDate(int date_day, int date_month, int date_year) // установка даты в формате дд.мм.гг</p>
+                                        <p class="cpp_code_2t">{</p>
+                                            <p class="cpp_code_3t">day   = date_day; // инициализация день</p>
+                                            <p class="cpp_code_3t">month = date_month; // инициализация месяц</p>
+                                            <p class="cpp_code_3t">year  = date_year; // инициализация год</p>
+                                            <p class="cpp_code_2t">}</p>
+                                            <p class="cpp_code_2t">void getDate() // отобразить текущую дату</p>
+                                            <p class="cpp_code_2t">{</p>
+                                                <p class="cpp_code_3t">cout &lt;&lt; "date: " &lt;&lt; day &lt;&lt; "." &lt;&lt; month &lt;&lt; "." &lt;&lt; year &lt;&lt; endl;</p>
+                                                <p class="cpp_code_2t">}</p>
+                                                <p class="cpp_code">}; // конец объявления класса CppStudio</p>
+                                                <p></p>
+                                                <p class="cpp_code">int main(int argc, char* argv[])</p>
+                                                <p class="cpp_code">{</p>
+                                                    <p class="cpp_code_1t">CppStudio objCppstudio(11,11,2011); // объявление объекта и инициализация элементов данных</p>
+                                                    <p class="cpp_code_1t">objCppstudio.message(); // вызов функции message</p>
+                                                    <p class="cpp_code_1t">objCppstudio.getDate(); // отобразить дату</p>
+                                                    <p></p>
+                                                    <p class="cpp_code_1t">system("pause");</p>
+                                                    <p></p>
+                                                    <p class="cpp_code_1t">return 0;</p>
+                                                    <p class="cpp_code">}</p>
+                                                    <p>Конструктор объявлен в строках 13 — 16. Конструктор имеет три параметра, через которые он получает информацию о дате, в теле конструктора вызывается set — функция для установки даты. В строке 35 объявляем объект класса, причём после имени объекта в круглых скобках передаём три аргумента.</p>
+                    </div>
+                </div>
+                <hr>
                 <p><a href="https://t.me/HowTo_C/101" target="_blank">Взято от сюда</a></p>
             </div>
             <hr>
