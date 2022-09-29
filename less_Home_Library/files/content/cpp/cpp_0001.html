@@ -1092,12 +1092,12 @@
                 <p>При объявлении класса, не обязательно объявлять три спецификатора доступа, и не обязательно их объявлять в таком порядке. Но лучше сразу определиться с порядком объявления спецификаторов доступа, и стараться его придерживаться. </p>
                 <p>Разработаем программу, в которой объявим простейший класс, в котором будет объявлена одна функция, печатающая сообщение:</p>
                 <p class="cpp_code">// classes.cpp: определяет точку входа для консольного приложения.</p>
-                <p></p>
+                <br>
                 <p class="cpp_code">#include "stdafx.h"</p>
                 <p class="cpp_code">#include &lt;iostream&gt;</p>
-                <p></p>
+                <br>
                 <p class="cpp_code">using namespace std;</p>
-                <p></p>
+                <br>
                 <p class="cpp_code">// начало объявления класса</p>
                 <p class="cpp_code">class CppStudio // имя класса</p>
                 <p class="cpp_code">{</p>
@@ -1107,15 +1107,15 @@
                 <p class="cpp_code_3t">cout &lt;&lt; "website: cppstudio. comntheme: Classes and Objects in C + +n";</p>
                 <p class="cpp_code_2t">}</p>
                 <p class="cpp_code">}; // конец объявления класса CppStudio</p>
-                <p></p>
+                <br>
                 <p class="cpp_code">int main(int argc, char* argv[])</p>
                 <p class="cpp_code">{</p>
                 <p class="cpp_code_1t">CppStudio objMessage; // объявление объекта</p>
                 <p class="cpp_code_1t">objMessage.message(); // вызов функции класса message</p>
-                <p></p>
+                <br>
                 <p class="cpp_code_1t">system("pause");</p>
                 <p class="cpp_code_1t">return 0;</p>
-                <p></p>
+                <br>
                 <p class="cpp_code">}</p>
                 <p>В строках 7 — 14 мы определили класс с именем <span class="font-bold font-italic">CppStudio</span>. Имя класса принято начинать с большой буквы, последующие слова в имени также должны начинаться с большой буквы. В теле класса объявлен
                     спецификатор доступа <span class="font-bold font-italic">public</span>, который позволяет вызывать другим функциям методы класса, объявленные после <span class="font-bold font-italic">public</span>. Вот именно поэтому в главной функции,
@@ -1149,12 +1149,12 @@
                             в предыдущем классе), то компилятор предоставляет конструктор по умолчанию, без параметров.</p>
                         <p>Доработаем класс <span class="font-bold font-italic">CppStudio</span>, добавив к нему конструктор:</p>
                         <p class="cpp_code">// classes.cpp: определяет точку входа для консольного приложения.</p>
-                        <p></p>
+                        <br>
                         <p class="cpp_code">#include "stdafx.h"</p>
                         <p class="cpp_code">#include &lt;iostream&gt;</p>
-                        <p></p>
+                        <br>
                         <p class="cpp_code">using namespace std;</p>
-                        <p></p>
+                        <br>
                         <p class="cpp_code">class CppStudio // имя класса</p>
                         <p class="cpp_code">{</p>
                         <p class="cpp_code_1t">private: // спецификатор доступа private</p>
@@ -1181,19 +1181,167 @@
                         <p class="cpp_code_3t">cout &lt;&lt; "date: " &lt;&lt; day &lt;&lt; "." &lt;&lt; month &lt;&lt; "." &lt;&lt; year &lt;&lt; endl;</p>
                         <p class="cpp_code_2t">}</p>
                         <p class="cpp_code">}; // конец объявления класса CppStudio</p>
-                        <p></p>
+                        <br>
                         <p class="cpp_code">int main(int argc, char* argv[])</p>
                         <p class="cpp_code">{</p>
                         <p class="cpp_code_1t">CppStudio objCppstudio(11,11,2011); // объявление объекта и инициализация элементов данных</p>
                         <p class="cpp_code_1t">objCppstudio.message(); // вызов функции message</p>
                         <p class="cpp_code_1t">objCppstudio.getDate(); // отобразить дату</p>
-                        <p></p>
+                        <br>
                         <p class="cpp_code_1t">system("pause");</p>
-                        <p></p>
+                        <br>
                         <p class="cpp_code_1t">return 0;</p>
                         <p class="cpp_code">}</p>
                         <p>Конструктор объявлен в строках 13 — 16. Конструктор имеет три параметра, через которые он получает информацию о дате, в теле конструктора вызывается set — функция для установки даты. В строке 35 объявляем объект класса, причём
                             после имени объекта в круглых скобках передаём три аргумента.</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="slide" style="padding-left: 3%;">
+                    <label for="slide-declaration_classes">
+                        <h3>Class constructor and destructor / Конструктор и деструктор классов</h3> 
+                    </label>
+                    <input type="checkbox" id="slide-declaration_classes" />
+                    <div class="slide-text">
+                        <p>Конструктор (construct — создавать) – это специальный метод класса, который предназначен для инициализации элементов класса некоторыми начальными значениями.</p>
+                        <p>В отличии от конструктора, деструктор (destruct — разрушать) — специальный метод класса, который служит для уничтожения элементов класса. Чаще всего его используют тогда, когда в конструкторе, при создании объекта класса, динамически
+                            был выделен участок памяти и необходимо эту память очистить, если эти значения уже не нужны для дальнейшей работы программы.</p>
+                        <div class="atention">
+                            <h4>Важно запомнить:</h4>
+                            <p>Конструктор и деструктор, мы всегда объявляем в разделе public. </p>
+                            <p>При объявлении конструктора, тип данных возвращаемого значения не указывается, в том числе — void!!!. </p>
+                            <p>У деструктора также нет типа данных для возвращаемого значения, к тому же деструктору нельзя передавать никаких параметров. </p>
+                            <p>Имя класса и конструктора должно быть идентично. </p>
+                            <p>Имя деструктора идентично имени конструктора, но с приставкой ~.</p>
+                            <p>В классе допустимо создавать несколько конструкторов, если это необходимо. Имена, согласно пункту 2 нашего списка, будут одинаковыми. Компилятор будет их различать по передаваемым параметрам (как при перегрузке функций). Если
+                                мы не передаем в конструктор параметры, он считается конструктором по умолчанию. </p>
+                            <p>Обратите внимание на то, что в классе может быть объявлен только один деструктор. </p>
+                        </div>
+                        <p>Теперь приведём пример работы конструктора:</p>
+                        <p class="cpp_code"># include &lt;iostream&gt;</p>
+                        <br>
+                        <p class="cpp_code">using namespace std;</p>
+                        <br>
+                        <p class="cpp_code">class AB //класс</p>
+                        <p class="cpp_code">{</p>
+                        <p class="cpp_code_1t">private:</p>
+                        <p class="cpp_code_2t">int a;</p>
+                        <p class="cpp_code_2t">int b;</p>
+                        <p class="cpp_code_1t">public:</p>
+                        <p class="cpp_code_2t">AB() //это конструктор: 1) у конструктора нет типа возвращаемого значения! в том числе void!!!</p>
+                        <p class="cpp_code_2t">// 2) имя должно быть таким как и у класса (в нашем случае AB)</p>
+                        <p class="cpp_code_2t">{</p>
+                        <p class="cpp_code_3t">a = 0;//присвоим начальные значения переменным</p>
+                        <p class="cpp_code_3t">b = 0;</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "Работа конструктора при создании нового объекта: " &lt;&lt; endl;//и здесь же их отобразим на экран</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "a = " &lt;&lt; a &lt;&lt; endl;</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "b = " &lt;&lt; b &lt;&lt; endl &lt;&lt; endl;</p>
+                        <p class="cpp_code_2t">}</p>
+                        <p class="cpp_code_2t">void setAB() // с помощью этого метода изменим начальные значения заданные конструктором</p>
+                        <p class="cpp_code_2t">{</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "Введите целое число а: ";</p>
+                        <p class="cpp_code_3t">cin >> a;</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "Введите целое число b: ";</p>
+                        <p class="cpp_code_3t">cin >> b;</p>
+                        <p class="cpp_code_2t">}</p>
+                        <p class="cpp_code_2t">void getAB() //выведем на экран измененные значения</p>
+                        <p class="cpp_code_2t">{</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "a = " &lt;&lt; a &lt;&lt; endl;</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "b = " &lt;&lt; b &lt;&lt; endl &lt;&lt; endl;</p>
+                        <p class="cpp_code_2t">}</p>
+                        <p class="cpp_code">};</p>
+                        <br>
+                        <p class="cpp_code">int main()</p>
+                        <p class="cpp_code">{</p>
+                        <p class="cpp_code_1t">setlocale(LC_ALL, "rus");</p>
+                        <p class="cpp_code_1t">AB obj1; //конструктор сработает на данном этапе (во время создания объекта класса)</p>
+                        <p class="cpp_code_1t">obj1.setAB(); //присвоим новые значения переменным</p>
+                        <p class="cpp_code_1t">obj1.getAB(); //и выведем их на экран</p>
+                        <p class="cpp_code_1t">AB obj2; //конструктор сработает на данном этапе (во время создания 2-го объекта класса)</p>
+                        <p class="cpp_code_1t">return 0;</p>
+                        <p class="cpp_code">}</p>
+                        <p>В результате работы программы мы получаем такой результат:</p>
+                        <p class="cpp_code">Работа конструктора при создании нового объекта: </p>
+                        <p class="cpp_code">a = 0</p>
+                        <p class="cpp_code">b = 0</p>
+                        <br>
+                        <p class="cpp_code">Введите целое число а: 34</p>
+                        <p class="cpp_code">Введите целое число b: 67</p>
+                        <p class="cpp_code">a = 34</p>
+                        <p class="cpp_code">b = 67</p>
+                        <br>
+                        <p class="cpp_code">Работа конструктора при создании нового объекта:</p>
+                        <p class="cpp_code">a = 0</p>
+                        <p class="cpp_code">b = 0</p>
+                        <p>Как видно из результата работы программы, конструктор срабатывает сразу, при создании объектов класса, поэтому вызывать конструктор не нужно, он сам «приходит».</p>
+                        <p>Также, как и обычным функциям можно передавать конструктору параметры. Через параметры, конструктору можно передавать любые данные, которые будут необходимы при инициализации объектов класса.</p>
+                        <p>Рассмотрим еще один пример, это та же программа, только в код внесены некоторые изменения.</p>
+                        <p>Сейчас мы покажем принцип работы деструктора:</p>
+                        <p class="cpp_code"># include &lt;iostream&gt;</p>
+                        <br>
+                        <p class="cpp_code">using namespace std;</p>
+                        <br>
+                        <p class="cpp_code">class AB //класс</p>
+                        <p class="cpp_code">{</p>
+                        <p class="cpp_code_1t">private:</p>
+                        <p class="cpp_code_2t">int a;</p>
+                        <p class="cpp_code_2t">int b;</p>
+                        <p class="cpp_code_1t">public:</p>
+                        <p class="cpp_code_2t">AB(int A, int B) //эти параметры мы передадим при создании объекта в main</p>
+                        <p class="cpp_code_2t">{</p>
+                        <p class="cpp_code_3t">a = A;//присвоим нашим элементам класса значения параметров</p>
+                        <p class="cpp_code_3t">b = B;</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "Тут сработал конструктор, который принимает параметры: " &lt;&lt; endl;//и здесь же их отобразим на экран</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "a = " &lt;&lt; a &lt;&lt; endl;</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "b = " &lt;&lt; b &lt;&lt; endl &lt;&lt; endl;</p>
+                        <p class="cpp_code_2t">}</p>
+                        <br>
+                        <p class="cpp_code_2t">void setAB()</p>
+                        <p class="cpp_code_2t">{</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "Введите целое число а: ";</p>
+                        <p class="cpp_code_3t">cin >> a;</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "Введите целое число b: ";</p>
+                        <p class="cpp_code_3t">cin >> b;</p>
+                        <p class="cpp_code_2t">}</p>
+                        <br>
+                        <p class="cpp_code_2t">void getAB()</p>
+                        <p class="cpp_code_2t">{</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "a = " &lt;&lt; a &lt;&lt; endl;</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "b = " &lt;&lt; b &lt;&lt; endl &lt;&lt; endl;</p>
+                        <p class="cpp_code_2t">}</p>
+                        <br>
+                        <p class="cpp_code_2t">~AB() // это деструктор. не будем заставлять его чистить память, пусть просто покажет где он сработал</p>
+                        <p class="cpp_code_2t">{</p>
+                        <p class="cpp_code_3t">cout &lt;&lt; "Тут сработал деструктор" &lt;&lt; endl;</p>
+                        <p class="cpp_code_2t">}</p>
+                        <p class="cpp_code">};</p>
+                        <br>
+                        <p class="cpp_code">int main()</p>
+                        <p class="cpp_code">{</p>
+                        <p class="cpp_code_1t">setlocale(LC_ALL, "rus");</p>
+                        <p class="cpp_code_1t">AB obj1(100, 100); //передаем конструктору параметры</p>
+                        <p class="cpp_code_1t">obj1.setAB(); //присвоим новые значения переменным</p>
+                        <p class="cpp_code_1t">obj1.getAB(); //и выведем их на экран</p>
+                        <p class="cpp_code_1t">AB obj2(200, 200); //передаем конструктору параметры</p>
+                        <p class="cpp_code">}</p>
+                        <p>Теперь посмотрим результат работы программы:</p>
+                        <p class="cpp_code">Тут сработал конструктор, который принимает параметры:</p>
+                        <p class="cpp_code">a = 100</p>
+                        <p class="cpp_code">b = 100</p>
+                        <br>
+                        <p class="cpp_code">Введите целое число а: 333</p>
+                        <p class="cpp_code">Введите целое число b: 333</p>
+                        <p class="cpp_code">a = 333</p>
+                        <p class="cpp_code">b = 333</p>
+                        <br>
+                        <p class="cpp_code">Тут сработал конструктор, который принимает параметры: </p>
+                        <p class="cpp_code">a = 200</p>
+                        <p class="cpp_code">b = 200</p>
+                        <br>
+                        <p class="cpp_code">Тут сработал деструктор</p>
+                        <p class="cpp_code">Тут сработал деструктор</p>
+                        <p>Деструктор срабатывает в тот момент, когда завершается работа программы и уничтожаются все данные. Мы его не вызывали – он сработал сам. Как видно, он сработал 2 раза, как и конструктор. В первую очередь, он удалил второй созданный
+                            объект (где a = 200, b = 200), а затем первый (где a = 100, b = 100).</p>
                     </div>
                 </div>
                 <hr>
@@ -1214,11 +1362,11 @@
                             — это <span class="font-bold font-italic">*.h</span> и заполняем поле «Имя файла». Имя выбираем осмысленное, как правило такое же, как и имя класса. Теперь к нашему проекту добавлен новый заголовочный файл — <span class="font-bold font-italic">CppStudio.h</span>.</p>
                         <p>В только что созданном заголовочном файле объявляем класс и, если необходимо, подключаем дополнительные заголовочные. Вот, что должно получиться:</p>
                         <p class="cpp_code">// заголовочный файл CppStudio.h</p>
-                        <p></p>
+                        <br>
                         <p class="cpp_code">#include &lt;iostream&gt;</p>
-                        <p></p>
+                        <br>
                         <p class="cpp_code">using namespace std;</p>
-                        <p></p>
+                        <br>
                         <p class="cpp_code">// объявление класса</p>
                         <p class="cpp_code">class CppStudio // имя класса</p>
                         <p class="cpp_code">{</p>
@@ -1249,11 +1397,11 @@
                         <p>Чтобы главная функция увидела созданный нами класс и смогла его использовать, необходимо включить определение класса в исполняемом файле, с функцией main.</p>
                         <p>Вот как это сделать:</p>
                         <p class="cpp_code">// classes.cpp: определяет точку входа для консольного приложения.</p>
-                        <p></p>
+                        <br>
                         <p class="cpp_code">#include "stdafx.h"</p>
                         <p class="cpp_code">// подключаем класс CppStudio</p>
                         <p class="cpp_code">#include "CppStudio.h"</p>
-                        <p></p>
+                        <br>
                         <p class="cpp_code">int main(int argc, char*argv[])</p>
                         <p class="cpp_code">{</p>
                         <p class="cpp_code_1t">CppStudio objCppstudio(11,11,2011); // объявление объекта и инициализвция элементов данных</p>
@@ -1263,6 +1411,101 @@
                         <p class="cpp_code_1t">return 0;</p>
                         <p class="cpp_code">}</p>
                         <p>В пятой строке подключено определение класса CppStudio, только после этого можно создавать объекты класса, использовать его методы и так далее.</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="slide" style="padding-left: 3%;">
+                    <label for="slide-Implementation_classes">
+                            <h3>Separating the Interface from the Implementation / Отделение интерфейса от реализации</h3> 
+                        </label>
+                    <input type="checkbox" id="slide-Implementation_classes" />
+                    <div class="slide-text">
+                        <p><span class="font-bold font-italic">Интерфейс класса</span> — конструкция, определяющая методы и свойства, предоставляемые классом.</p>
+                        <p><span class="font-bold font-italic">Реализация класса</span> — способ осуществления работоспособности класса.</p>
+                        <p><span class="font-bold font-italic">Отделение</span> интерфейса от <span class="font-bold font-italic">реализации</span> класса выполняется для того, чтобы скрыть способ осуществления работоспособности класса.</p>
+                        <ol>
+                            <p>Отделение интерфейса от реализации выполняется за 5 шагов:</p>
+                            <li>Добавить в проект заголовочный файл *.h.</li>
+                            <li>Определить интерфейс класса в заголовочном файле.</li>
+                            <li>Добавить в проект исполняемый файл *.cpp.</li>
+                            <li>В исполняемом файле выполнить реализацию класса.</li>
+                            <li>Подключить заголовочный файл к программе.</li>
+                        </ol>
+                        <p>Теперь рассмотрим, как должен выглядеть интерфейс класса:</p>
+                        <p class="cpp_code">// заголовочный файл класса СppStudio.h</p>
+                        <p class="cpp_code">// интерфейс класса</p>
+                        <br>
+                        <p class="cpp_code">// объявление класса</p>
+                        <p class="cpp_code">class CppStudio // имя класса</p>
+                        <p class="cpp_code">{</p>
+                        <p class="cpp_code_1t">private: // спецификатор доступа private</p>
+                        <p class="cpp_code_2t">int day, // день</p>
+                        <p class="cpp_code_2t">month, // месяц</p>
+                        <p class="cpp_code_2t">year; // год</p>
+                        <p class="cpp_code_1t">public: // спецификатор доступа public</p>
+                        <p class="cpp_code_2t">CppStudio(int, int, int); // конструктор класса</p>
+                        <p class="cpp_code_2t">void message(); // функция (метод класса) выводящая сообщение на экран</p>
+                        <p class="cpp_code_2t">void setDate(int, int, int); // установка даты в формате дд.мм.гг</p>
+                        <p class="cpp_code_2t">void getDate(); // отобразить текущую дату</p>
+                        <p class="cpp_code">}; // конец объявления класса CppStudio</p>
+                        <p>В интерфейсе класса остались объявленные переменные и прототипы методов класса.</p>
+                        <p>Теперь рассмотрим содержимое файла реализации методов класса:</p>
+                        <p class="cpp_code">// файл реализации класса CppStudio.cpp</p>
+                        <br>
+                        <p class="cpp_code">#include &lt;iostream&gt;</p>
+                        <br>
+                        <p class="cpp_code">using namespace std;</p>
+                        <br>
+                        <p class="cpp_code">// подключаем интерфейс класса к файлу его реализации</p>
+                        <p class="cpp_code">#include "CppStudio.h"</p>
+                        <br>
+                        <p class="cpp_code">CppStudio::CppStudio(int date_day, int date_month, int date_year ) // конструктор класса</p>
+                        <p class="cpp_code">{</p>
+                        <p class="cpp_code_1t">setDate(date_day, date_month, date_year); // вызов функции установки даты</p>
+                        <p class="cpp_code">}</p>
+                        <br>
+                        <p class="cpp_code">void CppStudio::message() // функция (метод класса) выводящая сообщение на экран</p>
+                        <p class="cpp_code">{</p>
+                        <p class="cpp_code_1t">cout &lt;&lt; "nwebsite: cppstudio.comntheme: Classes and Objects in C + +n";</p>
+                        <p class="cpp_code">}</p>
+                        <br>
+                        <p class="cpp_code">void CppStudio::setDate(int date_day, int date_month, int date_year) // установка даты в формате дд.мм.гг</p>
+                        <p class="cpp_code">{</p>
+                        <p class="cpp_code_1t">day = date_day; // инициализация день</p>
+                        <p class="cpp_code_1t">month = date_month; // инициализация месяц</p>
+                        <p class="cpp_code_1t">year = date_year; // инициализация год</p>
+                        <p class="cpp_code">}</p>
+                        <br>
+                        <p class="cpp_code">void CppStudio::getDate() // отобразить текущую дату</p>
+                        <p class="cpp_code">{</p>
+                        <p class="cpp_code_1t">cout &lt;&lt; "date: " &lt;&lt; day &lt;&lt; "." &lt;&lt; month &lt;&lt; "." &lt;&lt; year &lt;&lt; endl;</p>
+                        <p class="cpp_code">}</p>
+                        <p>Чтобы связать интерфейс класса и его реализацию, необходимо в файле реализации подключить заголовочный файл с определением класса, строка 6. После этого можно объявлять методы класса.</p>
+                        <p>Методы класса объявляются точно так же как и функции, только перед именем метода необходимо написать имя класса и поставить унарную операцию разрешения области действия &laquo;::&raquo;:</p>
+                        <p class="cpp_code">// синтаксис объявления методов класса вне тела класса</p>
+                        <p class="cpp_code">/*возвращаемый тип данных*/ /*имя класса*/::/*имя метода*/(/*параметры метода*/)</p>
+                        <p class="cpp_code">{</p>
+                        <p class="cpp_code_1t">// операторы</p>
+                        <p class="cpp_code">}</p>
+                        <p>Так как методы класса объявляются вне тела класса, то необходимо связать реализацию метода с классом, для этого используется бинарная операция разрешения области действия. Эта операция привязывает метод, объявленный извне, к классу,
+                            имя которого совпадает с именем в объявлении метода. Поэтому в объявлении метода класса необходимо добавлять имя класса и операцию разрешения области действия.</p>
+                        <p>Теперь, когда интерфейс класса определён, методы класса объявлены, осталось подключить заголовочный файл в исполняемом файле с функцией main и программа готова.</p>
+                        <p class="cpp_code">// classes.cpp: определяет точку входа для консольного приложения.</p>
+                        <br>
+                        <p class="cpp_code">#include "stdafx.h"</p>
+                        <br>
+                        <p class="cpp_code">// подключаем класс CppStudio</p>
+                        <p class="cpp_code">#include "CppStudio.h"</p>
+                        <br>
+                        <p class="cpp_code">int main(int argc, char*argv[])</p>
+                        <p class="cpp_code">{</p>
+                        <p class="cpp_code_1t">CppStudio objCppstudio(11,11,2011); // объявление объекта и инициализвция элементов данных</p>
+                        <p class="cpp_code_1t">objCppstudio.message(); // вызов функции message</p>
+                        <p class="cpp_code_1t">objCppstudio.getDate(); // отобразить дату</p>
+                        <p class="cpp_code_1t">system("pause");</p>
+                        <p class="cpp_code_1t">return 0;</p>
+                        <p class="cpp_code">}</p>
+                        <p>В строке 5 подключаем заголовочный файл класса, после чего можно создавать объекты этого класса.</p>
                     </div>
                 </div>
                 <hr>
