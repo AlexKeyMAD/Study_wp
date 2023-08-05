@@ -8,16 +8,26 @@
   background-color: #070217;
 }
 
-.logo{
+.logo {
   display: block;
   margin-bottom: 50px;
 }
 
-.links{
+.links {
   margin-bottom: 50px;
 }
 
-.links a{
+.links a {
   display: inline-block;
   margin: 24px 49px;
+}
+
+.links a:not(:last-child) {
+  margin-right: 25px;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 80px 0;
+  width: 1170px;
 }
