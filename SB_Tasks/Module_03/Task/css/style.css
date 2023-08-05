@@ -1,0 +1,23 @@
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: #fff;
+  background-color: #070217;
+}
+
+.logo{
+  display: block;
+  margin-bottom: 50px;
+}
+
+.links{
+  margin-bottom: 50px;
+}
+
+.links a{
+  display: inline-block;
+  margin: 24px 49px;
+}
