@@ -1,3 +1,26 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  font-family: 'font', sans-serif;
+}
+
 .main-content {
   display: flex;
   flex-direction: column;
@@ -30,4 +53,55 @@
   margin: 0 auto;
   padding: 80px 0;
   width: 1170px;
+}
+
+.container p {
+  margin: 0 0 40px;
+  width: 872px;
+}
+
+figure {
+  display: inline-block;
+  margin: 0 0 40px;
+  width: 872px;
+}
+
+.main-header {
+  margin: 0 0 40px;
+}
+
+.grey-block {
+  border-radius: 20px;
+  padding: 30px;
+  background-color: #f3f3f3;
+}
+
+.grey-block:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+.grey-block p {
+  margin-bottom: 10px;
+  width: 692;
+}
+
+h2 {
+  margin: 0 0 10px;
+
+}
+
+h3 {
+  margin: 0 0 10px;
+}
+
+ul {
+  padding-left: 15px;
+}
+
+li:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+img:not(figure img) {
+  margin-bottom: 40px;
 }
