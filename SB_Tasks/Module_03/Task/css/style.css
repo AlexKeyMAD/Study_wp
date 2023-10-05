@@ -42,7 +42,7 @@ body {
 
 .links a {
   display: inline-block;
-  margin: 24px 49px;
+  padding: 24px 49px;
 }
 
 .links a:not(:last-child) {
@@ -94,14 +94,14 @@ h3 {
   margin: 0 0 10px;
 }
 
-ul {
+.ul_container ul {
   padding-left: 15px;
 }
 
-li:not(:last-child) {
+.ul_container li:not(:last-child) {
   margin-bottom: 20px;
 }
 
-img:not(figure img) {
+.container img:not(figure img) {
   margin-bottom: 40px;
 }
