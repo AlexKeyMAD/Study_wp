@@ -182,27 +182,38 @@ h3 {
     color: #3f2aff;
 }
 
-.img_arrow {
-    width: 45px;
-    height: 5px;
+.list_box {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
 }
 
 .module_box {
-    display: inline-block;
+    display: block;
     box-sizing: border-box;
     width: 572px;
     height: 505px;
     box-shadow: 0px 0px 40px 0px #0000001A;
+    background-position: top center;
+    background-repeat: no-repeat;
+    margin-bottom: 26px;
 }
 
-.module_box p {
+.module_box:nth-child(2n) {
+  margin-left: 26px;
+}
+
+.module_box ul {
+  padding-top: 200px;
+}
+
+.module_box li {
     width: 100%;
     font-family: Arial;
     font-weight: 400;
     margin: 0;
+    list-style: none;
 }
-
-.line_box {}
 
 .show_button {
     border: 2px solid #3F2AFF;
@@ -211,4 +222,31 @@ h3 {
 
 .blue_text_color {
     color: #3f2aff;
+}
+
+.bg_img_intro {
+  background-image: url("../img/intro.jpg");
+}
+
+.bg_img_basicHTML {
+  background-image: url("../img/basicHTML.jpg");
+}
+
+.bg_img_basicCSS {
+  background-image: url("../img/BasicCSS.jpg");
+}
+
+.bg_img_maketWorking {
+  background-image: url("../img/maketWorking.jpg");
+}
+
+.to_main{
+  background-image: url("../img/Arrow\ 1.jpg");
+  background-position: left center;
+  background-repeat: no-repeat;
+  margin: 0;
+}
+
+.to_main a {
+  margin-left: 50px;
 }
