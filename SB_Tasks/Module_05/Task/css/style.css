@@ -200,10 +200,12 @@ h3 {
   background-repeat: no-repeat;
   margin-bottom: 26px;
   position: relative;
+  vertical-align: top;
+  line-height: 30px;
 }
 
-.module_box:nth-child(2n) {
-  margin-left: 20px;
+.module_box:not(:nth-child(2n)) {
+  margin-right: 20px;
 }
 
 .module_box ul {
