@@ -1,0 +1,16 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Verdana, sans-serif;
+  width: 1170px;
+}
+
+.button-menu {
+  border: 1px solid #cc9933;
+  border-radius: 10px;
+  background-color: white;
+  color: #cc9933;
+  font-size: 16px;
+}
