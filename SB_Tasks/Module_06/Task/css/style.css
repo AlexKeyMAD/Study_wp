@@ -30,3 +30,10 @@ body {
 .border-radius-img {
   border-radius: 15px;
 }
+
+.details-link {
+  background-image: url("../img/details.svg");
+  width: 105px;
+  height: 16px;
+  border: none;
+}
