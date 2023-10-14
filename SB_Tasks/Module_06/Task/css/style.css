@@ -14,3 +14,19 @@ body {
   color: #cc9933;
   font-size: 16px;
 }
+
+.tours-1-div {
+  background-image: url("../img/tours-1.jpg");
+}
+
+.tours-2-div {
+  background-image: url("../img/tours-2.jpg");
+}
+
+.lux-room-div {
+  background-image: url("../img/lux-room.jpg");
+}
+
+.border-radius-img {
+  border-radius: 15px;
+}
