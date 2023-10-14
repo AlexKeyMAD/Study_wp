@@ -7,6 +7,10 @@ body {
   width: 1170px;
 }
 
+main {
+  width: 100%;
+}
+
 .button-menu {
   border: 1px solid #cc9933;
   border-radius: 10px;
@@ -17,14 +21,29 @@ body {
 
 .tours-1-div {
   background-image: url("../img/tours-1.jpg");
+  position: relative;
+  background-position: left center;
+  background-repeat: no-repeat;
+  height: 258px;
+  width: 573px;
 }
 
 .tours-2-div {
   background-image: url("../img/tours-2.jpg");
+  position: relative;
+  background-position: left center;
+  background-repeat: no-repeat;
+  height: 258px;
+  width: 573px;
 }
 
 .lux-room-div {
   background-image: url("../img/lux-room.jpg");
+  position: relative;
+  background-position: left center;
+  background-repeat: no-repeat;
+  height: 540px;
+  width: 573px;
 }
 
 .border-radius-img {
@@ -36,4 +55,14 @@ body {
   width: 105px;
   height: 16px;
   border: none;
+}
+
+.special {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.tours-special {
+  display: block;
 }
