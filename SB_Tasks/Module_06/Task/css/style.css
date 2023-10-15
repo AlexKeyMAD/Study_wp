@@ -5,6 +5,7 @@ html {
 body {
   font-family: Arial, Verdana, sans-serif;
   width: 1170px;
+  background-color: #f1f1f1;
 }
 
 main {
@@ -65,4 +66,32 @@ main {
 
 .tours-special {
   display: block;
+}
+
+.services-box-img-1 {
+  background-image: url("../img/services-img-1.jpg");
+}
+
+.services-box-img-2 {
+  background-image: url("../img/services-img-2.jpg");
+}
+
+.services-box-img-3 {
+  background-image: url("../img/services-img-3.jpg");
+}
+
+.services-box-img-4 {
+  background-image: url("../img/services-img-4.jpg");
+}
+
+.services-box {
+  display: inline-block;
+  position: relative;
+  background-position: top center;
+  background-repeat: no-repeat;
+  width: 573px;
+  height: 330px;
+  vertical-align: top;
+  background-color: white;
+  border-radius: 15px;
 }
