@@ -6,18 +6,85 @@ body {
   font-family: Arial, Verdana, sans-serif;
   width: 1170px;
   background-color: #f1f1f1;
+  margin: auto;
 }
 
 main {
   width: 100%;
 }
 
-.button-menu {
+div {
+  border-radius: 15px;
+}
+
+.button {
   border: 1px solid #cc9933;
   border-radius: 10px;
   background-color: white;
   color: #cc9933;
   font-size: 16px;
+  padding: 13px 20px !important;
+}
+
+.button:hover {
+  background-color: #cc9933;
+  color: white;
+}
+
+.button:focus {
+  background-color: #cc9933;
+  color: white;
+}
+
+.button:active {
+  background-color: #a47312;
+  color: white;
+}
+
+.menu {
+  background-color: white;
+  width: 100%;
+  margin: 10px 0;
+  padding-right: 20px;
+  text-align: right;
+}
+
+.menu ul {
+  padding: 0 180px 0 40px;
+  width: 70%;
+  display: inline;
+}
+
+.menu li {
+  display: inline;
+  padding: 25px 15px;
+}
+
+.menu button {
+  display: inline-block;
+  margin: 10px 20px;
+}
+
+.link {
+  font-family: "Muller";
+  font-weight: 400;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #cc9933;
+}
+
+.link:focus {
+  border: 1px solid #cc9933;
+  border-radius: 0;
+}
+
+.link:active {
+  color: #a47312;
+  font-weight: bold;
 }
 
 .tours-1-div {
@@ -45,10 +112,7 @@ main {
   background-repeat: no-repeat;
   height: 540px;
   width: 573px;
-}
-
-.border-radius-img {
-  border-radius: 15px;
+  display: inline-block;
 }
 
 .details-link {
@@ -62,10 +126,12 @@ main {
   display: inline-block;
   box-sizing: border-box;
   width: 100%;
+  vertical-align: top;
 }
 
 .tours-special {
-  display: block;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .services-box-img-1 {
@@ -93,5 +159,89 @@ main {
   height: 330px;
   vertical-align: top;
   background-color: white;
-  border-radius: 15px;
+}
+
+.advantages {
+  width: 276px;
+  height: 276px;
+  display: inline-block;
+  background-color: white;
+}
+
+.accomodation-box {
+  display: inline-block;
+  position: relative;
+  background-position: top center;
+  background-repeat: no-repeat;
+  width: 374px;
+  height: 440px;
+  vertical-align: top;
+  background-color: white;
+}
+
+.accomodation-box-img-1 {
+  background-image: url("../img/accomodation-img-1.jpg");
+}
+
+.accomodation-box-img-2 {
+  background-image: url("../img/accomodation-img-2.jpg");
+}
+
+.accomodation-box-img-3 {
+  background-image: url("../img/accomodation-img-3.jpg");
+}
+
+.accomodation-box-img-4 {
+  background-image: url("../img/accomodation-img-4.jpg");
+}
+
+.accomodation-box-img-5 {
+  background-image: url("../img/accomodation-img-5.jpg");
+}
+
+.accomodation-box-img-6 {
+  background-image: url("../img/accomodation-img-6.jpg");
+}
+
+.accomodation-box-img-7 {
+  background-image: url("../img/accomodation-img-7.jpg");
+}
+
+.accomodation-box-img-8 {
+  background-image: url("../img/accomodation-img-8.jpg");
+}
+
+.accomodation-box-img-9 {
+  background-image: url("../img/accomodation-img-9.jpg");
+  display: inline-block;
+  position: relative;
+  background-position: top center;
+  background-repeat: no-repeat;
+  width: 374px;
+  height: 440px;
+  vertical-align: top;
+}
+
+.div-want-tour {
+  background-color: #e9e9e9;
+  width: 100%;
+  height: 256px;
+}
+
+.search-tour {
+  background-color: white;
+  width: 90%;
+  height: 106px;
+}
+
+.contacts {
+  background-color: white;
+  width: 100%;
+  height: 618px;
+}
+
+.info {
+  background-color: #333333;
+  width: 100%;
+  height: 341px;
 }
