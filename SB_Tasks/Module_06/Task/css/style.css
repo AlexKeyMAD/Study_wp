@@ -1,9 +1,75 @@
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerMedium.eot');
+  src: local('Muller Medium'), local('MullerMedium'),
+      url('../fonts/MullerMedium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerRegular.eot');
+  src: local('Muller Regular'), local('MullerRegular'),
+      url('../fonts/MullerRegular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerHeavy.eot');
+  src: local('Muller Heavy'), local('MullerHeavy'),
+      url('../fonts/MullerHeavy.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerThin.eot');
+  src: local('Muller Thin'), local('MullerThin'),
+      url('../fonts/MullerThin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerLight.eot');
+  src: local('Muller Light'), local('MullerLight'),
+      url('../fonts/MullerLight.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerBlack.eot');
+  src: local('Muller Black'), local('MullerBlack'),
+      url('../fonts/MullerBlack.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerBold.eot');
+  src: local('Muller Bold'), local('MullerBold'),
+      url('../fonts/MullerBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerExtraBold.eot');
+  src: local('Muller ExtraBold'), local('MullerExtraBold'),
+      url('../fonts/MullerExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+
 html {
   box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, Verdana, sans-serif;
+  font-family: Muller, Arial, Verdana, sans-serif;
   width: 1170px;
   background-color: #f1f1f1;
   margin: auto;
@@ -82,6 +148,11 @@ h1 {
   background-image: url("../img/personal-button-focus.png");
 }
 
+.button-div {
+  display: inline-block;
+  margin-right: 25px;
+}
+
 .button {
   border: 1px solid #cc9933;
   border-radius: 10px;
@@ -110,12 +181,11 @@ h1 {
   background-color: white;
   width: 100%;
   margin: 10px 0;
-  padding-right: 20px;
   text-align: right;
 }
 
 .menu ul {
-  padding: 0 180px 0 40px;
+  padding: 0 100px 0 10px;
   width: 70%;
   display: inline;
 }
