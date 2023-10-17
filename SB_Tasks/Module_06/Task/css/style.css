@@ -2,39 +2,43 @@
   font-family: 'Muller';
   src: url('../fonts/MullerMedium.eot');
   src: local('Muller Medium'), local('MullerMedium'),
-      url('../fonts/MullerMedium.woff2') format('woff2');
+    url('../fonts/MullerMedium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Muller';
   src: url('../fonts/MullerRegular.eot');
   src: local('Muller Regular'), local('MullerRegular'),
-      url('../fonts/MullerRegular.woff2') format('woff2');
+    url('../fonts/MullerRegular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Muller';
   src: url('../fonts/MullerHeavy.eot');
   src: local('Muller Heavy'), local('MullerHeavy'),
-      url('../fonts/MullerHeavy.woff2') format('woff2');
+    url('../fonts/MullerHeavy.woff2') format('woff2');
   font-weight: 900;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Muller';
   src: url('../fonts/MullerThin.eot');
   src: local('Muller Thin'), local('MullerThin'),
-      url('../fonts/MullerThin.woff2') format('woff2');
+    url('../fonts/MullerThin.woff2') format('woff2');
   font-weight: 100;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Muller';
   src: url('../fonts/MullerLight.eot');
   src: local('Muller Light'), local('MullerLight'),
-      url('../fonts/MullerLight.woff2') format('woff2');
+    url('../fonts/MullerLight.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
 }
@@ -43,23 +47,25 @@
   font-family: 'Muller';
   src: url('../fonts/MullerBlack.eot');
   src: local('Muller Black'), local('MullerBlack'),
-      url('../fonts/MullerBlack.woff2') format('woff2');
+    url('../fonts/MullerBlack.woff2') format('woff2');
   font-weight: 900;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Muller';
   src: url('../fonts/MullerBold.eot');
   src: local('Muller Bold'), local('MullerBold'),
-      url('../fonts/MullerBold.woff2') format('woff2');
+    url('../fonts/MullerBold.woff2') format('woff2');
   font-weight: bold;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Muller';
   src: url('../fonts/MullerExtraBold.eot');
   src: local('Muller ExtraBold'), local('MullerExtraBold'),
-      url('../fonts/MullerExtraBold.woff2') format('woff2');
+    url('../fonts/MullerExtraBold.woff2') format('woff2');
   font-weight: 800;
   font-style: normal;
 }
@@ -235,6 +241,7 @@ h1 {
 .tours-div-content {
   padding: 40px 45px;
 }
+
 .tours-div-content h3 {
   font-style: Muller;
   font-weight: 700;
@@ -355,12 +362,47 @@ h1 {
   background-color: white;
 }
 
+.service-box-content {
+  margin: 180px 10px 10px 30px;
+  width: 402px;
+  font-family: 'Muller';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.service-box-content p {
+  margin: 0;
+}
+
 .advantages {
   width: 276px;
   height: 276px;
   display: inline-block;
   background-color: white;
   vertical-align: top;
+}
+
+.advantages:not(:nth-last-child(-n+4)) {
+  margin-bottom: 10px;
+}
+
+.advantages:not(:nth-child(4n+1)) {
+  margin-right: 10px;
+}
+
+.advantages img {
+  padding-top: 50px;
+  padding-left: 50px;
+}
+
+.advantages p {
+  width: 190px;
+  font-family: 'Muller';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
+  padding-left: 50px;
 }
 
 .accomodation-box {
@@ -372,6 +414,20 @@ h1 {
   height: 440px;
   vertical-align: top;
   background-color: white;
+}
+
+.accomodation-box:not(:nth-child(3n+1)) {
+  margin-right: 20px;
+}
+
+.accomodation-box:not(:nth-last-child(2)) {
+  margin-bottom: 20px;
+}
+
+.accomodation-box-content {
+  margin-top: 240px;
+  margin-left: 40px;
+  position: relative;
 }
 
 .accomodation-box-img-1 {
@@ -417,17 +473,52 @@ h1 {
   vertical-align: top;
 }
 
+.accomodation p {
+  display: block;
+  font-family: 'Muller';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.location {
+  color: #999999;
+}
+
+.first-str {
+  position: relative;
+  width: 85%;
+}
+
+.stars {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+.all-variants-link {
+  display: block;
+  position: absolute;
+  margin: auto;
+  bottom: 20px;
+  left: 50px;
+}
+
 .div-want-tour {
   background-color: #e9e9e9;
   width: 100%;
   height: 256px;
 }
 
+.div-want-tour h1 {
+  padding-top: 30px;
+}
+
 .search-tour {
   background-color: white;
-  width: 90%;
+  width: 93%;
   height: 106px;
-  margin: auto;
+  margin: auto 40px;
 }
 
 .contacts {
