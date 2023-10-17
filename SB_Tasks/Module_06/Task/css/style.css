@@ -13,8 +13,73 @@ main {
   width: 100%;
 }
 
+header {
+  margin-top: 5px;
+  width: 100%;
+}
+
 div {
   border-radius: 15px;
+}
+
+h1 {
+  font-family: Muller;
+  font-weight: 400;
+  font-size: 40px;
+  margin-left: 40px;
+}
+
+.header-div {
+  position: relative;
+}
+
+.tel-link {
+  width: 165px;
+  height: 35px;
+  border: none;
+  margin-left: 30px;
+  position: relative;
+  top: -10px;
+  background-position: left center;
+  background-repeat: no-repeat;
+
+  background-image: url("../img/tel-button.png");
+}
+
+.tel-link:hover {
+  background-image: url("../img/tel-button-hover.png");
+}
+
+.tel-link:active {
+  background-image: url("../img/tel-button-active.png");
+}
+
+.tel-link:focus {
+  background-image: url("../img/tel-button-focus.png");
+}
+
+.personal-link {
+  width: 155px;
+  height: 40px;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-image: url("../img/personal-button.png");
+}
+
+.personal-link:hover {
+  background-image: url("../img/personal-button-hover.png");
+}
+
+.personal-link:active {
+  background-image: url("../img/personal-button-active.png");
+}
+
+.personal-link:focus {
+  background-image: url("../img/personal-button-focus.png");
 }
 
 .button {
@@ -70,11 +135,6 @@ div {
   width: 35%;
 }
 
-.personal-link {
-  display: inline-block;
-  width: 35%;
-}
-
 .link {
   font-family: "Muller";
   font-weight: 400;
@@ -86,6 +146,7 @@ div {
 
 .link:hover {
   color: #cc9933;
+  border: none;
   border: none;
 }
 
@@ -100,6 +161,25 @@ div {
   border: none;
 }
 
+.tours-div-content {
+  padding: 40px 45px;
+}
+.tours-div-content h3 {
+  font-style: Muller;
+  font-weight: 700;
+  font-size: 40px;
+  color: white;
+  margin: 0;
+}
+
+.tours-div-content p {
+  font-style: Muller;
+  font-weight: 400;
+  font-size: 20px;
+  color: white;
+  margin-top: 5px;
+}
+
 .tours-1-div {
   background-image: url("../img/tours-1.jpg");
   position: relative;
@@ -107,6 +187,7 @@ div {
   background-repeat: no-repeat;
   height: 258px;
   width: 573px;
+  margin-right: 15px;
 }
 
 .tours-2-div {
@@ -116,6 +197,8 @@ div {
   background-repeat: no-repeat;
   height: 258px;
   width: 573px;
+  margin-top: 25px;
+  margin-right: 15px;
 }
 
 .lux-room-div {
