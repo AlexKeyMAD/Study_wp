@@ -93,6 +93,7 @@ h1 {
   font-weight: 400;
   font-size: 40px;
   margin-left: 40px;
+  margin-top: 70px;
 }
 
 .header-div {
@@ -281,8 +282,28 @@ h1 {
   display: inline-block;
 }
 
+.lux-room-content {
+  padding: 170px 45px;
+}
+
+.lux-room-content h3 {
+  font-style: Muller;
+  font-weight: 700;
+  font-size: 60px;
+  color: white;
+  margin: 0;
+}
+
+.lux-room-content p {
+  font-style: Muller;
+  font-weight: 400;
+  font-size: 30px;
+  color: white;
+  margin-top: 5px;
+
+}
+
 .details-link {
-  background-image: url("../img/details.svg");
   width: 105px;
   height: 16px;
   border: none;
@@ -298,6 +319,13 @@ h1 {
 .tours-special {
   display: inline-block;
   vertical-align: top;
+}
+
+.about-us {
+  width: 888px;
+  line-height: 32px;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .services-box-img-1 {
