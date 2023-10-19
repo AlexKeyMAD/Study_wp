@@ -521,17 +521,106 @@ h1 {
   margin: auto 40px;
 }
 
+.search-tour label {
+  font-family: 'Muller';
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12px;
+  display: block;
+}
+
+.search-tour select,input {
+  font-family: 'Muller';
+  font-size: 16px;
+  border: none;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.search-tour button {
+  width: 108px;
+  margin-left: 45px;
+  margin-top: 30px;
+  vertical-align: top;
+}
+
+.search-tour-div option {
+  padding-left: 0;
+}
+
+.search-tour-div {
+  display: inline-block;
+  margin: 30px 10px;
+}
+
+.search-tour-div:nth-child(n+1) {
+  margin-left: 25px;
+}
+
+.search-tour-div:nth-child(-n+2) {
+  width: 169px;
+}
+
+.search-tour-div:not(:nth-child(-n+2)) {
+  width: 121px;
+}
+
+.imput-search {
+  border-bottom: 1px solid #e9e9e9;
+}
+
 .contacts {
   background-color: white;
   width: 100%;
   height: 618px;
   position: relative;
+  margin-bottom: 45px;
 }
 
 .contacts-data {
   display: inline-block;
-  margin: 20px 25px;
-  width: 410px;
+  margin: 45px;
+  width: 375px;
+  vertical-align: top;
+}
+
+.contacts-data tr:nth-child(n+2) td {
+  padding-top: 18px;
+}
+
+.contacts-data td {
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.contacts-data td {
+  padding-bottom: 18px;
+}
+
+.contacts-data p {
+  color: #999999;
+  margin: 5px 0;
+}
+
+.contacts-data td:nth-child(2n) {
+  font-family: 'Muller';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  padding-left: 45px;
+}
+
+.contacts-data td:not(:nth-child(2n)) {
+  font-family: 'Muller';
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.contacts-data button {
+  width: 213px;
+  height: 70px;
+  margin-top: 45px;
 }
 
 .contacts-photo {
@@ -553,15 +642,6 @@ h1 {
   line-height: 30px;
   color: #ffffff;
   margin-bottom: 25px;
-}
-
-.info a {
-  color: #cc9933;
-  font-family: 'Muller';
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  text-decoration: none;
 }
 
 .info-div-1 {
@@ -594,6 +674,12 @@ h1 {
 .info-link {
   float: left;
   clear: left;
+  color: #cc9933;
+  font-family: 'Muller';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
 }
 
 .info-div-3 {
@@ -619,12 +705,15 @@ h1 {
 .button-eyes {
   background-image: url("../img/eyes.png");
 }
+
 .button-eyes:hover {
   background-image: url("../img/eyes-hover.png");
 }
+
 .button-eyes:focus {
   background-image: url("../img/eyes-focus.png");
 }
+
 .button-eyes:active {
   background-image: url("../img/eyes-active.png");
 }

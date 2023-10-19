@@ -299,7 +299,38 @@
       <div class="div-want-tour">
         <h1 id="want-tour">Хочу тур</h1>
         <div class="search-tour">
-
+          <div class="search-tour-div">
+            <label for="sity-select">Город вылета</label>
+            <select name="city" id="sity-select">
+              <option value="Moscow">Москва</option>
+              <option value="SPB">Санкт-Петербург</option>
+              <option value="Krasnodar">Краснодар</option>
+              <option value="Omsk">Омск</option>
+              <option value="Vladivostok">Владивосток</option>
+            </select>
+          </div>
+          <div class="search-tour-div">
+            <label for="country-select">Страна</label>
+            <select name="country" id="country-select">
+              <option value="Australia">Австралия</option>
+              <option value="USA">США</option>
+              <option value="Kanada">Канада</option>
+              <option value="Turkey">Турция</option>
+              <option value="Kazakhstan">Казахстан</option>
+            </select></div>
+          <div class="search-tour-div">
+            <label for="date-arival-select">Дата прибытия</label>
+            <input type="date" id="date-arival-select">
+          </div>
+          <div class="search-tour-div">
+            <label for="nights">Ночей</label>
+            <input type="number" id="nights" class="imput-search">
+          </div>
+          <div class="search-tour-div">
+            <label for="tourists">Туристы</label>
+            <input type="number" id="tourists" class="imput-search">
+          </div>
+          <button class="button">Найти</button>
         </div>
       </div>
     </main>
@@ -311,7 +342,7 @@
             <table>
               <tr>
                 <td>Адрес</td>
-                <td>Москва, улица Юности, дом 5 строение 4, офис 2</td>
+                <td>Москва, улица Юности,<br> дом 5 строение 4, офис 2</td>
               </tr>
               <tr>
                 <td>Телефоны</td>
@@ -321,16 +352,18 @@
               </tr>
               <tr>
                 <td>Email</td>
-                <td><a href="mailto:lg.oona@mail.ru" class="info-link">lg.oona@mail.ru</a>
+                <td><a href="mailto:lg.oona@mail.ru" class="info-link">lg.oona@mail.ru</a><br>
                   <p>по вопросам бронирования</p>
-                  <a href="mailto:hotels.ln@mail.ru" class="info-link">hotels.ln@mail.ru</a>
+                  <a href="mailto:hotels.ln@mail.ru" class="info-link">hotels.ln@mail.ru</a><br>
                   <p>по вопросам сотрудничества</p></td>
               </tr>
               <tr>
                 <td>График</td>
-                <td><nobr>Понедельник-пятница</nobr>, с&nbsp;10:00 до&nbsp;19:00</td>
+                <td><nobr>Понедельник-пятница</nobr>,<br> с&nbsp;10:00
+                  до&nbsp;19:00</td>
               </tr>
             </table>
+            <button class="button">Построить маршрут</button>
           </div>
           <div class="contacts-photo">
             <img src="./img/Lagoona-ofice.jpg" alt>
@@ -343,7 +376,7 @@
             &laquo;Лагуна Хотелс&raquo;</p>
           <p>Представленная на&nbsp;сайте информация носит справочный характер
             и&nbsp;не&nbsp;является публичной офертой</p>
-          <a href="#info">Пользовательское соглашение</a>
+          <a href="#info" class="info-link">Пользовательское соглашение</a>
         </div>
         <div class="info-div-2">
           <p>11710, улица Юности, дом 5 строение 4, офис 2</p>
